@@ -1,0 +1,489 @@
+{{Construction|内容繁多，待进一步完善}}
+{{SVE location
+|name      = 高地
+|mapx      = 259
+|mapy      = 163
+|building  = Highlands.png
+|openhours = 永久
+|closed    = 无
+|unlockmethod = {{NPC/SVE|Lance|2+ [[File:HeartIconLarge.png|16px|link=]]}}{{NPC/SVE|Marlon|解锁马龙的船}}
+|width     = 
+|location  = highlands
+|occupants = {{NPC/SVE|Lance}} 
+}}
+{{TOC right|limit=2}}
+
+'''高地'''是 SVE 新增的一张地图，可以通过马龙的船前往。[[SVE:兰斯|兰斯]]住在这里并守护着该地区
+
+当玩家与[[SVE:兰斯|兰斯]]好感度达到 2 心后，就可以解锁[[SVE:马龙|马龙]]的特别任务“马龙的船”。完成该任务以后，就可以随时使用[[SVE:探险家公会|探险家公会]]旁码头边马龙的船前往高地。
+
+== 概览 ==
+
+高地可以大致分为[[#高地森林|高地森林]]、[[#高地山峰|高地山峰]]和[[#高地废墟|高地废墟]]三个区域，三个区域会生成各异的可采集物品与怪物。此外，[[#高地山峰|高地山峰]]上还隐藏着[[SVE:高地洞穴|高地洞穴]]与[[SVE:钻石洞穴|钻石洞穴]]的入口。高地洞穴的入口位于山峰的底部，最开始被几块圆石挡住；钻石洞穴的入口则位于山腰处，最开始被一块圆石和一颗桃花心木挡住。
+
+== 建筑 ==
+
+=== 高地前哨站 ===
+
+高地前哨站是[[SVE:兰斯|兰斯]]的住处，其位于地图的右下方，也是前往高地其他位置的必经之路。玩家可以使用前哨站中的床睡觉，也可以在前哨站内部或外侧放置箱子来储存在高地战斗时产生的怪物战利品。
+
+高地前哨站附近的区域不会刷新怪物，但是其他区域生成的怪物有可能追随玩家来到高地前哨站附近。
+
+=== 高地矮人商店 ===
+
+在解救高地矮人以后，它将会在高地前哨站南边的一处崖壁边上开设商店，玩家可以在这里买到各种与矿石有关的装饰品。
+
+<!-- [[File:Highland_Dwarf_Store.png|thumb|none|400px|高地矮人商店]] -->
+
+高地矮人出售的商品详见下文表格。
+
+{|class="wikitable mw-collapsible mw-collapsed sortable"
+|-
+!colspan="4" style="text-align: center;"| 高地矮人商店列表 &nbsp;
+|-
+!class="unsortable" | 图片
+!名称
+!style="min-width: 110px; text-align:center"| 描述
+!价格
+|-
+| [[File:Sign of Yoba.png]]
+| 由巴的标志 
+| 农场装饰品 
+| data-sort-value="7500"|{{Price|7500}}
+|-
+| [[File:Dwarf_Table.png]]
+| 矮人小桌 
+| 农场装饰品 
+| data-sort-value="4000"|{{Price|4000}}
+|-
+| [[File:Dwarf_Cushion.png]]
+| 矮人坐垫 
+| 农场装饰品 
+| data-sort-value="1500"|{{Price|1500}}
+|-
+| [[File:Dwarf_Chest.png]]
+| 矮人宝箱 
+| 农场装饰品 
+| data-sort-value="6000"|{{Price|6000}}
+|-
+| [[File:Danger_Sign.png]]
+| 危险标志 
+| 农场装饰品 
+| data-sort-value="800"|{{Price|800}}
+|-
+| [[File:Dwarf_Backpack.png]]
+| 背包 
+| 农场装饰品 
+| data-sort-value="1000"|{{Price|1000}}
+|-
+| [[File:Small_Barrel.png]]
+| 小桶 
+| 农场装饰品 
+| data-sort-value="650"|{{Price|650}}
+|-
+| [[File:Small_Opened_Barrel.png]]
+| 开着的小桶 
+| 农场装饰品 
+| data-sort-value="650"|{{Price|650}}
+|-
+| [[File:Copper_Node.png]]
+| 铜矿 
+| 农场装饰品 
+| data-sort-value="1000"|{{Price|1000}}
+|-
+| [[File:Iron_Node.png]]
+| 铁矿 
+| 农场装饰品 
+| data-sort-value="2000"|{{Price|2000}}
+|-
+| [[File:Gold_Node.png]]
+| 金矿 
+| 农场装饰品 
+| data-sort-value="3000"|{{Price|3000}}
+|-
+| [[File:Iridium_Node.png]]
+| 铱矿 
+| 农场装饰品 
+| data-sort-value="4000"|{{Price|4000}}
+|-
+| [[File:Radioactive_Node.png]]
+| 放射性矿 
+| 农场装饰品 
+| data-sort-value="5000"|{{Price|5000}}
+|-
+| [[File:Geode_Node.png]]
+| 晶球矿 
+| 农场装饰品 
+| data-sort-value="1500"|{{Price|1500}}
+|-
+| [[File:Frozen_Geode_Node.png]]
+| 冰封晶球矿 
+| 农场装饰品 
+| data-sort-value="2500"|{{Price|2500}}
+|-
+| [[File:Magma_Geode_Node.png]]
+| 岩浆晶球矿 
+| 农场装饰品 
+| data-sort-value="3500"|{{Price|3500}}
+|-
+| [[File:Omni_Geode_Node.png]]
+| 万象晶球矿 
+| 农场装饰品 
+| data-sort-value="4500"|{{Price|4500}}
+|-
+| [[File:Mystic_Node.png]]
+| 神秘矿石 
+| 农场装饰品 
+| data-sort-value="8000"|{{Price|8000}}
+|-
+| [[File:Gem_Node.png]]
+| 宝石矿 
+| 农场装饰品 
+| data-sort-value="2750"|{{Price|2750}}
+|-
+| [[File:Diamond_Node.png]]
+| 钻石矿 
+| 农场装饰品 
+| data-sort-value="4000"|{{Price|4000}}
+|-
+| [[File:Emerald_Node.png]]
+| 绿宝石矿 
+| 农场装饰品 
+| data-sort-value="3500"|{{Price|3500}}
+|-
+| [[File:Ruby_Node.png]]
+| 红宝石矿 
+| 农场装饰品 
+| data-sort-value="3000"|{{Price|3000}}
+|-
+| [[File:Jade_Node.png]]
+| 翡翠矿 
+| 农场装饰品 
+| data-sort-value="2500"|{{Price|2500}}
+|-
+| [[File:Amethyst_Node.png]]
+| 紫水晶矿 
+| 农场装饰品 
+| data-sort-value="2000"|{{Price|2000}}
+|-
+| [[File:Topaz_Node.png]]
+| 黄水晶矿 
+| 农场装饰品 
+| data-sort-value="1500"|{{Price|1500}}
+|-
+| [[File:Aquamarine_Node.png]]
+| 海蓝宝石矿 
+| 农场装饰品 
+| data-sort-value="1750"|{{Price|1750}}
+|-
+| [[File:Stone_1.png]]
+| 石头1 
+| 农场装饰品 
+| data-sort-value="400"|{{Price|400}}
+|-
+| [[File:Stone_2.png]]
+| 石头2 
+| 农场装饰品 
+| data-sort-value="400"|{{Price|400}}
+|-
+| [[File:Stone_3.png]]
+| 石头3 
+| 农场装饰品 
+| data-sort-value="400"|{{Price|400}}
+|-
+| [[File:Stone_4.png]]
+| 石头4 
+| 农场装饰品 
+| data-sort-value="400"|{{Price|400}}
+|-
+| [[File:Stone_5.png]]
+| 石头5 
+| 农场装饰品 
+| data-sort-value="400"|{{Price|400}}
+|-
+| [[File:Stone_6.png]]
+| 石头6 
+| 农场装饰品 
+| data-sort-value="400"|{{Price|400}}
+|-
+| [[File:Frozen_Stone_1.png]]
+| 冻石1 
+| 农场装饰品 
+| data-sort-value="500"|{{Price|500}}
+|-
+| [[File:Frozen_Stone_2.png]]
+| 冰石2 
+| 农场装饰品 
+| data-sort-value="500"|{{Price|500}}
+|-
+| [[File:Frozen_Stone_3.png]]
+| 冰石3 
+| 农场装饰品 
+| data-sort-value="500"|{{Price|500}}
+|-
+| [[File:Frozen_Stone_4.png]]
+| 冰石4 
+| 农场装饰品 
+| data-sort-value="500"|{{Price|500}}
+|-
+| [[File:Ice_Crystal_1.png]]
+| 冰晶1 
+| 农场装饰品 
+| data-sort-value="1000"|{{Price|1000}}
+|-
+| [[File:Ice_Crystal_2.png]]
+| 冰晶2 
+| 农场装饰品 
+| data-sort-value="1000"|{{Price|1000}}
+|-
+| [[File:Ice_Crystal_3.png]]
+| 冰晶3 
+| 农场装饰品 
+| data-sort-value="1000"|{{Price|1000}}
+|-
+| [[File:Magma_Stone_1.png]]
+| 岩浆岩1 
+| 农场装饰品 
+| data-sort-value="800"|{{Price|800}}
+|-
+| [[File:Magma_Stone_2.png]]
+| 岩浆岩2 
+| 农场装饰品 
+| data-sort-value="800"|{{Price|800}}
+|-
+| [[File:Bone_Node_1.png]]
+| 骨头矿1 
+| 农场装饰品 
+| data-sort-value="2000"|{{Price|2000}}
+|-
+| [[File:Bone_Node_2.png]]
+| 骨头矿2 
+| 农场装饰品 
+| data-sort-value="2000"|{{Price|2000}}
+|-
+| [[File:Clay_Node.png]]
+| 粘土矿 
+| 农场装饰品 
+| data-sort-value="1500"|{{Price|1500}}
+|-
+| [[File:Cinder_Shard_Node_1.png]]
+| 火山晶石矿1 
+| 农场装饰品 
+| data-sort-value="5000"|{{Price|5000}}
+|-
+| [[File:Cinder_Shard_Node_2.png]]
+| 火山晶石矿2 
+| 农场装饰品 
+| data-sort-value="5000"|{{Price|5000}}
+|-
+| [[File:Copper_Node_Volcano.png]]
+| 火山铜矿 
+| 农场装饰品 
+| data-sort-value="2000"|{{Price|2000}}
+|-
+| [[File:Iron_Node_Volcano.png]]
+| 火山铁矿 
+| 农场装饰品 
+| data-sort-value="4000"|{{Price|4000}}
+|-
+| [[File:Stone_Index845.png]]
+| 火山石1 
+| 农场装饰品 
+| data-sort-value="900"|{{Price|900}}
+|-
+| [[File:Stone_Index846.png]]
+| 火山石2 
+| 农场装饰品 
+| data-sort-value="900"|{{Price|900}}
+|-
+| [[File:Stone_Index847.png]]
+| 火山石3 
+| 农场装饰品 
+| data-sort-value="900"|{{Price|900}}
+|-
+| [[File:Smooth_Boulder_L.png]]
+| 光滑的巨石 左 
+| 农场装饰品 
+| data-sort-value="3000"|{{Price|3000}}
+|-
+| [[File:Smooth_Boulder_R.png]]
+| 光滑的巨石 右 
+| 农场装饰品 
+| data-sort-value="3000"|{{Price|3000}}
+|-
+| [[File:Jagged_Boulder_L.png]]
+| 锯齿状巨石 左 
+| 农场装饰品 
+| data-sort-value="3000"|{{Price|3000}}
+|-
+| [[File:Jagged_Boulder_R.png]]
+| 锯齿状巨石 右 
+| 农场装饰品 
+| data-sort-value="3000"|{{Price|3000}}
+|-
+| [[File:Meteor L.png]]
+| 陨石 左 
+| 农场装饰品 
+| data-sort-value="15000"|{{Price|15000}}
+|-
+| [[File:Meteor R.png]]
+| 陨石 右 
+| 农场装饰品 
+| data-sort-value="15000"|{{Price|15000}}
+|-
+|}
+
+== 高地森林 ==
+
+高地森林是高地的主要区域，高地森林上生长着大量的[[SVE:冷杉树|冷杉树]]和[[SVE:白桦树|白桦树]]，还会随季节的变化生成不同种类的怪物和采集品。
+
+=== 怪物 ===
+
+{{Quote|这里的石魔和史莱姆随着季节变化，自身颜色也会有所不同。<br/>对于它们进化到能伪装自己的可能性，我感到惊讶。|兰斯}}
+
+高地森林上最主要的怪物是[[史莱姆]]和[[荒野石魔]]，其中荒野石魔是不可见的，只有当玩家靠近时，它才会从地面冒出来跟随并攻击玩家。夜晚的高地森林还会生成[[暗影狂徒]]、[[暗影萨满]]和[[暗影狙击手]]，这使得夜晚的高地更加具有挑战性。
+
+这些怪物的基础数值（攻击力、生命值）与原版的怪物相比有所不同，部分怪物还会产生独特的掉落物。
+
+生成在高地森林北侧山崖附近一片特殊区域内的怪物（如图所示黄色区域），被击杀时必定掉落[[SVE:松露巧克力棒|松露巧克力棒]]的四种原料之一。
+
+[[File:Highlands_Special_Monsters_1.png|thumb|400px|特殊怪物生成区域]]
+
+{|class="wikitable"
+|-
+! colspan="5" style="text-align: center;" | 高地森林怪物信息
+|-
+! 名称与外观
+! [[File:Attack.png|24px]] 基础伤害
+! [[File:Health.png|24px]] 生命值
+! 其它掉落物
+! 区域内特殊掉落物
+|-
+| [[File:Green Slime.png|24px]] [[史莱姆]]
+| style="text-align: right;" | 30~66
+| style="text-align: right;" | 350
+| {{Name|史莱姆种子}}
+| rowspan="2" | {{Name|榛子}}{{Name|松露}}{{Name|牛奶}}{{Name|糖}}
+|-
+| [[File:Wilderness Golem SVE.png|24px]] [[荒野石魔]]
+| style="text-align: right;" | 45~48
+| style="text-align: right;" | 525
+| {{Name|怪兽茎种子}}
+|-
+| [[File:Wilderness Golem SVE.png|24px]] [[铱石魔]]
+| style="text-align: right;" | 65
+| style="text-align: right;" | 800
+| colspan="2" rowspan="4" style="text-align: center;" | 无
+|-
+| [[File:Shadow Brute Dangerous.png|24px]] [[暗影狂徒（危险）|暗影狂徒]]
+| style="text-align: right;" | 60
+| style="text-align: right;" | 400
+|-
+| [[File:Shadow Shaman Dangerous.png|24px]] [[暗影萨满（危险）|暗影萨满]]
+| style="text-align: right;" | 50
+| style="text-align: right;" | 300
+|-
+| [[File:Shadow Sniper.png|24px]] [[暗影狙击手]]
+| style="text-align: right;" | 45
+| style="text-align: right;" | 300
+|-
+|}
+
+若玩家经历了[[SVE:科罗布斯|科罗布斯]] 10 心事件的第四阶段，那么夜晚的高地森林将不再刷新暗影怪物。若使用背叛之黑暗神殿打破与暗影怪物之间的和平，那么这些怪物将会再次出现在夜晚的高地，并且还会增加 20 点额外的基础伤害值。
+
+=== 采集 ===
+
+高地森林上每天都会生成 8~16 个[[史莱姆蛋]]，这些史莱姆蛋会随季节变化成不同的颜色，并且会在每天结束时消失。
+
+{|class="wikitable"
+|-
+! colspan="2" style="text-align: center;"| 高地森林采集信息
+|-
+! class="no-wrap" style="min-width: 90px;  text-align: center;" | {{Season|Spring}}
+| class="no-wrap" style="min-width: 160px; text-align: center;" | [[File:Green Slime Egg.png|24px]][[史莱姆蛋|绿色史莱姆蛋]]
+|-
+! class="no-wrap" style="min-width: 90px;  text-align: center;" | {{Season|Summer}}
+| class="no-wrap" style="min-width: 160px; text-align: center;" | [[File:Green Slime Egg.png|24px]][[史莱姆蛋|绿色史莱姆蛋]]
+|-
+! class="no-wrap" style="min-width: 90px;  text-align: center;" | {{Season|Fall}}
+| class="no-wrap" style="min-width: 160px; text-align: center;" | [[File:Red Slime Egg.png|24px]][[史莱姆蛋|红色史莱姆蛋]]
+|-
+! class="no-wrap" style="min-width: 90px;  text-align: center;" | {{Season|Winter}}
+| class="no-wrap" style="min-width: 160px; text-align: center;" | [[File:Blue Slime Egg.png|24px]][[史莱姆蛋|蓝色史莱姆蛋]]
+|-
+|}
+
+=== 特殊事件 ===
+
+在解救高地矮人以后，任意一天都有 15% 的概率触发“史莱姆入侵”事件<ref name="slimeinvade" />。此事件的发生会使得高地全天不间断地刷新大量的[[史莱姆]]和[[史莱姆#巨型史莱姆|巨型史莱姆]]。若在配置文件中勾选了“低内存高地”选项，那么这一事件将不会发生。
+
+== 高地废墟 ==
+
+高地废墟位于地图右侧一片被树林地形围起来的区域。在这片区域里，可以看见一个湖泊，湖畔围绕着断壁残垣。
+
+=== 怪物 ===
+
+高地废墟里的主要怪物是[[灰尘精灵（危险）|灰尘精灵]]，其他生成在[[#高地森林|高地森林]]的怪物也会在这里出现。在雨天的时候，这里还会刷新稀有的绿色灰尘精灵，击杀它们必定掉落一个[[SVE:绿蘑菇|绿蘑菇]]。
+
+{|class="wikitable"
+|-
+! colspan="5" style="text-align: center;" | 高地废墟怪物信息
+|-
+! 名称与外观
+! [[File:Attack.png|24px]] 基础伤害
+! [[File:Health.png|24px]] 生命值
+! 其它掉落物
+|-
+| [[File:Dust Sprite Dangerous.png|24px]] [[灰尘精灵（危险）|灰尘精灵]]
+| style="text-align: right;" | 40
+| style="text-align: right;" | 250
+| {{Name|真菌种子}}{{Name|Common Mushroom}}{{Name|红蘑菇}}{{Name|紫蘑菇}}{{Name|鸡油菌}}{{Name|羊肚菌}}
+|-
+| [[File:Green Dust Sprite.png|24px]] 绿色灰尘精灵
+| style="text-align: right;" | 50
+| style="text-align: right;" | 650
+| {{Name|Green Mushroom}}
+|-
+|}
+
+=== 采集 ===
+
+在除[[冬季]]以外的其他季节，高地废墟每天都会生成 7~12 个可采集物品，这些物品将会在每天结束时消失。
+
+{|class="wikitable"
+|-
+! colspan="2" style="text-align: center;"| 高地废墟采集信息
+|-
+! class="no-wrap" style="min-width: 90px;  text-align: center;" | {{Season|Spring}}
+| {{Name|Mushroom Colony|class=inline}}
+|-
+! class="no-wrap" style="min-width: 90px;  text-align: center;" | {{Season|Summer}}
+| {{Name|Mushroom Colony|class=inline}} • {{Name|蕨菜|class=inline}}
+|-
+! class="no-wrap" style="min-width: 90px;  text-align: center;" | {{Season|Fall}}
+| {{Name|Mushroom Colony|class=inline}} • {{Name|Poison Mushroom|class=inline}}
+|-
+|}
+
+== 高地山峰 ==
+
+高地山峰位于地图左侧，高地山峰上生长着许多果树，还会根据季节刷新出大量的季节性采集品。山顶上每天都会刷新一只名为“Bully Rex”的 Boss 生物。要想到达山顶，玩家需要沿着山峰上曲折的小径行走，这些道路最开始被许多大原木和大树桩挡住，需要随身携带一把高等级的斧子来清除这些障碍物。高地山峰上还分别隐藏着高地洞穴和钻石洞穴的入口。
+
+=== 怪物 ===
+
+高地山峰上生成的怪物和[[#高地森林|高地森林]]里的怪物一致。
+
+== 参考 == 
+
+<references>
+<ref name="slimeinvade"> 查看游戏代码中的 <samp>content/Monster_Spawn_Settings</samp>，其本质是一条怪物生成规则，该规则 ID 为 <samp>Highlands Rare Event Spawn</samp>，事件名称为编者注，该规则既没有本地化键名，也不会在与任何 NPC 的对话中被提及。</ref>
+</references>
+
+== 历史 ==
+1.14 加入。
+
+== 站内导航 ==
+
+{{NavBoxLocations}}
+
+[[Category:SVE 地点]]

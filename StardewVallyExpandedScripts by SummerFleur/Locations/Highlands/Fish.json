@@ -1,0 +1,62 @@
+{
+    "Bull Trout": [
+        "River",
+        "Fall Winter"
+    ],
+    "Highlands Bass": [
+        "River",
+        "Fall Spring Summer Winter"
+    ],
+    "Fiber Goby": [
+        "Pond",
+        "Fall Spring Summer Winter"
+    ],
+    "Largemouth Bass": [
+        "Pond",
+        "Fall Spring Summer Winter"
+    ],
+    "Rainbow Trout": [
+        "River",
+        "Summer"
+    ],
+    "Walleye": [
+        "River",
+        "Fall Winter"
+    ],
+    "Perch": [
+        "River",
+        "Winter"
+    ],
+    "Carp": [
+        "River",
+        "Fall Spring Winter"
+    ],
+    "Green Algae": [
+        "River",
+        "Fall Spring Summer Winter"
+    ],
+    "Midnight Carp": [
+        "River",
+        "Fall Winter"
+    ],
+    "Sturgeon": [
+        "River",
+        "Summer Winter"
+    ],
+    "Bullhead": [
+        "River",
+        "Fall Spring Summer Winter"
+    ],
+    "Chub": [
+        "River",
+        "Fall Spring Summer Winter"
+    ],
+    "Lingcod": [
+        "River",
+        "Winter"
+    ],
+    "Goldfish": [
+        "River",
+        "Winter"
+    ]
+}

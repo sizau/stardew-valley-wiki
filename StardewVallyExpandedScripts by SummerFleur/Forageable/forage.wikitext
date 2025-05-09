@@ -1,0 +1,560 @@
+
+
+{{Item Forage
+|eng        = Lucky Four Leaf Clover
+|source     = [[采集]]
+|location   = [[SVE:秘密森林|秘密森林]] • [[SVE:森林西部|森林西部]]
+|season     = {{Season|Spring}} • {{Season|Summer}}
+|sellprice  = 400
+|edibility  = -300
+|color      = green
+|tag        = 
+}}
+
+'''四叶草'''是一种[[SVE:采集品|采集品]]，可以在[[春季]]和[[夏季]]的[[SVE:秘密森林|秘密森林]]和[[SVE:森林西部|森林西部]]通过采集获得。四叶草还会出现在[[SVE:高地|高地]]左侧的山峰上。
+
+不同于原版[[采集品]]的是，未被采集的四叶草会在每天结束时消失，不会一直留存到一周结束。
+
+== 提示 ==
+
+四叶草的生成频率较低，不一定每天都会生成，但是可以通过反复退出并重新进入存档来刷新采集品生成，从而提高获取到四叶草的概率。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|like=George,Jodi,Alex,Clint,Claire,Lance,Gunther,Lewis,Caroline,Harvey,Sebastian,Olivia,Willy,Andy,Demetrius,Scarlett,Gus,Sandy,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Krobus,Victor,Robin,Kent,Elliott,Emily,Evelyn,Susan,Apples,Leah,Linus,Shane,Leo,Magnus,Marlon,Sophia,Henchman,Sam,Morgan,Vincent,Haley,Jas,Abigail,Martin
+}}
+
+== 收集包 ==
+{{Bundle|enchanter||y}}需要一个四叶草。
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Forage
+|eng        = Smelly Rafflesia
+|source     = [[采集]]
+|location   = [[SVE:秘密森林|秘密森林]]
+|season     = {{Season|Spring}} • {{Season|Summer}} • {{Season|Fall}}
+|sellprice  = 375
+|edibility  = -300
+|color      = 
+|tag        = 
+}}
+
+'''大王花'''是一种[[SVE:采集品|采集品]]，可以在[[春季]]、[[夏季]]和[[秋季]]的[[SVE:秘密森林|秘密森林]]通过采集获得。大王花还会出现在[[SVE:高地|高地]]左侧的山峰上。
+
+不同于原版[[采集品]]的是，未被采集的大王花会在每天结束时消失，不会一直留存到一周结束。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Demetrius
+|like=Magnus
+|neutral=Marlon
+|hate=George,Jodi,Alex,Clint,Claire,Lance,Gunther,Lewis,Caroline,Harvey,Sebastian,Olivia,Willy,Andy,Scarlett,Gus,Sandy,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Krobus,Victor,Robin,Kent,Elliott,Emily,Evelyn,Susan,Apples,Leah,Linus,Shane,Leo,Sophia,Henchman,Sam,Morgan,Vincent,Haley,Jas,Abigail,Martin
+}}
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Forage
+|eng        = Poison Mushroom
+|source     = [[采集]]
+|location   = [[SVE:秘密森林|秘密森林]]
+|season     = {{Season|Summer}} • {{Season|Fall}}
+|sellprice  = 60
+|edibility  = -100
+|color      = brown
+|tag        = 
+}}
+
+'''毒蘑菇'''是一种[[SVE:采集品|采集品]]，可以在[[夏季]]和[[秋季]]的[[SVE:秘密森林|秘密森林]]通过采集获得。毒蘑菇还会出现在[[SVE:高地|高地]]右侧的池塘边。
+
+不同于原版[[采集品]]的是，未被采集的毒蘑菇会在每天结束时消失，不会一直留存到一周结束。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Krobus
+|like=Magnus
+|hate=George,Jodi,Alex,Clint,Claire,Lance,Gunther,Lewis,Caroline,Harvey,Sebastian,Olivia,Willy,Andy,Scarlett,Gus,Sandy,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Victor,Robin,Kent,Elliott,Emily,Evelyn,Susan,Apples,Leah,Linus,Shane,Leo,Sophia,Henchman,Sam,Morgan,Vincent,Haley,Jas,Abigail,Martin,Demetrius,Marlon
+}}
+
+== 收集包 ==
+{{Bundle|Exotic Foraging||y}}需要一个毒蘑菇。
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Fruit
+|eng        = Red Baneberry
+|source     = [[采集]]
+|location   = [[SVE:秘密森林|秘密森林]]
+|season     = Summer
+|sellprice  = 20
+|edibility  = -50
+|color      = red
+|tag        = forage
+}}
+
+'''类叶升麻红果'''是一种水果，可以在[[夏季]]的[[SVE:秘密森林|秘密森林]]通过采集获得。
+
+类叶升麻红果只会生成在秘密森林左下角处的一处灌木丛旁，这处灌木丛旁每天都会刷新出新的红果，未被采集的红果也会在每天结束时消失。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|neutral=Krobus
+|love=Magnus
+|hate=George,Jodi,Alex,Clint,Claire,Lance,Gunther,Lewis,Caroline,Harvey,Sebastian,Olivia,Willy,Andy,Scarlett,Gus,Sandy,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Victor,Robin,Kent,Elliott,Emily,Evelyn,Susan,Apples,Leah,Linus,Shane,Leo,Sophia,Henchman,Sam,Morgan,Vincent,Haley,Jas,Abigail,Martin,Demetrius,Marlon
+}}
+
+==配方==
+===烹饪===
+{{Recipes|Header}}
+{{:SVE:蘑菇红果拌饭|RecipeRowSVE}}
+{{Recipes|Footer}}
+
+
+== 收集包 ==
+{{Bundle|Summer Foraging||y}}需要一个类叶升麻红果。
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Forage
+|eng        = Mushroom Colony
+|source     = [[采集]]
+|location   = [[SVE:秘密森林|秘密森林]] • [[SVE:森林西部|森林西部]] 
+|season     = Fall
+|sellprice  = 105
+|edibility  = 18
+|color      = _
+|tag        = mushroom
+}}
+
+'''蘑菇菌落'''是一种[[SVE:采集品|采集品]]，可以在[[秋季]]的[[SVE:秘密森林|秘密森林]]和[[SVE:森林西部|森林西部]] 通过采集获得。蘑菇菌落还会出现在[[SVE:高地|高地]]右侧的池塘边。
+
+不同于原版[[采集品]]的是，未被采集的蘑菇菌落会在每天结束时消失，不会一直留存到一周结束。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Linus
+|like=Harvey,Demetrius,Leah
+|neutral=George,Alex,Henchman,Clint,Claire,Lance,Gunther,Lewis,Olivia,Andy,Morgan,Scarlett,Gus,Sandy,Penny,Pam,Marnie,Robin,Kent,Emily,Evelyn,Susan,Morris,Abigail,Marlon,Apples
+|dislike=Jodi,Caroline,Sebastian,Willy,Sam,Vincent,Haley,Maru,Pierre,Dwarf,Krobus,Sophia,Elliott,Shane,Jas,Leo,Martin,Magnus
+|hate=Victor
+}}
+
+== 收集包 ==
+{{Bundle|Fall Foraging||y}}需要一个蘑菇菌落。
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Fruit
+|eng        = Bearberrys
+|source     = [[采集]] • [[远古斑点]]
+|location   = [[SVE:秘密森林|秘密森林]]
+|season     = Winter
+|sellprice  = 55
+|edibility  = 15
+|color      = red
+|tag        = forage
+}}
+
+'''熊果'''是一种水果，可以在[[冬季]]的[[SVE:秘密森林|秘密森林]]通过采集或挖掘[[远古斑点]]获得。
+
+不同于原版[[采集品]]的是，未被采集的熊果会在每天结束时消失，不会一直留存到一周结束。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Harvey
+|like=George,Lance,Andy,Demetrius,Evelyn
+|neutral=Alex,Clint,Claire,Lewis,Olivia,Gus,Sandy,Penny,Pam,Marnie,Robin,Emily,Morris,Marlon,Leah,Linus,Jodi,Caroline,Sebastian,Willy,Sam,Victor,Maru,Pierre,Dwarf,Krobus,Sophia,Elliott,Shane,Martin,Magnus,Henchman,Gunther,Morgan,Scarlett,Apples,Kent,Leo,Susan
+|hate=Vincent,Haley,Jas,Abigail
+}}
+
+== 收集包 ==
+{{Bundle|Winter Foraging||y}}需要一个熊果。
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Flower
+|eng        = Ferngill Primrose
+|source     = [[采集]]
+|location   = [[SVE:顶峰|顶峰]]
+|season     = Spring
+|sellprice  = 120
+|edibility  = 18
+|color      = 
+|tag        = forage
+}}
+
+'''芬吉尔报春花'''是一种花，可以在[[春季]]的[[SVE:顶峰|顶峰]]通过采集获得。
+
+顶峰上每天都会生成几朵芬吉尔报春花，然而不同于原版[[采集品]]的是，未被采集的芬吉尔报春花会在每天结束时消失，不会一直留存到一周结束。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Sandy
+|like=Jodi,Alex,Claire,Gunther,Lewis,Caroline,Harvey,Olivia,Willy,Andy,Demetrius,Gus,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Krobus,Victor,Robin,Kent,Elliott,Emily,Evelyn,Susan,Apples,Leah,Linus,Shane,Leo,Magnus,Sophia,Sam,Vincent,Haley,Jas,Martin
+|neutral=Morgan,Scarlett,Henchman
+|dislike=George,Clint,Lance,Sebastian,Abigail
+|hate=Marlon
+}}
+
+== 收集包 ==
+没有任何收集包需要芬吉尔报春花。
+
+==配方==
+===烹饪===
+{{Recipes|Header|hide=buff,duration}}
+{{:SVE:花朵曲奇|RecipeRow/SVE/Nobuffs}}
+{{Recipes|Footer}}
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Flower
+|eng        = Goldenrod
+|source     = [[采集]]
+|location   = [[SVE:顶峰|顶峰]]
+|season     = {{Season|Summer}} • {{Season|Fall}}
+|sellprice  = 160
+|edibility  = 23
+|color      = 
+|tag        = forage
+}}
+
+'''金杆草'''是一种花，可以在[[夏季]]和[[秋季]]的[[SVE:顶峰|顶峰]]通过采集获得。
+
+顶峰上每天都会生成几朵金杆草，然而不同于原版[[采集品]]的是，未被采集的金杆草会在每天结束时消失，不会一直留存到一周结束。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Olivia
+|like=Jodi,Alex,Claire,Gunther,Lewis,Caroline,Harvey,Evelyn,Willy,Demetrius,Gus,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Krobus,Victor,Robin,Kent,Elliott,Emily,Sandy,Susan,Apples,Leah,Linus,Shane,Leo,Magnus,Sophia,Sam,Vincent,Haley,Jas,Martin,Morgan,Scarlett,Henchman,Abigail,George,Clint,Lance,Marlon
+|dislike=Sebastian,Andy
+}}
+
+== 收集包 ==
+没有任何收集包需要金杆草。
+
+==配方==
+===烹饪===
+{{Recipes|Header|hide=buff,duration}}
+{{:SVE:花朵曲奇|RecipeRow/SVE/Nobuffs}}
+{{Recipes|Footer}}
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Flower
+|eng        = Thistle
+|source     = [[采集]]
+|location   = [[SVE:顶峰|顶峰]]
+|season     = All
+|sellprice  = 120
+|edibility  = 10
+|color      = 
+|tag        = forage
+}}
+
+'''蓟'''是一种花，可以在任何季节的[[SVE:顶峰|顶峰]]通过采集获得。
+
+顶峰上每天都会生成几朵蓟，然而不同于原版[[采集品]]的是，未被采集的蓟会在每天结束时消失，不会一直留存到一周结束。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Evelyn
+|like=Jodi,Alex,Claire,Gunther,Lewis,Caroline,Harvey,Olivia,Willy,Demetrius,Gus,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Krobus,Victor,Robin,Kent,Elliott,Emily,Sandy,Susan,Apples,Leah,Linus,Shane,Leo,Magnus,Sophia,Sam,Vincent,Haley,Jas,Martin,Abigail
+|neutral=Morgan,Scarlett,Henchman
+|dislike=George,Clint,Lance,Sebastian,Andy
+|hate=Marlon
+}}
+
+== 收集包 ==
+没有任何收集包需要蓟。
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Flower
+|eng        = Winter Star Rose
+|source     = [[采集]]
+|location   = 
+|season     = {{Season|}}
+|sellprice  = 200
+|edibility  = 28
+|color      = 
+|tag        = forage
+}}
+
+'''冬日星玫瑰'''是一种花，可以在[[冬季]]的[[SVE:顶峰|顶峰]]通过采集获得。
+
+顶峰上每天都会生成几朵冬日星玫瑰，然而不同于原版[[采集品]]的是，未被采集的冬日星玫瑰会在每天结束时消失，不会一直留存到一周结束。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Emily
+|like=Jodi,Alex,Claire,Gunther,Lewis,Caroline,Harvey,Olivia,Willy,Demetrius,Gus,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Krobus,Victor,Robin,Kent,Elliott,Evelyn,Sandy,Susan,Apples,Leah,Linus,Shane,Leo,Magnus,Sophia,Sam,Vincent,Haley,Jas,Martin,Abigail
+|neutral=Morgan,Scarlett,Henchman
+|dislike=George,Clint,Lance,Sebastian,Andy
+|hate=Marlon
+}}
+
+== 收集包 ==
+没有任何收集包需要冬日星玫瑰。
+
+==配方==
+===烹饪===
+{{Recipes|Header|hide=buff,duration}}
+{{:SVE:花朵曲奇|RecipeRow/SVE/Nobuffs}}
+{{Recipes|Footer}}
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Flower
+|eng        = Swamp Flower
+|source     = [[采集]]
+|location   = [[SVE:禁忌迷宫|禁忌迷宫]]
+|season     = All
+|sellprice  = 125
+|edibility  = -300
+|color      = Green
+|tag        = forage
+}}
+
+'''沼泽花'''是一种花，可以在任何季节的[[SVE:禁忌迷宫|禁忌迷宫]]通过采集获得。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Sandy
+|like=Jodi,Alex,Claire,Gunther,Lewis,Caroline,Harvey,Olivia,Willy,Demetrius,Gus,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Krobus,Victor,Robin,Kent,Elliott,Evelyn,Emily,Susan,Apples,Leah,Linus,Shane,Leo,Magnus,Sophia,Sam,Vincent,Haley,Jas,Martin,Abigail
+|neutral=Morgan,Scarlett,Henchman,Andy
+|dislike=George,Clint,Lance,Sebastian
+|hate=Marlon
+}}
+
+== 收集包 ==
+没有任何收集包需要沼泽花。
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Flower
+|eng        = Diamond Flower
+|source     = [[采集]]
+|location   = [[SVE:高地#钻石洞穴|钻石洞穴]]
+|season     = All
+|sellprice  = 850
+|edibility  = -300
+|color      = white
+|tag        = forage
+}}
+
+'''钻石花'''是一种花，可以在任何季节的[[SVE:高地#钻石洞穴|钻石洞穴]]通过采集获得。
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=Haley
+|like=Jodi,Alex,Claire,Gunther,Lewis,Caroline,Harvey,Olivia,Willy,Demetrius,Gus,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Krobus,Victor,Robin,Kent,Elliott,Evelyn,Sandy,Susan,Apples,Leah,Linus,Shane,Leo,Magnus,Sophia,Sam,Vincent,Emily,Jas,Martin,Abigail,Andy
+|neutral=Morgan,Scarlett,Henchman
+|dislike=George,Clint,Lance,Sebastian
+|hate=Marlon
+}}
+
+== 收集包 ==
+没有任何收集包需要钻石花。
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Flower
+|eng        = Golden Ocean Flower
+|source     = [[采集]]
+|location   = [[SVE:寓言礁|寓言礁]]
+|season     = All
+|sellprice  = 1000
+|edibility  = -300
+|color      = gold
+|tag        = forage
+}}
+
+'''金色海洋花'''是一种花，可以在任何季节的[[SVE:寓言礁|寓言礁]]通过采集获得。
+
+寓言礁北部的潮汐池附近每天都会刷新一朵金色海洋花，未被采集的金色海洋花会在每天结束时消失。 
+
+== 送礼 ==
+
+{{GiftsByItemSVE
+|love=George,Jodi,Alex,Clint,Claire,Gunther,Lewis,Caroline,Harvey,Sebastian,Olivia,Willy,Demetrius,Scarlett,Gus,Sandy,Penny,Pam,Marnie,Maru,Pierre,Dwarf,Krobus,Victor,Robin,Kent,Elliott,Emily,Evelyn,Susan,Leah,Linus,Shane,Leo,Sophia,Henchman,Sam,Vincent,Haley,Jas,Abigail,Martin
+|like=Lance,Andy,Apples,Morgan,Magnus,Marlon
+}}
+
+== 收集包 ==
+没有任何收集包需要金色海洋花。
+
+==导航==
+
+{{NavBoxObj}}
+
+[[Category:SVE 采集品]]
+
+-------------------------------------------------
+
+
+{{Item Forage
+|eng        = Big Conch
+|source     = [[采集]]
+|location   = 
+|season     = {{Season|}}
+|sellprice  = 150
+|edibility  = -300
+|color      = orange
+|tag        = forage
+}}
+
+'''海螺'''是一种[[SVE:采集品|采集品]]，
+
+
+{{Item Forage
+|eng        = Dried Sand Dollar
+|source     = [[采集]]
+|location   = 
+|season     = {{Season|}}
+|sellprice  = 80
+|edibility  = -300
+|color      = white
+|tag        = forage
+}}
+
+'''沙钱'''是一种[[SVE:采集品|采集品]]，
+
+
+{{Item Forage
+|eng        = Shark Tooth
+|source     = [[采集]]
+|location   = 
+|season     = {{Season|}}
+|sellprice  = 175
+|edibility  = -300
+|color      = white
+|tag        = forage
+}}
+
+'''鲨鱼牙'''是一种[[SVE:采集品|采集品]]，
+
+
+{{Item Forage
+|eng        = Green Mushroom
+|source     = [[采集]]
+|location   = 
+|season     = {{Season|}}
+|sellprice  = 1250
+|edibility  = 500
+|color      = 
+|tag        = forage
+}}
+
+'''绿蘑菇'''是一种[[SVE:采集品|采集品]]，
+
+
+{{Item Forage
+|eng        = Mega Purple Mushroom
+|source     = [[采集]]
+|location   = 
+|season     = {{Season|}}
+|sellprice  = 8000
+|edibility  = 999
+|color      = purple
+|quality    = false
+|tag        = forage
+}}
+
+'''巨型紫蘑菇'''是一种[[SVE:采集品|采集品]]，
+

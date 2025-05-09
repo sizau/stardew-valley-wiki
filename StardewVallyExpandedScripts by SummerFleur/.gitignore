@@ -1,0 +1,14 @@
+/#Debug Files/
+/#Stardew Vally Expanded/
+/#Wiki
+/.idea
+/__pycache__
+
+# File types
+*.png
+*.psd
+*.jpg
+
+
+# Other files
+Untitled*.*
