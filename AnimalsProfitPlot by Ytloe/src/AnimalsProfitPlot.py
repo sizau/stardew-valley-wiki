@@ -3,12 +3,14 @@
 用于计算不同好感度下动物的日收益，支持常规产物和加工产物的收益对比
 """
 
+from pathlib import Path
 from typing import Optional, Tuple, Union
+
+import matplotlib.pyplot as plt
 import numpy as np
 from numpy.typing import NDArray
-import matplotlib.pyplot as plt
+
 from generic_funtion import get_input
-from pathlib import Path
 
 
 def get_animal_base_data(animal_id) -> dict:
@@ -573,9 +575,10 @@ def plot_profit_comparison(
 def main() -> None:
   """主函数"""
   print("=== 星露谷物语动物收益计算器 ===")
-
+  # 0-鸡、1-虚空鸡、2-金鸡、3-恐龙、4-鸭、5-兔子、6-牛、7-山羊、8-绵羊、9-猪、10-鸵鸟
   # for animal_id in range(11):
   animal_id: int = 8
+  # setup_animal_config()
   print("\n配置动物信息（有技能）...")
   config_with_skills = setup_animal_config(
     animal_id=animal_id,
@@ -608,7 +611,7 @@ def main() -> None:
   raw_no_skills, proc_no_skills, lrg_probs_no_skills, quality_probs_no_skills = calc_daily_profits(
     config_no_skills
   )
-  # 有查看概率的需求可以自行调整输出lrg_probs和quality_probs
+  # 有查看概率的需求可以自行for print输出lrg_probs和quality_probs，都是1001个元素
 
   # 输出关键节点的收益数据
   print("\n=== 好感度收益对比 ===")

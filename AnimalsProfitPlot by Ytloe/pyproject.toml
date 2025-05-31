@@ -1,14 +1,18 @@
 [project]
-name = "AnimalsProfitPlot"
+name = "Animals_Profit_Plot"
 version = "0.1.0"
 description = "动物利润计算器"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-    "matplotlib>=3.10.3",
-    "numpy>=2.2.6",
-]
+dependencies = ["matplotlib>=3.10.3"]
 
 [tool.ruff]
 "indent-width" = 2
 "line-length" = 115
+
+[tool.uv.workspace]
+members = ["AnimalsProfitPlot by Ytloe"]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+default = true
