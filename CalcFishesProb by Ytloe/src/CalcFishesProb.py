@@ -1,5 +1,8 @@
 import time
+import sys
 import tracemalloc
+import argparse
+import json
 from collections import defaultdict
 from itertools import combinations
 from typing import Any
@@ -7,20 +10,42 @@ from typing import Any
 import numpy as np
 
 
-def calc_fishing_prob(fish_list: list[dict]) -> dict[Any, Any]:
+class Fish:
+  """
+  存储鱼数据的类
+
+  Attributes:
+      ID: 鱼的 DisplayName
+      Precedence: 鱼的“优先级”
+      SurvivalProb: 从 Locations 里读出来经过 get_chance 算出来的概率
+      HookProb: 从 Fish 里读出来经过整个 CheckGenericFishRequirements 方法算出来的概率
+  """
+  ID: str = ""
+  Precedence: int = 0
+  SurvivalProb: float = 0.0
+  HookProb: float = 0.0
+
+  def __init__(self, ID: str, Precedence: int, SurvivalProb: float, HookProb: float):
+    self.ID = ID
+    self.Precedence = Precedence
+    self.SurvivalProb = SurvivalProb
+    self.HookProb = HookProb
+
+
+def calc_fishing_prob(fishes: list[Fish]) -> dict[Any, Any]:
   """
   计算优先级排序的方法
 
   Args:
-      fish_list (list[dict]): 传入鱼的优先级和存活概率和咬钩概率，具体看下面的main
+      fishes (list[Fish]): 传入的鱼
 
   Returns:
       dict[Any, Any]: _description_
   """
   # 按优先级分组
   groups_by_precedence = defaultdict(list)
-  for fish in fish_list:
-    groups_by_precedence[fish["Precedence"]].append(fish)
+  for fish in fishes:
+    groups_by_precedence[fish.Precedence].append(fish)
 
   sorted_precedences = sorted(groups_by_precedence.keys())
   final_probs = {}
@@ -38,7 +63,7 @@ def calc_fishing_prob(fish_list: list[dict]) -> dict[Any, Any]:
       reach_probability *= 1 - group_exact_block_probs[prev_precedence]
 
     # 使用NumPy数组存储组内每条鱼的基础概率
-    group_probs = np.array([fish["survival_prob"] * fish["hook_prob"] for fish in group])
+    group_probs = np.array([fish.SurvivalProb * fish.HookProb for fish in group])
 
     # 计算每条鱼的精确期望概率
     group_expected_probs = {}
@@ -84,8 +109,8 @@ def calc_fishing_prob(fish_list: list[dict]) -> dict[Any, Any]:
 
         expected_prob = total_prob
 
-      group_expected_probs[fish["ID"]] = expected_prob
-      final_probs[fish["ID"]] = reach_probability * expected_prob
+      group_expected_probs[fish.ID] = expected_prob
+      final_probs[fish.ID] = reach_probability * expected_prob
 
     # 计算该组的精确阻挡概率
     group_exact_block_probs[precedence] = sum(group_expected_probs.values())
@@ -93,19 +118,18 @@ def calc_fishing_prob(fish_list: list[dict]) -> dict[Any, Any]:
   return final_probs
 
 
-def main():
-  # 创建20条鱼的数据
-  fish_data = []
-  precedences = [-100, -20, -10] + [0] * 15 + [10, 20]
-
-  for i in range(20):
-    fish_id = chr(65 + i)  # A-T
-    precedence = precedences[i]
-    prob = 0.05 + i * 0.03
-
-    fish_data.append({"ID": fish_id, "Precedence": precedence, "survival_prob": prob, "hook_prob": prob})
-    # survival_prob：从Locations里读出来经过get_chance算出来的概率
-    # hook_prob：从Fish里读出来经过整个CheckGenericFishRequirements方法算出来的概率
+def run(arg):
+  with open(arg.json_file, "r", encoding="utf-8") as f:
+    fish_list = json.load(f)
+    fish_data = [
+      Fish(
+        fish["ID"],
+        int(fish["Precedence"]),
+        float(fish["SurvivalProb"]),
+        float(fish["HookProb"])
+      )
+      for fish in fish_list
+    ]
 
   # 内存追踪
   tracemalloc.start()
@@ -126,20 +150,47 @@ def main():
   execution_time_ms = (end_time - start_time) * 1000
 
   # 输出结果
-  print("钓鱼概率计算结果")
-  print("=" * 50)
-  print(f"{'鱼ID':<6} {'概率(%)':<20}")
-  print("-" * 50)
+  output_lines = []
+  output_lines.append("钓鱼概率计算结果")
+  output_lines.append("=" * 50)
+  output_lines.append(f"{'鱼ID':<6} {'概率(%)':<20}")
+  output_lines.append("-" * 50)
 
   for fish_id in sorted(results.keys()):
     probability_percent = results[fish_id] * 100
-    print(f"{fish_id:<6} {probability_percent:.10f}")
+    output_lines.append(f"{fish_id:<6} {probability_percent:.10f}")
 
-  print("\n" + "=" * 50)
-  print("性能统计")
-  print("=" * 50)
-  print(f"峰值内存使用: {peak_memory:,} bytes")
-  print(f"运行时间: {execution_time_ms:.3f} ms")
+  output_lines.append("\n" + "=" * 50)
+  output_lines.append("性能统计")
+  output_lines.append("=" * 50)
+  output_lines.append(f"峰值内存使用: {peak_memory:,} bytes")
+  output_lines.append(f"运行时间: {execution_time_ms:.3f} ms")
+
+  # 写入 out.txt，覆盖旧内容
+  with open("out.txt", "w", encoding="utf-8") as out_file:
+    out_file.write("\n".join(output_lines))
+
+
+def main():
+  parser = argparse.ArgumentParser()
+  subparsers = parser.add_subparsers()
+
+  parser_func = subparsers.add_parser("run")
+  parser_func.add_argument("json_file", type=str, help="JSON 文件路径，包含鱼数据")
+  parser_func.set_defaults(func=run)
+
+  args = parser.parse_args()
+
+  try:
+    result = args.func(args)
+    if isinstance(result, str):
+      print(result)
+      sys.exit(0)
+    else:
+      sys.exit(result)
+  except Exception as e:
+    print(f"Error: {str(e)}", file=sys.stderr)
+    sys.exit(99)
 
 
 if __name__ == "__main__":

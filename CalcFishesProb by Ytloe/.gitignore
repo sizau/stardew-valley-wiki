@@ -11,3 +11,9 @@ wheels/
 
 #Project files
 test
+
+# IDE files
+.idea/
+
+# test files
+test*
