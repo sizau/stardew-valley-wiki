@@ -1,0 +1,21 @@
+[project]
+name = "calcfishesprob-by-ytloe"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.2.6",
+    "psutil>=7.0.0",
+]
+
+[tool.ruff]
+"indent-width" = 2
+"line-length" = 115
+
+[tool.uv.workspace]
+members = ["CalcFishesProb by Ytloe"]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+default = true
