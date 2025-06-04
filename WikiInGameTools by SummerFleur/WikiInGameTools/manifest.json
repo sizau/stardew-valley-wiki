@@ -1,0 +1,11 @@
+{
+  "Name": "Wiki In-game Tools",
+  "Author": "SummerFleur",
+  "Version": "1.0.0",
+  "Description": "Stardew wiki in-game tools",
+  "UniqueID": "SummerFleur.WIT",
+  "MinimumApiVersion": "4.0.0",
+  "EntryDll": "WIT.dll",
+  "UpdateKeys": [],
+  "Dependencies": []
+}

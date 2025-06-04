@@ -1,0 +1,9 @@
+# IDE 相关
+.idea/
+
+# 调试相关
+bin/
+obj/
+
+# 个人配置
+WikiInGameTools.sln.DotSettings.user
