@@ -6,10 +6,11 @@ using Microsoft.Xna.Framework;
 using StardewValley;
 using StardewValley.Extensions;
 using StardewValley.GameData.Locations;
+using WikiInGameTools;
 using WikiIngameTools.Framework;
-using static WikiInGameTools.CalcFishedProb.FishUtilities;
+using static WikiIngameTools.CalcFishesProb.Framework.FishUtilities;
 
-namespace WikiInGameTools.CalcFishedProb;
+namespace WikiIngameTools.CalcFishesProb.Framework;
 
 internal static class FishesProb
 {
@@ -307,7 +308,7 @@ internal static class FishesProb
         return possibleFish;
     }
 
-    private static void ConvertToJson(List<Fish> fishes, Conditions c)
+    private static void ConvertToJson(List<Fish> fishes, FishConditions c)
     {
         // 将当前钓鱼等级情况下，所有水深可钓到的鱼类数据序列化为 json
         var savePath = Path.Combine("output", c.Location, $"{c.Season},{c.Weather},{c.Time},{c.Level},{c.Depth}.json");
@@ -333,8 +334,8 @@ internal static class FishesProb
             ? "rainy"
             : "sunny";
 
-        var depth = ModEntry.Config.CustomWaterDepth 
-            ? ModEntry.Config.WaterDepth 
+        var depth = CalcFishesProb.CfpConfig.CustomWaterDepth 
+            ? CalcFishesProb.CfpConfig.WaterDepth 
             : location.DisplayName switch 
             {
                 "Secret Woods" => 3,
@@ -394,7 +395,7 @@ internal static class FishesProb
                     fishes.Add(fish);
             }
 
-            var conditions = new Conditions(location, season.ToString(), weather, time, 10, depth);
+            var conditions = new FishConditions(location, season.ToString(), weather, time, 10, depth);
             ConvertToJson(fishes, conditions);
         }
     }

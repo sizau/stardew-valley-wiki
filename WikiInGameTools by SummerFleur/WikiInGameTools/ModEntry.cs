@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations; 
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using WikiInGameTools.CalcFishedProb;
+using WikiIngameTools.CalcFishesProb;
 using WikiIngameTools.Framework;
 using WikiInGameTools.Framework.ConfigurationService;
 
@@ -23,6 +23,14 @@ internal class ModEntry : Mod
     public static IModHelper ModHelper { get; private set; }
     private static IMonitor ModMonitor { get; set; }
     public static void Log(string s, LogLevel l = LogLevel.Debug) => ModMonitor.Log(s, l);
+    #endregion
+    
+    /****
+     ** 模块
+     ** Modules
+     ****/
+    #region Modules
+    public static CalcFishesProb CalcFishesProb { get; set; }
     #endregion
     
     /// <summary>
@@ -48,15 +56,25 @@ internal class ModEntry : Mod
      ** Event handlers
      ****/
     #region Event handlers
+
     /// <summary>
     /// 游戏存档载入事件。
     /// </summary>
-    private static void OnGameLoaded(object sender, SaveLoadedEventArgs e) { }
+    private static void OnGameLoaded(object sender, SaveLoadedEventArgs e)
+    {
+        CalcFishesProb = new CalcFishesProb();
+        if (Config.CalcFishesProbModConfig.Enable)
+            CalcFishesProb.Activate();
+    }
 
     /// <summary>
     /// 游戏存档退出事件。
     /// </summary>
-    private static void OnGameUnload(object sender, ReturnedToTitleEventArgs e) { }
+    private static void OnGameUnload(object sender, ReturnedToTitleEventArgs e)
+    {
+        CalcFishesProb.Deactivate();
+        CalcFishesProb = null;
+    }
 
     /// <summary>
     /// 游戏启动事件
@@ -64,7 +82,6 @@ internal class ModEntry : Mod
     private static void OnGameLaunched(object sender, GameLaunchedEventArgs e)
     {
         GenericModConfigMenuIntegration.Register(Manifest, ModHelper.ModRegistry,
-            () => Config,
             () => Config = new ModConfig(),
             ReloadConfig
         );
@@ -78,11 +95,7 @@ internal class ModEntry : Mod
     /// <summary>
     /// 按下按键事件。
     /// </summary>
-    private static void OnButtonChanged(object sender, ButtonsChangedEventArgs e)
-    {
-        if (KeyBind.QueryKey.JustPressed())
-            FishesProb.GetAllFishData();
-    }
+    private static void OnButtonChanged(object sender, ButtonsChangedEventArgs e) { }
     #endregion
     
     /****
@@ -92,12 +105,12 @@ internal class ModEntry : Mod
     #region Private Methods
     /// <summary>
     /// 读取模组配置更新并重新载入配置。
-    /// Read the update of modconfig and reload them.
     /// </summary>
     private static void ReloadConfig()
     {
         ModHelper.WriteConfig(Config);
         Config = ModHelper.ReadConfig<ModConfig>();
+        CalcFishesProb.ReloadConfig();
     }
     #endregion
 }

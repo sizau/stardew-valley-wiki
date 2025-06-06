@@ -1,7 +1,7 @@
 ﻿using StardewValley;
 using StardewValley.GameData.Locations;
 
-namespace WikiInGameTools.CalcFishedProb;
+namespace WikiIngameTools.CalcFishesProb.Framework;
 
 internal static class FishUtilities
 {
@@ -26,25 +26,5 @@ internal static class FishUtilities
     {
         var id = spawn.Id;
         return ItemRegistry.Create(id);
-    }
-}
-
-public struct Conditions
-{
-    public readonly string Location;
-    public readonly string Season;
-    public readonly string Weather;
-    public readonly int Time;
-    public readonly int Level;
-    public readonly int Depth;
-
-    public Conditions(GameLocation location, string season, string weather, int time, int level, int depth)
-    {
-        Location = location.DisplayName;
-        Season = season;
-        Weather = weather;
-        Time = time;
-        Level = level;
-        Depth = depth;
     }
 }

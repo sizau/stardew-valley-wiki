@@ -1,4 +1,4 @@
-﻿namespace WikiInGameTools.CalcFishedProb;
+﻿namespace WikiIngameTools.CalcFishesProb.Framework;
 
 internal class Fisher
 {
