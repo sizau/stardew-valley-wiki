@@ -17,7 +17,7 @@ class Fish:
   Attributes:
       ID: 鱼的 DisplayName
       Precedence: 鱼的“优先级”
-      SurvivalProb: 从 Locations 里读出来经过 get_chance 算出来的概率
+      SurvivalProb: 从 Locations 里读出来经过 GetChance 算出来的概率
       HookProb: 从 Fish 里读出来经过整个 CheckGenericFishRequirements 方法算出来的概率
   """
   ID: str = ""
@@ -118,7 +118,15 @@ def calc_fishing_prob(fishes: list[Fish]) -> dict[Any, Any]:
   return final_probs
 
 
-def run(arg):
+def run(arg) -> None:
+  """
+  读取鱼类数据 json 文件，反序列化后调用 calc_fishing_prob 计算具体概率，并写入文件，命令行使用样例：
+
+  python CalcFishesProb.py run [json绝对路径]
+
+  Args:
+    arg: 命令行传入参数，仅包含 json_file 路径
+  """
   with open(arg.json_file, "r", encoding="utf-8") as f:
     fish_list = json.load(f)
     fish_data = [
@@ -150,11 +158,10 @@ def run(arg):
   execution_time_ms = (end_time - start_time) * 1000
 
   # 输出结果
-  output_lines = []
-  output_lines.append("钓鱼概率计算结果")
-  output_lines.append("=" * 50)
-  output_lines.append(f"{'鱼ID':<6} {'概率(%)':<20}")
-  output_lines.append("-" * 50)
+  output_lines = ["钓鱼概率计算结果",
+                  "=" * 50,
+                  f"{'鱼ID':<6} {'概率(%)':<20}",
+                  "-" * 50]
 
   for fish_id in sorted(results.keys()):
     probability_percent = results[fish_id] * 100
@@ -171,7 +178,10 @@ def run(arg):
     out_file.write("\n".join(output_lines))
 
 
-def main():
+def main() -> None:
+  """
+  命令行调用主函数
+  """
   parser = argparse.ArgumentParser()
   subparsers = parser.add_subparsers()
 
