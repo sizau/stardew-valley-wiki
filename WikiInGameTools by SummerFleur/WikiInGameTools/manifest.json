@@ -5,7 +5,7 @@
   "Description": "Stardew wiki in-game tools",
   "UniqueID": "SummerFleur.WIT",
   "MinimumApiVersion": "4.0.0",
-  "EntryDll": "WIT.dll",
+  "EntryDll": "WikiInGameTools.dll",
   "UpdateKeys": [],
   "Dependencies": []
 }

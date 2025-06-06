@@ -1,6 +1,9 @@
 ﻿using JetBrains.Annotations; 
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using WikiInGameTools.CalcFishedProb;
+using WikiIngameTools.Framework;
+using WikiInGameTools.Framework.ConfigurationService;
 
 namespace WikiInGameTools;
 
@@ -15,6 +18,7 @@ internal class ModEntry : Mod
      ** Properties
      ****/
     #region Properties
+    public static ModConfig Config { get; private set; }
     public static IManifest Manifest { get; private set; }
     public static IModHelper ModHelper { get; private set; }
     private static IMonitor ModMonitor { get; set; }
@@ -35,6 +39,8 @@ internal class ModEntry : Mod
         helper.Events.GameLoop.SaveLoaded += OnGameLoaded;
         helper.Events.Display.MenuChanged += OnMenuChanged;
         helper.Events.Input.ButtonsChanged += OnButtonChanged;
+        
+        Config = helper.ReadConfig<ModConfig>();
     }
     
     /****
@@ -55,7 +61,14 @@ internal class ModEntry : Mod
     /// <summary>
     /// 游戏启动事件
     /// </summary>
-    private static void OnGameLaunched(object sender, GameLaunchedEventArgs e) { }
+    private static void OnGameLaunched(object sender, GameLaunchedEventArgs e)
+    {
+        GenericModConfigMenuIntegration.Register(Manifest, ModHelper.ModRegistry,
+            () => Config,
+            () => Config = new ModConfig(),
+            ReloadConfig
+        );
+    }
 
     /// <summary>
     /// 游戏菜单变化事件。
@@ -65,6 +78,26 @@ internal class ModEntry : Mod
     /// <summary>
     /// 按下按键事件。
     /// </summary>
-    private static void OnButtonChanged(object sender, ButtonsChangedEventArgs e) { }
+    private static void OnButtonChanged(object sender, ButtonsChangedEventArgs e)
+    {
+        if (KeyBind.QueryKey.JustPressed())
+            FishesProb.GetAllFishData();
+    }
+    #endregion
+    
+    /****
+     ** 私有方法
+     ** Private Methods
+     ****/
+    #region Private Methods
+    /// <summary>
+    /// 读取模组配置更新并重新载入配置。
+    /// Read the update of modconfig and reload them.
+    /// </summary>
+    private static void ReloadConfig()
+    {
+        ModHelper.WriteConfig(Config);
+        Config = ModHelper.ReadConfig<ModConfig>();
+    }
     #endregion
 }
