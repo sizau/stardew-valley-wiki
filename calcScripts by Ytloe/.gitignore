@@ -13,3 +13,9 @@ wheels/
 #Project files
 img
 test
+
+# IDE Files
+.idea/
+
+# Original data
+src/Locations/

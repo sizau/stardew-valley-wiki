@@ -1,0 +1,50 @@
+[
+  {
+    "ID": "鳀鱼",
+    "Precedence": 0,
+    "SurvivalProb": 1.0,
+    "HookProb": 0.44999998807907104
+  },
+  {
+    "ID": "沙丁鱼",
+    "Precedence": 0,
+    "SurvivalProb": 1.0,
+    "HookProb": 0.8499999642372131
+  },
+  {
+    "ID": "鲱鱼",
+    "Precedence": 0,
+    "SurvivalProb": 1.0,
+    "HookProb": 0.6499999761581421
+  },
+  {
+    "ID": "海草",
+    "Precedence": 0,
+    "SurvivalProb": 1.0,
+    "HookProb": 0.5
+  },
+  {
+    "ID": "比目鱼",
+    "Precedence": 0,
+    "SurvivalProb": 1.0,
+    "HookProb": 0.3500000238418579
+  },
+  {
+    "ID": "海凝胶",
+    "Precedence": 0,
+    "SurvivalProb": 0.10000000149011612,
+    "HookProb": 1.0
+  },
+  {
+    "ID": "秘密纸条",
+    "Precedence": 1000,
+    "SurvivalProb": 0.07999999821186066,
+    "HookProb": 1.0
+  },
+  {
+    "ID": "六种垃圾",
+    "Precedence": 2000,
+    "SurvivalProb": 1.0,
+    "HookProb": 1.0
+  }
+]
