@@ -308,6 +308,11 @@ internal static class FishesProb
         return possibleFish;
     }
 
+    /// <summary>
+    /// 将鱼类数据序列化为 Json。
+    /// </summary>
+    /// <param name="fishes">当前地点可能出现的所有鱼类数据</param>
+    /// <param name="c">所有外部条件，包括季节、天气、水深等</param>
     private static void ConvertToJson(List<Fish> fishes, FishConditions c)
     {
         // 将当前钓鱼等级情况下，所有水深可钓到的鱼类数据序列化为 json
@@ -324,6 +329,10 @@ internal static class FishesProb
         }
     }
     
+    /// <summary>
+    /// 获取当前地点、当前浮标位置下可能钓到的所有鱼类列表，然后转化为 Json
+    /// 文件存储到 output 文件夹下，其中浮标位置使用的是光标所在位置。
+    /// </summary>
     public static void GetAllFishData()
     {
         // 获取当前位置和鼠标所在区域的地块坐标
@@ -334,12 +343,15 @@ internal static class FishesProb
             ? "rainy"
             : "sunny";
 
+        // 获取当前水深，由于未找到合适的计算方法，因此默认为 5，部分地点根据其最大水深做调整
+        // 对于其它需要调整水深的情况，需使用 config
         var depth = CalcFishesProb.CfpConfig.CustomWaterDepth 
             ? CalcFishesProb.CfpConfig.WaterDepth 
-            : location.DisplayName switch 
+            : location.Name switch 
             {
                 "Secret Woods" => 3,
                 "Calico Desert" => 2,
+                "IslandNorth" => 1,
                 _ => 5
             };
 

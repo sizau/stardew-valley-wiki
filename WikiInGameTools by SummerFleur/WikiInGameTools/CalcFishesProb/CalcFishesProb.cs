@@ -14,7 +14,15 @@ internal class CalcFishesProb : IModule
      ** Properties & Fields
      ****/
     public bool IsActive { get; private set; }
+    
+    /// <summary>
+    /// 模块配置
+    /// </summary>
     public static CalcFishesProbModConfig CfpConfig { get; set; }
+    
+    /// <summary>
+    /// 查询按钮
+    /// </summary>
     private static KeybindList QueryKey { get; } = KeybindList.Parse("Q");
     
     /****
@@ -33,10 +41,16 @@ internal class CalcFishesProb : IModule
         ModEntry.ModHelper.Events.Input.ButtonsChanged -= OnButtonChanged;
     }
     
+    public static void ReloadConfig() => CfpConfig = ModEntry.Config.CalcFishesProbModConfig;
+    
     /****
      ** 事件处理函数
      ** Event handlers
      ****/
+    /// <summary>
+    /// 按下 <see cref="QueryKey"/> 按钮时，调用 <see cref="FishesProb.GetAllFishData()"/>
+    /// 方法获取当前地点全部鱼类数据。
+    /// </summary>
     private static void OnButtonChanged(object sender, ButtonsChangedEventArgs e)
     {
         if (QueryKey.JustPressed())
@@ -51,18 +65,15 @@ internal class CalcFishesProb : IModule
         Api.AddBoolOption(ModEntry.Manifest, 
             () => ModEntry.Config.CalcFishesProbModConfig.Enable, 
             delegate(bool value) { ModEntry.Config.CalcFishesProbModConfig.Enable = value; }, 
-            () => "Enable");
+            () => "启用");
         Api.AddBoolOption(ModEntry.Manifest, 
             () => ModEntry.Config.CalcFishesProbModConfig.CustomWaterDepth, 
             delegate(bool value) { ModEntry.Config.CalcFishesProbModConfig.CustomWaterDepth = value; }, 
-            () => "Enable Custom Water Depth?");
+            () => "使用自定义水深");
         Api.AddNumberOption(ModEntry.Manifest, 
             () => ModEntry.Config.CalcFishesProbModConfig.WaterDepth, 
             delegate(int value) { ModEntry.Config.CalcFishesProbModConfig.WaterDepth = value; }, 
-            () => "Water Depth", null, 0, 5);
+            () => "水深", null, 0, 5);
     }
-    
-    public static void ReloadConfig()
-        => CfpConfig = ModEntry.Config.CalcFishesProbModConfig;
 }
 

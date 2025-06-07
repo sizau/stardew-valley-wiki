@@ -30,7 +30,7 @@ internal class ModEntry : Mod
      ** Modules
      ****/
     #region Modules
-    public static CalcFishesProb CalcFishesProb { get; set; }
+    private static CalcFishesProb CalcFishesProb { get; set; }
     #endregion
     
     /// <summary>
