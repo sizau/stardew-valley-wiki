@@ -25,10 +25,10 @@
   运行流程：
 
   1. setup_animal_config；得到动物所有基础信息的 dict
-  2. calc_daily_profits；根据基础信息使用 numpy 批量计算 0~1000 好感度的常规日收益和加工日收益（附带大产物概率和品质概率）
-  3. plot_profit_comparison；传入数据绘制图像，可以自行修改线段颜色和背景图
+  2. calc_daily_profits；根据基础信息使用 numpy 批量计算 0~1000 好感度的常规日收益和加工日收益（附带大产物概率和品质概率以及更多详细数据）
+  3. plot_profit_comparison；传入多个数据列表绘制图像，可以自行修改线段颜色和背景图
 
-- calcFishesProb.py 是用于计算钓鱼准确概率的其中一个方法，建议搭配 json 文件夹里的“钓鱼概率解释文档.txt”查看，暂时还不完善
+- calcFishesProb.py 是用于计算钓鱼准确概率的其中一个方法，建议搭配 json 文件夹里的“钓鱼概率解释文档.txt”查看，目前该模块全权交给雀枝管理
   运行流程：
 
   1. calc_fishing_prob; 传入[{"ID": fish_id, "Precedence": precedence, "survival_prob": prob, "hook_prob": prob}]这个类型的列表就能获得概率

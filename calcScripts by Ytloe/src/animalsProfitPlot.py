@@ -3,14 +3,16 @@
 用于计算不同好感度下动物的日收益，支持常规产物和加工产物的收益对比
 """
 
+import warnings
 from pathlib import Path
-from typing import Optional, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
+import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy.typing import NDArray
 
-from utils import get_input
+from utils import PerfMonitor, get_input
 
 
 def get_animal_base_data(animal_id) -> dict:
@@ -296,7 +298,7 @@ def calc_daily_profits(
     cycle_array = np.full(1001, cycle_days)
 
   # 计算常规日收益
-  raw_daily_profits = (row_profits + lrg_profits) / cycle_array - 50
+  raw_daily_profits = ((row_profits + lrg_profits) / cycle_array - 50) * 1
 
   # 计算加工收益
   if animal_type == "猪":
@@ -341,61 +343,140 @@ def calc_daily_profits(
     proc_lrg_profits = lrg_profits
 
   # 计算加工日收益
-  proc_daily_profits = (proc_row_profits + proc_lrg_profits) / cycle_array - 50
+  proc_daily_profits = ((proc_row_profits + proc_lrg_profits) / cycle_array - 50) * 1
 
+  # 如果有更细致的计算需求，除了以下4个数值还可以自己输出
+  # 常规产物日收益：row_profits
+  # 大产物日收益：lrg_profits
+  # 常规产物日收益（加工）：proc_row_profits
+  # 大产物日收益（加工）：proc_lrg_profits
   return raw_daily_profits, proc_daily_profits, lrg_probs, quality_probs
 
 
 def plot_profit_comparison(
-  raw1: NDArray[np.float64],
-  proc1: NDArray[np.float64],
-  raw2: NDArray[np.float64],
-  proc2: NDArray[np.float64],
-  labels: Tuple[str, str] = ("配置1", "配置2"),
+  data_list: List[NDArray[np.float64]],
+  labels: List[str],
   save_path: Optional[str] = "profit_comparison.png",
   animal_id: int = 0,
+  title_suffix: str = "好感度与日收益对比图",
 ) -> None:
   """
-  绘制两种配置的收益对比图，支持添加注释点
+  绘制多组数据的收益对比图，支持添加注释点
 
   Args:
-      raw1, proc1: 第一种配置的常规和加工收益
-      raw2, proc2: 第二种配置的常规和加工收益
-      labels: 配置标签
+      data_list: 包含多组数据的列表，每组数据是一个NDArray[np.float64]
+      labels: 每条折线的标签列表，长度应与data_list相同
       save_path: 保存路径
       animal_id: 动物ID
+      title_suffix: 图表标题后缀
   """
+  # 参数验证
+  if len(data_list) != len(labels):
+    raise ValueError("数据组数与标签数量不匹配")
+
+  if len(data_list) == 0:
+    raise ValueError("至少需要一组数据")
+
   plt.rcParams["font.sans-serif"] = ["SimHei"]
   plt.rcParams["axes.unicode_minus"] = False
 
   x = np.arange(1001)
 
   # 获取y轴范围
-  all_values = np.concatenate([raw1, proc1, raw2, proc2])
+  all_values = np.concatenate(data_list)
   y_min = np.min(all_values)
   y_max = np.max(all_values)
   y_min_floor = (int(y_min) // 100) * 100
   y_max_ceil = ((int(y_max) + 99) // 100) * 100
 
-  # 设置画布
-  fig, ax = plt.subplots(figsize=(12, 6))
+  # 设置画布 - 固定DPI以确保一致性
+  fig, ax = plt.subplots(figsize=(12, 6), dpi=100)
 
   # 设置背景图片
-  bg_path = Path("img/bg1.jpg")
+  bg_path = Path("img/bg.jpg")
   if bg_path.exists():
-    img = plt.imread(bg_path)
-    # 将背景设置为整个figure
-    fig.figimage(img, alpha=0.3, zorder=0, resize=True)
-    # 设置ax背景为透明，让figure背景显示出来
+    # 抑制EXIF警告
+
+    with warnings.catch_warnings():
+      warnings.filterwarnings("ignore", message="Corrupt EXIF data")
+      warnings.filterwarnings("ignore", category=UserWarning)
+      # 读取背景图
+      img = plt.imread(bg_path)
+
+    # 获取figure的实际尺寸
+    fig_width_inch, fig_height_inch = fig.get_size_inches()
+    dpi = fig.dpi
+    fig_width_px = int(fig_width_inch * dpi)
+    fig_height_px = int(fig_height_inch * dpi)
+
+    # 获取背景图的原始尺寸
+    img_height, img_width = img.shape[:2]
+
+    # 计算缩放比例（保持长宽比）
+    scale = min(fig_width_px / img_width, fig_height_px / img_height)
+
+    # 如果图片需要缩放
+    if scale != 1:
+      # 计算新的尺寸
+      new_height = int(img_height * scale)
+      new_width = int(img_width * scale)
+
+      if scale < 1:
+        step_h = max(1, img_height // new_height)
+        step_w = max(1, img_width // new_width)
+        img = img[::step_h, ::step_w]
+
+    # 计算居中位置
+    xo = (fig_width_px - img.shape[1]) // 2
+    yo = (fig_height_px - img.shape[0]) // 2
+
+    # 添加背景图
+    fig.figimage(img, xo=xo, yo=yo, alpha=0.3, zorder=-1)
     ax.set_facecolor("none")
   else:
     ax.set_facecolor("white")
 
-  # 绘制四条线
-  ax.plot(x, raw1, label=f"{labels[0]}常规日收益", color="blue", linewidth=2, zorder=5)
-  ax.plot(x, proc1, label=f"{labels[0]}加工日收益", color="green", linewidth=2, zorder=5)
-  ax.plot(x, raw2, label=f"{labels[1]}常规日收益", color="orange", linewidth=2, zorder=5)
-  ax.plot(x, proc2, label=f"{labels[1]}加工日收益", color="red", linewidth=2, zorder=5)
+  # 定义颜色列表，用于多条折线
+  colors = [
+    "blue",
+    "green",
+    "red",
+    "orange",
+    "purple",
+    "brown",
+    "pink",
+    "gray",
+    "olive",
+    "cyan",
+    "magenta",
+    "yellow",
+    "black",
+    "lime",
+    "navy",
+    "teal",
+    "maroon",
+    "aqua",
+  ]
+
+  # 如果折线数量超过预定义颜色，使用matplotlib的颜色映射
+  if len(data_list) > len(colors):
+    # 使用tab20颜色映射或者生成HSV颜色
+    if len(data_list) <= 20:
+      cmap = plt.cm.get_cmap("tab20")
+      colors = [cmap(i / len(data_list)) for i in range(len(data_list))]
+    else:
+      # 使用HSV色彩空间生成均匀分布的颜色
+
+      colors = []
+      for i in range(len(data_list)):
+        hue = i / len(data_list)
+        rgb = mcolors.hsv_to_rgb([hue, 0.8, 0.9])
+        colors.append(rgb)
+
+  # 绘制多条折线
+  for i, (data, label) in enumerate(zip(data_list, labels)):
+    color = colors[i % len(colors)]
+    ax.plot(x, data, label=label, color=color, linewidth=2, zorder=5)
 
   # 默认的重要转折点
   vertical_lines: list[tuple[int, str]] = []
@@ -439,7 +520,7 @@ def plot_profit_comparison(
         bbox=dict(boxstyle="round,pad=0.2", facecolor="white", edgecolor=color, alpha=0.8),
       )
 
-  # 设置坐标轴 - 修正2：添加适当的边距，避免过分贴合
+  # 设置坐标轴
   ax.set_xlabel("好感度")
   ax.set_ylabel("日收益")
   ax.set_xticks(np.arange(0, 1001, 200))
@@ -456,9 +537,22 @@ def plot_profit_comparison(
   y_margin = (y_max_ceil - y_min_floor) * 0.05
   ax.set_ylim(y_min_floor - y_margin, y_max_ceil + y_margin)
 
-  ax.set_title(f"{animal_type}好感度与日收益对比图")
-  ax.legend(loc="upper left")
+  ax.set_title(f"{animal_type}{title_suffix}")
+
+  # 动态调整图例位置和列数
+  n_lines = len(data_list)
+  if n_lines <= 4:
+    ax.legend(loc="upper left")
+  elif n_lines <= 8:
+    ax.legend(loc="upper left", ncol=2)
+  else:
+    # 对于更多折线，使用更多列或放在图外
+    ax.legend(bbox_to_anchor=(1.05, 1), loc="upper left", ncol=max(1, n_lines // 10))
+
   ax.grid(True, linestyle="--", alpha=0.5, zorder=1)
+
+  # 先调用tight_layout
+  plt.tight_layout()
 
   # 确保img文件夹存在并保存
   if save_path:
@@ -468,123 +562,31 @@ def plot_profit_comparison(
     # 将保存路径修改为img文件夹中
     save_file = img_dir / save_path if not save_path.startswith("img") else Path(save_path)
 
-    plt.savefig(save_file, dpi=300, bbox_inches="tight", facecolor="white")
+    # 使用bbox_inches保存图片
+    plt.savefig(save_file, bbox_inches="tight", pad_inches=0.1, facecolor="white")
+    print(f"图表已保存到 ./img/{save_path}")
 
-  plt.tight_layout()
-  plt.show()
-
-
-# def create_legacy_output(
-#   raw_profits: NDArray[np.float64], proc_profits: NDArray[np.float64], animal_config: dict
-# ) -> list:
-#   """创建与原始格式兼容的输出列表"""
-#   legacy_list = []
-
-#   # 重新计算一些需要的数据用于legacy格式
-#   friendship_levels = np.arange(0, 1001)
-#   animal_type = animal_config["type"]
-#   skills = animal_config["skills"]
-
-#   # 计算拾取倍数
-#   if animal_type == "猪":
-#     pickup_mult = 1.2 if "采集者" in skills else 1.0
-#   else:
-#     pickup_mult = 2.0 if animal_config["use_golden_cookie"] else 1.0
-
-#   # 初始化品质概率（避免未绑定变量错误）
-#   quality_probs = [0.0, 0.0, 0.0, 0.0]
-
-#   # 计算猪的固定品质概率
-#   if animal_type == "猪":
-#     if "无技能" not in skills and "植物学家" in skills:
-#       quality_probs = [0.0, 0.0, 0.0, 1.0]
-#     else:
-#       Au_prob = np.clip(animal_config["foraging_level"] / 30, 0, 1)
-#       Ag_prob = np.clip((1 - Au_prob) * (animal_config["foraging_level"] / 15), 0, 1 - Au_prob)
-#       No_prob = max(1 - Au_prob - Ag_prob, 0)
-#       quality_probs = [No_prob, Ag_prob, Au_prob, 0.0]
-
-#   # 计算大产物概率相关参数
-#   has_lrg_prod = animal_config["lrg_prices"][0] > 0
-
-#   for i in range(1001):
-#     friendship = friendship_levels[i]
-
-#     # 动态计算当前好感度的品质概率（非猪动物）
-#     if animal_type != "猪":
-#       skill_bonus = 0.33 if any(skill in skills for skill in ["鸡舍大师", "牧羊人"]) else 0.0
-#       mood = 255
-#       quality = (friendship / 1000) - (1 - (mood / 225)) + skill_bonus
-
-#       Ir_prob = 0 if quality <= 0.95 else np.clip(quality / 2, 0, 1)
-#       Au_prob = np.clip((1 - Ir_prob) * (quality / 2), 0, (1 - Ir_prob))
-#       Ag_prob = np.clip((1 - Ir_prob - Au_prob) * quality, 0, (1 - Ir_prob - Au_prob))
-#       No_prob = max(1 - Ir_prob - Au_prob - Ag_prob, 0)
-#       quality_probs = [No_prob, Ag_prob, Au_prob, Ir_prob]
-
-#     # 计算大产物概率
-#     lrg_prob = 0.0
-#     if has_lrg_prod:
-#       mood = 255
-#       mood_modifier = 1.5 if mood > 200 else min(0, mood - 100)
-
-#       if animal_type == "兔子":
-#         friendship_modifier = 5000
-#         threshold = 0
-#       elif animal_type == "鸭":
-#         friendship_modifier = 4750
-#         threshold = 200
-#       else:
-#         friendship_modifier = 1200
-#         threshold = 200
-
-#       if friendship >= threshold:
-#         lrg_prob = min(1, (friendship + mood * mood_modifier) / friendship_modifier)
-
-#     row_prob = 1 - lrg_prob
-
-#     # 计算每周期产出
-#     if animal_type == "猪":
-#       # 这里需要daily_frames，但为了简化，使用默认值
-#       daily_frames = 26280  # 默认值
-#       keep_work_prob = min(friendship / 1500, 0.9999)
-#       decay_factor = 1.0 - (1.0 - keep_work_prob) * 0.0002
-#       cycle_prod = (1.0 / (1.0 - keep_work_prob)) * (1.0 - decay_factor**daily_frames)
-#     else:
-#       cycle_prod = 1.0
-
-#     # 添加概率和数量数据
-#     other_data = {
-#       "概率": {
-#         "No": quality_probs[0],
-#         "Ag": quality_probs[1],
-#         "Au": quality_probs[2],
-#         "Ir": quality_probs[3],
-#         "reg": row_prob,
-#         "lrg": lrg_prob,
-#       },
-#       "数量": {"日产出": cycle_prod, "个收获": pickup_mult},
-#     }
-#     legacy_list.append(other_data)
-#     legacy_list.append(raw_profits[i])
-#     legacy_list.append(proc_profits[i])
-
-#   return legacy_list
+  # 展示图像
+  # plt.show()
 
 
 def main() -> None:
   """主函数"""
+  # 调用性能监控
+  monitor = PerfMonitor("动物收益计算")
+  monitor.start()
+  # 测试准确性能时记得把plot_profit_comparison()的plt.show()注释掉，并采用animal_id = 0
   print("=== 星露谷物语动物收益计算器 ===")
   # 0-鸡、1-虚空鸡、2-金鸡、3-恐龙、4-鸭、5-兔子、6-牛、7-山羊、8-绵羊、9-猪、10-鸵鸟
   # for animal_id in range(11):
-  animal_id: int = 8
+  animal_id: int = 0
   # setup_animal_config()
   print("\n配置动物信息（有技能）...")
   config_with_skills = setup_animal_config(
     animal_id=animal_id,
     skill_ids=[1, 2, 3, 4],
     profit_rate=1.0,
-    use_golden_cookie=False,
+    use_golden_cookie=True,
   )
 
   print(f"配置完成：{config_with_skills['type']}")
@@ -615,30 +617,33 @@ def main() -> None:
 
   # 输出关键节点的收益数据
   print("\n=== 好感度收益对比 ===")
-  key_points = [0, 200, 400, 600, 800, 1000]
-
-  for friendship in key_points:
+  # key_points = [0, 200, 400, 600, 800, 1000]
+  for friendship in range(0, 1001, 100):
     print(f"好感度 {friendship}:")
-    print(f"  全技能 - 常规: {raw_skilled[friendship]:.4f}, 加工: {proc_skilled[friendship]:.4f}")
-    print(f"  无技能 - 常规: {raw_no_skills[friendship]:.4f}, 加工: {proc_no_skills[friendship]:.4f}")
+    print(
+      f"  全技能 - 常规: {raw_skilled[friendship]:.4f}, \
+      加工: {proc_skilled[friendship]:.4f}，\
+      品质概率：{quality_probs_skilled[friendship]}，\
+      大产物概率：{lrg_probs_skilled[friendship]}"
+    )
+    print(
+      f"  无技能 - 常规: {raw_no_skills[friendship]:.4f}, \
+      加工: {proc_no_skills[friendship]:.4f}，\
+      品质概率：{quality_probs_no_skills[friendship]}，\
+      大产物概率：{lrg_probs_no_skills[friendship]}"
+    )
 
   # 绘制对比图
   print(config_with_skills)
   print("\n绘制收益对比图...")
   plot_profit_comparison(
-    raw_skilled,
-    proc_skilled,
-    raw_no_skills,
-    proc_no_skills,
-    labels=("全技能", "无技能"),
+    data_list=[raw_skilled, proc_skilled, raw_no_skills, proc_no_skills],
+    labels=["全技能常规日收益", "全技能加工日收益", "无技能常规日收益", "无技能加工日收益"],
     save_path=f"{config_with_skills['type']}_profit_comparison.png",
     animal_id=animal_id,
   )
-
-  print(f"\n图表已保存到 ./img/{config_with_skills['type']}_profit_comparison.png")
-
-  # legacy_output = create_legacy_output(raw_skilled, proc_skilled, config_with_skills)
-  # print(f"Legacy格式输出长度: {len(legacy_output)}")
+  monitor.stop()
+  monitor.print_stats()
 
 
 if __name__ == "__main__":

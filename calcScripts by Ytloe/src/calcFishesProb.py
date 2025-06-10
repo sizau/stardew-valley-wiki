@@ -1,10 +1,10 @@
-import time
-import sys
-import tracemalloc
 import argparse
+import hashlib
 import json
 import os
-import hashlib
+import sys
+import time
+import tracemalloc
 from collections import defaultdict
 from itertools import combinations
 from typing import Any
@@ -22,6 +22,7 @@ class Fish:
       SurvivalProb: 从 Locations 里读出来经过 GetChance 算出来的概率
       HookProb: 从 Fish 里读出来经过整个 CheckGenericFishRequirements 方法算出来的概率
   """
+
   ID: str = ""
   Precedence: int = 0
   SurvivalProb: float = 0.0
@@ -143,7 +144,7 @@ def _run(json_f, delete_secret_notes=True) -> None:
         fish["ID"],
         int(fish["Precedence"]),
         float(fish["SurvivalProb"]),
-        float(fish["HookProb"])
+        float(fish["HookProb"]),
       )
       for fish in fish_list
     ]
@@ -159,10 +160,7 @@ def _run(json_f, delete_secret_notes=True) -> None:
   results = calc_fishing_prob(fish_data)
 
   # 输出 txt 结果
-  output_lines1 = ["钓鱼概率计算结果",
-                  "=" * 50,
-                  f"{'鱼ID':<6} {'概率(%)':<20}",
-                  "-" * 50]
+  output_lines1 = ["钓鱼概率计算结果", "=" * 50, f"{'鱼ID':<6} {'概率(%)':<20}", "-" * 50]
 
   output_lines2 = ["鱼ID,概率(%)"]
 
@@ -199,20 +197,20 @@ def merge_duplicate_fish_data(location_dir):
       location_dir: 地点文件夹路径
   """
   # 获取目录下所有json文件
-  all_files = [f for f in os.listdir(location_dir) if f.endswith('.json')]
+  all_files = [f for f in os.listdir(location_dir) if f.endswith(".json")]
 
   # 按季节和天气分组
-  file_groups: dict[ tuple, list[tuple] ] = {}
+  file_groups: dict[tuple, list[tuple]] = {}
   for filename in all_files:
     try:
       # 解析文件名: 季节,天气,时间,10,5.json
-      parts = filename.split(',')
+      parts = filename.split(",")
       season = parts[0]
       weather = parts[1]
       time_str = parts[2]
       time_val = int(time_str)  # 将时间转换为整数用于排序
 
-      group_key : tuple = (season, weather)
+      group_key: tuple = (season, weather)
       file_path = os.path.join(location_dir, filename)
 
       if group_key not in file_groups:
@@ -234,13 +232,13 @@ def merge_duplicate_fish_data(location_dir):
     print(f"找到 {len(files)} 个文件")
 
     current_hash = None
-    files_to_keep : list[tuple] = []
-    files_to_remove : list[tuple] = []
+    files_to_keep: list[tuple] = []
+    files_to_remove: list[tuple] = []
 
     # 1. 合并连续重复的文件
     for time_val, filename, file_path in files:
       # 计算文件哈希
-      with open(file_path, 'rb') as f:
+      with open(file_path, "rb") as f:
         file_hash = hashlib.md5(f.read()).hexdigest()
 
       # 第一个文件或遇到新哈希值
@@ -270,12 +268,12 @@ def merge_duplicate_fish_data(location_dir):
       time_val, filename, file_path = files_to_keep[i]
 
       # 计算开始时间（向下取整到整百）
-      start = (time_val - 30)
+      start = time_val - 30
 
       # 计算结束时间
       if i < len(files_to_keep) - 1:
         # 下一个保留文件的时间（向下取整到整百）
-        end = (files_to_keep[i + 1][0] - 30)
+        end = files_to_keep[i + 1][0] - 30
       else:
         # 最后一个文件，结束时间为2600
         end = 2600
@@ -291,6 +289,7 @@ def merge_duplicate_fish_data(location_dir):
     print(f"分组处理完成: 保留 {len(files_to_keep)} 个文件, 删除 {len(files_to_remove)} 个文件")
 
   print(f"合计删除 {delete_count} 个重复文件")
+
 
 def main() -> None:
   """

@@ -3,7 +3,7 @@ revision = 2
 requires-python = ">=3.12"
 
 [[package]]
-name = "animals-profit-plot"
+name = "calcscripts-by-ytloe"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
