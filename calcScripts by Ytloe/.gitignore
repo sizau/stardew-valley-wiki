@@ -13,6 +13,8 @@ wheels/
 #Project files
 img
 test
+output
+logs
 
 # IDE Files
 .idea/
