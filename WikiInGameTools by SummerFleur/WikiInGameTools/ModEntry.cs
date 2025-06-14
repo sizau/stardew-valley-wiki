@@ -110,7 +110,7 @@ internal class ModEntry : Mod
     {
         ModHelper.WriteConfig(Config);
         Config = ModHelper.ReadConfig<ModConfig>();
-        CalcFishesProb.ReloadConfig();
+        CalcFishesProb.Reload();
     }
     #endregion
 }

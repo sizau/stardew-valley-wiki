@@ -12,4 +12,20 @@ internal static class Utilities
 
         return new Vector2(tileX, tileY);
     }
+    
+    public static void Reload(this IModule module)
+    {
+        var configStatus = module.Config.Enable;
+        if (configStatus == module.IsActive) return;
+        
+        switch (configValue: configStatus, module.IsActive)
+        {
+            case (true, false):
+                module.Activate();
+                break;
+            case (false, true):
+                module.Deactivate();
+                break;
+        }
+    }
 }

@@ -1,6 +1,8 @@
-﻿namespace WikiIngameTools.CalcFishesProb;
+﻿using WikiInGameTools.Framework.ConfigurationService;
 
-internal class CalcFishesProbModConfig
+namespace WikiIngameTools.CalcFishesProb;
+
+internal class CalcFishesProbModConfig : IConfig
 {
     public bool Enable { get; set; }
     public bool CustomWaterDepth { get; set; }

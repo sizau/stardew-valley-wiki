@@ -5,7 +5,7 @@ namespace WikiIngameTools.CalcFishesProb.Framework;
 
 internal static class FishUtilities
 {
-    public static string GetFishName(SpawnFishData spawn)
+    public static string GetFishName(this SpawnFishData spawn)
     {
         var id = spawn.Id;
         switch (id)
@@ -22,7 +22,7 @@ internal static class FishUtilities
         }
     }
 
-    public static Item GetFish(SpawnFishData spawn)
+    public static Item GetFish(this SpawnFishData spawn)
     {
         var id = spawn.Id;
         return ItemRegistry.Create(id);

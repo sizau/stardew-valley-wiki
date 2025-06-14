@@ -8,7 +8,6 @@ using StardewValley.Extensions;
 using StardewValley.GameData.Locations;
 using WikiInGameTools;
 using WikiIngameTools.Framework;
-using static WikiIngameTools.CalcFishesProb.Framework.FishUtilities;
 
 namespace WikiIngameTools.CalcFishesProb.Framework;
 
@@ -345,8 +344,8 @@ internal static class FishesProb
 
         // 获取当前水深，由于未找到合适的计算方法，因此默认为 5，部分地点根据其最大水深做调整
         // 对于其它需要调整水深的情况，需使用 config
-        var depth = CalcFishesProb.CfpConfig.CustomWaterDepth 
-            ? CalcFishesProb.CfpConfig.WaterDepth 
+        var depth = ModEntry.Config.CalcFishesProbModConfig.CustomWaterDepth 
+            ? ModEntry.Config.CalcFishesProbModConfig.WaterDepth 
             : location.Name switch 
             {
                 "Secret Woods" => 3,
@@ -398,9 +397,9 @@ internal static class FishesProb
             foreach (var spawn in fishData)
             {
                 // 新建 Fish 实例并加入至 fishes 列表
-                var fish = new Fish(GetFishName(spawn), spawn.Precedence,
+                var fish = new Fish(spawn.GetFishName(), spawn.Precedence,
                     SurvivalProbability(fisher, spawn),
-                    HookProbability(GetFish(spawn), location, fisher, weather, time, spawn, depth));
+                    HookProbability(spawn.GetFish(), location, fisher, weather, time, spawn, depth));
                 
                 // 剔除不满足条件的情况
                 if (fish.SurvivalProb > 0 && fish.HookProb > 0)

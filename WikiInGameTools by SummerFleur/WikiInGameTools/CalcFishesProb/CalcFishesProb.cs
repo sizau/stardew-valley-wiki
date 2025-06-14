@@ -3,7 +3,7 @@ using StardewModdingAPI.Utilities;
 using WikiInGameTools;
 using WikiIngameTools.CalcFishesProb.Framework;
 using WikiIngameTools.Framework;
-using static WikiInGameTools.Framework.ConfigurationService.GenericModConfigMenuIntegration;
+using WikiInGameTools.Framework.ConfigurationService;
 
 namespace WikiIngameTools.CalcFishesProb;
 
@@ -14,11 +14,7 @@ internal class CalcFishesProb : IModule
      ** Properties & Fields
      ****/
     public bool IsActive { get; private set; }
-    
-    /// <summary>
-    /// 模块配置
-    /// </summary>
-    public static CalcFishesProbModConfig CfpConfig { get; set; }
+    public IConfig Config => ModEntry.Config.CalcFishesProbModConfig;
     
     /// <summary>
     /// 查询按钮
@@ -41,8 +37,6 @@ internal class CalcFishesProb : IModule
         ModEntry.ModHelper.Events.Input.ButtonsChanged -= OnButtonChanged;
     }
     
-    public static void ReloadConfig() => CfpConfig = ModEntry.Config.CalcFishesProbModConfig;
-    
     /****
      ** 事件处理函数
      ** Event handlers
@@ -55,25 +49,6 @@ internal class CalcFishesProb : IModule
     {
         if (QueryKey.JustPressed())
             FishesProb.GetAllFishData();
-    }
-
-    public CalcFishesProb()
-    {
-        CfpConfig = ModEntry.Config.CalcFishesProbModConfig;
-
-        Api.AddSectionTitle(ModEntry.Manifest, () => "计算钓鱼概率模块");
-        Api.AddBoolOption(ModEntry.Manifest, 
-            () => ModEntry.Config.CalcFishesProbModConfig.Enable, 
-            delegate(bool value) { ModEntry.Config.CalcFishesProbModConfig.Enable = value; }, 
-            () => "启用");
-        Api.AddBoolOption(ModEntry.Manifest, 
-            () => ModEntry.Config.CalcFishesProbModConfig.CustomWaterDepth, 
-            delegate(bool value) { ModEntry.Config.CalcFishesProbModConfig.CustomWaterDepth = value; }, 
-            () => "使用自定义水深");
-        Api.AddNumberOption(ModEntry.Manifest, 
-            () => ModEntry.Config.CalcFishesProbModConfig.WaterDepth, 
-            delegate(int value) { ModEntry.Config.CalcFishesProbModConfig.WaterDepth = value; }, 
-            () => "水深", null, 0, 5);
     }
 }
 
