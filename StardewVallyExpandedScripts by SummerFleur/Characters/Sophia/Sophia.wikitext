@@ -20,10 +20,7 @@
 
 ==行程表==
 
-{{Stub|8 心事件后的内容待补充}}
-
 下面显示的是索菲娅的行程表，从上到下优先级逐次下降，例如雨天行程的优先级会比在它下面的高。
-
 {{ScheduleHead|desert|15、17}}
 {{ScheduleRowStart}}
 {{ScheduleRow|07:00|出发乘坐巴士前往沙漠节。}}
@@ -43,6 +40,35 @@
 -->{{ScheduleHead|green}}
 {{ScheduleRowStart}}
 {{ScheduleRow|全天|站在家门前。}}
+{{ScheduleEnd}}<!--
+
+-->{{ScheduleHead|summer|8 心事件后}}
+{{ScheduleRowStart|summer|每个季节的 6 日}}
+{{ScheduleRow|06:50|起床去厨房吃早餐。}}
+{{ScheduleRow|08:30|前往[[SVE:詹金斯的宅子|维克多的家]]。}}
+{{ScheduleRow|10:50|和维克多一起看漫画。}}
+{{ScheduleRow|17:20|回家，坐在壁炉前看书。}}
+{{ScheduleRow|22:30|上床睡觉。}}
+{{ScheduleEnd|in}}
+{{ScheduleRowStart|summer|除了春季，每个季节的 10 日}}
+{{ScheduleRow|06:30|起床去厨房吃早餐。}}
+{{ScheduleRow|09:10|前往[[SVE:翡翠农场|苏珊的家]]。}}
+{{ScheduleRow|13:20|在苏珊的工作台前和苏珊学手工。}}
+{{ScheduleRow|18:00|回家，上床睡觉。}}
+{{ScheduleEnd|in}}
+{{ScheduleRowStart|summer|每个季节的 14 日}}
+{{ScheduleRow|06:30|起床去厨房吃早餐。}}
+{{ScheduleRow|08:30|前往[[柳巷2号|艾米丽和海莉的家]]。}}
+{{ScheduleRow|10:20|在海莉的房间里和海莉一起化妆。}}
+{{ScheduleRow|16:10|回家，坐在壁炉前看书。}}
+{{ScheduleRow|21:00|上床睡觉。}}
+{{ScheduleEnd|in}}
+{{ScheduleRowStart|summer|每个季节的 20 日}}
+{{ScheduleRow|06:30|起床去厨房吃早餐。}}
+{{ScheduleRow|08:30|前往[[柳巷2号|艾米丽和海莉的家]]。}}
+{{ScheduleRow|11:50|在艾米丽的房间里和艾米丽一起缝纫。}}
+{{ScheduleRow|16:20|回家，到卧室里看漫画。}}
+{{ScheduleRow|21:00|上床睡觉。}}
 {{ScheduleEnd}}<!--
 
 -->{{ScheduleHead|special|特殊日程}}
@@ -611,37 +637,11 @@
 |}
 |}
 
-== 商店 ==
-You can buy these from Sophia at her ledger {{Icon|sophia_ledger}}.
-[[File:Sophia's Ledger.png|thumb|214x214px|Sophia's Ledger|链接=Special:FilePath/Sophia's_Ledger.png]]
-{{TableStart|caption =}}
-{{TableStartRow|Image}}
-{{TableStartRow|Name}}
-{{TableStartRow|Description}}
-{{TableStartRow|Price}}
-|-
-{{TableRow|[[File:Blue Moon Wine_small.png]]}}
-{{TableRow|[[SVE:Blue Moon Wine|Blue Moon Wine]]}}
-{{TableRow|''"Sophia's hand-crafted wine from Blue Moon Vineyard."''}}
-{{TableRow|{{Icon|coin}} 3,000g}}
-|-
-{{TableRow|[[File:Aged Blue Moon Wine smalltrans.png]]}}
-{{TableRow|[[SVE:Aged Blue Moon Wine|Aged Blue Moon Wine]]}}
-{{TableRow|''"Sophia's aged hand-crafted wine from Blue Moon Vineyard. It comes with a prestigious basket riddled with leaves, with a shiny bow to wrap it all together! Makes a wonderful gift!"''}}
-{{TableRow|{{Icon|coin}} 28,000g}}
-|-
-{{TableRow|[[File:Sprinkler.png]]}}
-{{TableRow|[[洒水器]]}}
-{{TableRow|''"Waters the 4 adjacent tiles every morning."''}}
-{{TableRow|{{Icon|coin}} 600g}}
-|-
-{{TableRow|[[File:Quality_Sprinkler.png]]}}
-{{TableRow|[[优质洒水器]]}}
-{{TableRow|''"Waters the 8 adjacent tiles every morning."''}}
-{{TableRow|{{Icon|coin}} 4,000g}}
-|}
+== 索菲娅的订单簿 ==
+{{Main article|SVE:索菲娅家#索菲娅的订单簿}}
 
-{{Template:SpoilerEvents}}
+玩家可以在索菲娅工作室里的订单簿上购买物品。
+
 == 爱心事件 ==
 ===见面事件===
 {{heart event
@@ -1428,10 +1428,5 @@ Sophia Spouse Area.png|索菲娅的玫瑰仙子花园
 **Fixed farmhouse pathing issues.
 * 1.13.9: Lewis now judge's Sophia's grange display at the Stardew Valley Fair.
 
-== Gallery ==
-Gallery of pictures taken in game.
-
 ==导航==
 {{NavBoxChar}}
-
-[[Category:可结婚的角色]]
