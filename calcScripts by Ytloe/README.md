@@ -36,11 +36,12 @@
 - readRecipe.py 是用于计算全制造配方的材料需求的
   依赖文件（解包成 json 后放入 json 文件夹里即可）：
 
-  1. Data\BigCraftables.json
-  2. Strings\BigCraftables.zh-CN.json
-  3. Data\CraftingRecipes.json
-  4. Data\Objects.json
-  5. Strings\Objects.zh-CN.json
+  1. Data\CraftingRecipes.json
+  2. Data\CookingRecipes.json
+  3. Data\Objects.json
+  4. Strings\Objects.zh-CN.json
+  5. Data\BigCraftables.json
+  6. Strings\BigCraftables.zh-CN.json
 
 - utils.py 是一些通用的函数
 - test.py 测试通用函数用的，可以看看 utils 里面的类和方法都怎么调用
