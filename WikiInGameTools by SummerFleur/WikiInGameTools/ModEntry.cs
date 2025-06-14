@@ -4,6 +4,7 @@ using StardewModdingAPI.Events;
 using WikiIngameTools.CalcFishesProb;
 using WikiIngameTools.Framework;
 using WikiInGameTools.Framework.ConfigurationService;
+using WikiIngameTools.GetNPCGiftTastes;
 
 namespace WikiInGameTools;
 
@@ -31,6 +32,7 @@ internal class ModEntry : Mod
      ****/
     #region Modules
     private static CalcFishesProb CalcFishesProb { get; set; }
+    private static GetNPCGiftTastes GetNPCGiftTastes { get; set; }
     #endregion
     
     /// <summary>
@@ -65,6 +67,9 @@ internal class ModEntry : Mod
         CalcFishesProb = new CalcFishesProb();
         if (Config.CalcFishesProbModConfig.Enable)
             CalcFishesProb.Activate();
+
+        if (Config.GetNPCGiftTastesModConfig.Enable)
+            GetNPCGiftTastes.Activate();
     }
 
     /// <summary>
@@ -74,6 +79,8 @@ internal class ModEntry : Mod
     {
         CalcFishesProb.Deactivate();
         CalcFishesProb = null;
+
+        GetNPCGiftTastes.Deactivate();
     }
 
     /// <summary>
@@ -85,6 +92,8 @@ internal class ModEntry : Mod
             () => Config = new ModConfig(),
             ReloadConfig
         );
+
+        GetNPCGiftTastes = new GetNPCGiftTastes();
     }
 
     /// <summary>
@@ -97,7 +106,7 @@ internal class ModEntry : Mod
     /// </summary>
     private static void OnButtonChanged(object sender, ButtonsChangedEventArgs e) { }
     #endregion
-    
+
     /****
      ** 私有方法
      ** Private Methods
@@ -111,6 +120,7 @@ internal class ModEntry : Mod
         ModHelper.WriteConfig(Config);
         Config = ModHelper.ReadConfig<ModConfig>();
         CalcFishesProb.Reload();
+        GetNPCGiftTastes.Reload();
     }
     #endregion
 }
