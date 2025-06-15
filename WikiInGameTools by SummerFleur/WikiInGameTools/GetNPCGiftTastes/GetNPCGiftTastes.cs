@@ -14,14 +14,14 @@ internal class GetNPCGiftTastes : IModule
      ****/
     public bool IsActive { get; private set; }
     public IConfig Config => ModEntry.Config.GetNPCGiftTastesModConfig;
-    
+
     public void Activate()
     {
         IsActive = true;
         ItemData.Init();
         NPCData.Init();
     }
-    
+
     public void Deactivate()
     {
         IsActive = false;
@@ -39,7 +39,7 @@ internal class GetNPCGiftTastes : IModule
             ModEntry.Log("模块未被启用！", LogLevel.Error);
             return;
         }
-        
+
         if (args.Length == 0)
         {
             ModEntry.Log("未输入物品名称！", LogLevel.Error);
@@ -49,17 +49,16 @@ internal class GetNPCGiftTastes : IModule
         var lang = args.Length > 1 && !string.IsNullOrEmpty(args[1]) ? args[1] : "en";
         var result = TastesGetter.GetAllNPCTasteToItem(args[0], lang);
 
-        if (result == "null")
+        switch (result.Status)
         {
-            ModEntry.Log("未找到物品信息，请检查输入值是否有误。", LogLevel.Warn);
-            return;
+            case Status.Null:
+                ModEntry.Log("未找到物品信息，请检查输入值是否有误。", LogLevel.Warn);
+                return;
+            case Status.Blacklisted:
+                ModEntry.Log("该物品似乎是非常规物品，因此解析可能不正确。", LogLevel.Alert);
+                break;
         }
 
-        if (result[..11] == "blacklisted")
-        {
-            ModEntry.Log("该物品似乎是非常规物品。", LogLevel.Alert);
-        }
-        
         ModEntry.Log("具体信息如下：\n" + result);
     }
 
@@ -73,7 +72,7 @@ internal class GetNPCGiftTastes : IModule
             ModEntry.Log("模块未被启用！", LogLevel.Error);
             return;
         }
-        
+
         if (args.Length == 0)
         {
             ModEntry.Log("未输入 NPC 的名字！", LogLevel.Error);
@@ -83,12 +82,12 @@ internal class GetNPCGiftTastes : IModule
         var lang = args.Length > 1 && !string.IsNullOrEmpty(args[1]) ? args[1] : "en";
         var result = TastesGetter.GetNPCTasteToAllItem(args[0], lang);
 
-        if (result == "null")
+        if (result.Status == Status.Null)
         {
             ModEntry.Log("未找到 NPC 信息，请检查输入值是否有误。", LogLevel.Warn);
             return;
         }
-        
+
         ModEntry.Log("具体信息如下：\n" + result);
     }
 

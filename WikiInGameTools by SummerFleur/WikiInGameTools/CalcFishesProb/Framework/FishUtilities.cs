@@ -12,10 +12,10 @@ internal static class FishUtilities
         {
             case "SECRET_NOTE_OR_ITEM":
                 return "秘密纸条";
-            
+
             case "(O)167|(O)168|(O)169|(O)170|(O)171|(O)172":
                 return "六种垃圾";
-            
+
             default:
                 var item = GetFish(spawn);
                 return item == null ? "" : item.DisplayName;

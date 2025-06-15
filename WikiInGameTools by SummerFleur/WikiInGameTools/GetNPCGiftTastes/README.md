@@ -17,9 +17,9 @@
 
 #### 获取指定的 NPC 对所有物品的态度
 
-`taste_of_npc xxx`，支持使用 NPC 的英文名或当前语言下的显示名，即可以这样使用：
-- `taste_of_npc Abigail`（不区分大小写）
-- `taste_of_npc 阿比盖尔`（仅在当前语言为中文的情况下）
+`tastes_of_npc xxx`，支持使用 NPC 的英文名或当前语言下的显示名，即可以这样使用：
+- `tastes_of_npc Abigail`（不区分大小写）
+- `tastes_of_npc 阿比盖尔`（仅在当前语言为中文的情况下）
 
 两种命令均可以在后面加上语言代码以指定输出的语言，如 `npc_taste_to 防风草 ja` 将会输出日文结果。
 

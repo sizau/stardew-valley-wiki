@@ -8,7 +8,7 @@ internal interface IModule
     /// 模块启用状态。
     /// </summary>
     public bool IsActive { get; }
-    
+
     /// <summary>
     /// 模块配置
     /// </summary>

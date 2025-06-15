@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations; 
+﻿using JetBrains.Annotations;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using WikiIngameTools.CalcFishesProb;
@@ -11,7 +11,7 @@ namespace WikiInGameTools;
 /// <summary>
 /// The mod entry class loaded by SMAPI.
 /// </summary>
-[UsedImplicitly] 
+[UsedImplicitly]
 internal class ModEntry : Mod
 {
     /****
@@ -25,7 +25,7 @@ internal class ModEntry : Mod
     private static IMonitor ModMonitor { get; set; }
     public static void Log(string s, LogLevel l = LogLevel.Debug) => ModMonitor.Log(s, l);
     #endregion
-    
+
     /****
      ** 模块
      ** Modules
@@ -43,13 +43,13 @@ internal class ModEntry : Mod
         Manifest = ModManifest;
         ModMonitor = Monitor;
         ModHelper = Helper;
-        
+
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
         helper.Events.GameLoop.ReturnedToTitle += OnGameUnload;
         helper.Events.GameLoop.SaveLoaded += OnGameLoaded;
         helper.Events.Display.MenuChanged += OnMenuChanged;
         helper.Events.Input.ButtonsChanged += OnButtonChanged;
-        
+
         Config = helper.ReadConfig<ModConfig>();
     }
     

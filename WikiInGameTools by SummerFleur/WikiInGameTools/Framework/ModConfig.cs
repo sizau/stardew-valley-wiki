@@ -1,5 +1,8 @@
-﻿namespace WikiIngameTools.Framework;
+﻿using System;
 
+namespace WikiIngameTools.Framework;
+
+[Serializable]
 internal class ModConfig
 {
     public CalcFishesProb.CalcFishesProbModConfig CalcFishesProbModConfig { get; set; } = new();

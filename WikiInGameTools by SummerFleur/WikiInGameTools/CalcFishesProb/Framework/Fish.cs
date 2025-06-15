@@ -11,7 +11,7 @@ internal class Fish
     public double HookProb { get; }
     
     public Fish() { }
-    
+
     public Fish(string id, int precedence, double survivalProb, double hookProb)
     {
         ID = id;
@@ -24,7 +24,7 @@ internal class Fish
     {
         if (obj == null || GetType() != obj.GetType())
             return false;
-        
+
         var other = (Fish)obj;
         return ID == other.ID &&
                Precedence == other.Precedence &&

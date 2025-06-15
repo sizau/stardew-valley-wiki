@@ -5,13 +5,6 @@ namespace WikiIngameTools.GetNPCGiftTastes.Framework;
 
 internal static class ItemBlackList
 {
-    /// <summary>
-    /// Check whether a given item is blacklisted.
-    /// </summary>
-    /// <returns>Whether the item is blacklisted.</returns>
-    /// <param name="item">Item to check.</param>
-    public static bool Blacklisted(this Item item) => BlacklistedItemIDs.Contains(item.QualifiedItemId);
-    
     private static readonly HashSet<string> BlacklistedItemIDs = new()
     {
         // stones
@@ -145,9 +138,47 @@ internal static class ItemBlackList
         "(O)924",
         "(O)925", // Slime Crate
 
-        // why u want categorize them???
+        // secret notes
+        "(O)79",
+        "(O)842",
+
+        // ???
+        "(O)277",
+        "(O)458",
         "(O)460",
         "(O)808",
+
+        // rings
+        "(O)516",
+        "(O)517",
+        "(O)518",
+        "(O)519",
+        "(O)520",
+        "(O)521",
+        "(O)522",
+        "(O)523",
+        "(O)524",
+        "(O)525",
+        "(O)526",
+        "(O)527",
+        "(O)529",
+        "(O)530",
+        "(O)531",
+        "(O)532",
+        "(O)533",
+        "(O)534",
+        "(O)801",
+        "(O)810",
+        "(O)811",
+        "(O)839",
+        "(O)859",
+        "(O)860",
+        "(O)861",
+        "(O)862",
+        "(O)863",
+        "(O)880",
+        "(O)887",
+        "(O)888",
 
         // unobtainable
         "(O)30", // Lumber
@@ -160,8 +191,23 @@ internal static class ItemBlackList
         "(O)892", // Warp Totem: Qi's Arena
         "(O)927", // Camping Stove
         "(O)929", // Hedge
-        
-        "(T)Lantern",
-        "(O)SeedSpot"
+        "(O)SeedSpot",
+
+        // other ungiftable
+        "(O)911", // horse flute
+        "(O)CalicoEgg",
+        "(O)FarAwayStone",
+        "(O)PrizeTicket",
+        "(T)Lantern"
     };
+
+    /// <summary>
+    /// Check whether a given item is blacklisted.
+    /// </summary>
+    /// <returns>Whether the item is blacklisted.</returns>
+    /// <param name="item">Item to check.</param>
+    public static bool Blacklisted(this Item item)
+    {
+        return BlacklistedItemIDs.Contains(item.QualifiedItemId);
+    }
 }

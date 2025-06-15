@@ -15,12 +15,12 @@ internal class CalcFishesProb : IModule
      ****/
     public bool IsActive { get; private set; }
     public IConfig Config => ModEntry.Config.CalcFishesProbModConfig;
-    
+
     /// <summary>
     /// 查询按钮
     /// </summary>
     private static KeybindList QueryKey { get; } = KeybindList.Parse("Q");
-    
+
     /****
      ** 公有方法
      ** Public methods
@@ -30,13 +30,13 @@ internal class CalcFishesProb : IModule
         IsActive = true;
         ModEntry.ModHelper.Events.Input.ButtonsChanged += OnButtonChanged;
     }
-    
+
     public void Deactivate()
     {
         IsActive = false;
         ModEntry.ModHelper.Events.Input.ButtonsChanged -= OnButtonChanged;
     }
-    
+
     /****
      ** 事件处理函数
      ** Event handlers
@@ -51,4 +51,3 @@ internal class CalcFishesProb : IModule
             FishesProb.GetAllFishData();
     }
 }
-
