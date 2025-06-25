@@ -2,6 +2,7 @@ import csv
 import datetime
 import re
 from pathlib import Path
+from typing import Any
 
 # 导入通用工具库
 from utils import FileUtils, Logger, PerfMonitor, StringUtils
@@ -45,16 +46,16 @@ class RecipeParser:
     self.logger.info("正在加载数据文件...")
 
     # 预加载所有JSON文件到内存
-    self.crafting_recipes_data = self._load_json_safe("CraftingRecipes.json")
-    self.cooking_recipes_data = self._load_json_safe("CookingRecipes.json")
-    self.objects_data = self._load_json_safe("Objects.json")
-    self.objects_localization = self._load_json_safe("Objects.zh-CN.json")
-    self.bigcraftables_data = self._load_json_safe("BigCraftables.json")
-    self.bigcraftables_localization = self._load_json_safe("BigCraftables.zh-CN.json")
+    self.crafting_recipes_data : dict[str, str] = self._load_json_safe("CraftingRecipes.json")
+    self.cooking_recipes_data : dict[str, str] = self._load_json_safe("CookingRecipes.json")
+    self.objects_data : dict[str, dict[str, Any]] = self._load_json_safe("Objects.json")
+    self.objects_localization : dict[str, str] = self._load_json_safe("Objects.zh-CN.json")
+    self.bigcraftables_data : dict[str, dict[str, Any]] = self._load_json_safe("BigCraftables.json")
+    self.bigcraftables_localization : dict[str, str]  = self._load_json_safe("BigCraftables.zh-CN.json")
 
     self.logger.info("数据加载完成")
 
-  def _load_json_safe(self, filename):
+  def _load_json_safe(self, filename) -> dict[str, Any]:
     """安全加载JSON文件"""
     try:
       json_path = Path(__file__).parent.parent / "json" / filename
@@ -64,11 +65,11 @@ class RecipeParser:
     except FileNotFoundError:
       self.logger.warning(f"找不到文件: {filename}")
       return {}
-    except Exception as e:
-      self.logger.error(f"加载 {filename} 时出错: {e}")
+    except Exception as ex:
+      self.logger.error(f"加载 {filename} 时出错: {ex}")
       return {}
 
-  def read_recipes(self):
+  def read_recipes(self) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
     """读取配方文件，解析物品代码和数量，分别返回制造和烹饪配方"""
     crafting_recipes = {}
     cooking_recipes = {}
@@ -151,13 +152,13 @@ class RecipeParser:
     if search_bigcraftable:
       if clean_code in self.bigcraftables_data:
         display_name = self.bigcraftables_data[clean_code].get("DisplayName", "")
-        match = re.search(r":(\w+_Name)\]", display_name)
+        match = re.search(r":(\w+_Name)]", display_name)
         if match:
           return match.group(1), clean_code, f"(BC){clean_code}"
     else:
       if clean_code in self.objects_data:
         display_name = self.objects_data[clean_code].get("DisplayName", "")
-        match = re.search(r":(\w+_Name)\]", display_name)
+        match = re.search(r":(\w+_Name)]", display_name)
         if match:
           return match.group(1), clean_code, f"(O){clean_code}"
 
@@ -194,7 +195,7 @@ class RecipeParser:
 
     return f"未知物品({item_code})", item_code
 
-  def get_all_recipes_with_names(self):
+  def get_all_recipes_with_names(self) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
     """获取所有配方并转换物品代码为中文名称"""
     crafting_recipes, cooking_recipes = self.read_recipes()
 
@@ -218,7 +219,8 @@ class RecipeParser:
 
     return crafting_recipes, cooking_recipes
 
-  def calc_material_usage_detailed(self, recipes):
+  @staticmethod
+  def calc_material_usage_detailed(recipes) -> dict[str, Any]:
     """统计指定配方集合中每种材料的总使用量，返回详细信息"""
     # 使用材料名称作为键，值为包含代码和数量的字典
     material_usage = {}
@@ -282,7 +284,7 @@ class RecipeParser:
     FileUtils.write_json(export_data, output_file)
     self.logger.info(f"{recipe_type}配方JSON已保存到: {output_file}")
 
-  def save_statistics_txt(self, crafting_usage, cooking_usage, total_usage, output_dir):
+  def save_statistics_txt(self, crafting_usage, cooking_usage, total_usage, output_dir) -> None:
     """保存统计信息到TXT文件"""
     output_file = output_dir / "statistics.txt"
 
@@ -304,7 +306,8 @@ class RecipeParser:
 
     self.logger.info(f"统计TXT已保存到: {output_file}")
 
-  def _write_usage_table_with_code(self, file_handle, usage_dict):
+  @staticmethod
+  def _write_usage_table_with_code(file_handle, usage_dict) -> None:
     """写入材料使用统计表格"""
     # 计算材料名称[代码]的最大显示宽度
     max_width = 0
