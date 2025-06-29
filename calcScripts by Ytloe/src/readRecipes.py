@@ -7,31 +7,45 @@ from utils import FileUtils, PerfMonitor, StringUtils
 
 
 class Item:
-  """物品类，存储物品的前缀、代码、数量和名称"""
+  """物品类，存储物品的前缀、代码、数量和名称
 
-  def __init__(self, prefix: str = "(O)", code: str = "", count: int = 1, name: str = ""):
+  Attributes:
+      prefix: 物品的类型识别标志，例如 (O)、(BC)
+      code: 物品 ID
+      count: 物品数量
+      displayName: 物品的汉语名称
+      name: 物品的英语名称
+  """
+  def __init__(self, prefix: str = "(O)", code: str = "", count: int = 1, displayName: str = "", name: str = ""):
     self.prefix = prefix
     self.code = code
     self.count = count
+    self.displayName = displayName
     self.name = name
 
   def __repr__(self):
-    return f"{self.name}[{self.prefix}{self.code}] × {self.count}"
+    return f"{self.displayName}[{self.prefix}{self.code}] × {self.count}"
 
   def __str__(self):
     return self.__repr__()
 
   def to_dict(self):
-    return {"prefix": self.prefix, "code": self.code, "count": self.count, "name": self.name}
+    return {"prefix": self.prefix, "code": self.code, "count": self.count, "name": self.displayName}
 
   def get_key(self):
     """获取物品的唯一标识键"""
-    return f"{self.name}[{self.prefix}{self.code}]"
+    return f"{self.displayName}[{self.prefix}{self.code}]"
 
 
 class Recipe:
-  """配方类，存储配方名称、原料列表和产物"""
+  """配方类，存储配方名称、原料列表和产物
 
+  Attributes:
+      recipe_name: 配方的名称
+      materials: 配方所需的原材料
+      product: 配方产出的物品
+      is_expanded: 配方是否已展开
+  """
   def __init__(self, recipe_name: str, materials: List[Item], product: Item, is_expanded: bool = False):
     self.recipe_name = recipe_name
     self.materials = materials
@@ -48,7 +62,7 @@ class Recipe:
       result += f" - {material}\n"
 
     # 产物
-    result += f" > {self.product}"
+    result += f" > {self.product}\n"
 
     return result
 
@@ -138,9 +152,9 @@ class RecipeParser:
         prefix = "(O)"
         code = code_part
 
-    item = Item(prefix=prefix, code=code, count=count, name="")
+    item = Item(prefix=prefix, code=code, count=count, displayName="", name="")
     # 获取物品名称
-    item.name = self.get_item_name(item)
+    (item.displayName, item.name) = self.get_item_name(item)
 
     return item
 
@@ -190,7 +204,7 @@ class RecipeParser:
 
     return Recipe(recipe_name, materials, product)
 
-  def parse_all_recipes(self):
+  def parse_all_recipes(self) -> Dict[str, Recipe]:
     """解析所有配方"""
     # 读取JSON文件
     self.read_json_files()
@@ -212,7 +226,7 @@ class RecipeParser:
 
     return self.all_recipes
 
-  def expand_recipes(self):
+  def expand_recipes(self) -> None:
     """展开嵌套配方"""
     # 创建产物到配方的映射
     product_to_recipe = {}
@@ -253,7 +267,8 @@ class RecipeParser:
                   prefix=sub_material.prefix,
                   code=sub_material.code,
                   count=new_count,
-                  name=sub_material.name,
+                  displayName=sub_material.displayName,
+                  name=sub_material.name
                 )
                 material_dict[sub_key] = new_item
 
@@ -272,11 +287,12 @@ class RecipeParser:
           recipe.is_expanded = True
           self.expanded_recipes.add(recipe_name)
 
-  def get_item_name(self, item: Item) -> str:
+  def get_item_name(self, item: Item) -> tuple[str, str]:
     """获取物品的中文名称"""
     # 处理负数
     if item.prefix == "" and item.code in self.negative_code_mapping:
-      return self.negative_code_mapping[item.code]
+      ncm = self.negative_code_mapping[item.code]
+      return ncm, ncm
 
     # 根据prefix选择数据源
     if item.prefix == "(O)":
@@ -286,11 +302,12 @@ class RecipeParser:
       data_source = self.bigcraftables_data
       localization_source = self.bigcraftables_zh_cn
     else:
-      return ""
+      return "", ""
 
     # 查找物品数据
     if item.code in data_source:
       item_data = data_source[item.code]
+      name = item_data.get("Name", "")
       display_name = item_data.get("DisplayName", "")
 
       # 解析DisplayName中的本地化键
@@ -302,11 +319,12 @@ class RecipeParser:
           localization_key = match.group(1) + "_Name"
           # 从本地化文件中获取名称
           if localization_key in localization_source:
-            return localization_source[localization_key]
+            return localization_source[localization_key], name
 
-    return "未知物品"
+    return "未知物品", "未知物品"
 
-  def calc_material_count(self, recipes: Dict[str, Recipe]) -> Dict[str, int]:
+  @staticmethod
+  def calc_material_count(recipes: Dict[str, Recipe]) -> Dict[str, int]:
     """计算原料统计"""
     material_stats = defaultdict(int)
 
@@ -395,7 +413,7 @@ if __name__ == "__main__":
   get_item_name()进入Objects和BigCraftables中根据完整代码获取对应物品的中文键名
   calc_material_count()计算所有配方的原料数量
   """
-  recipes = parser.parse_all_recipes()
+  Recipes = parser.parse_all_recipes()
 
   # 保存所有结果
   parser.save_all_results()
