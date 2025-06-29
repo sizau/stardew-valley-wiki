@@ -298,7 +298,7 @@ def calc_daily_profits(
     cycle_array = np.full(1001, cycle_days)
 
   # 计算常规日收益
-  raw_daily_profits = ((row_profits + lrg_profits) / cycle_array - 50) * 1
+  raw_daily_profits = ((row_profits + lrg_profits) / cycle_array - 50) * 12
 
   # 计算加工收益
   if animal_type == "猪":
@@ -343,7 +343,7 @@ def calc_daily_profits(
     proc_lrg_profits = lrg_profits
 
   # 计算加工日收益
-  proc_daily_profits = ((proc_row_profits + proc_lrg_profits) / cycle_array - 50) * 1
+  proc_daily_profits = ((proc_row_profits + proc_lrg_profits) / cycle_array - 50) * 12
 
   # 如果有更细致的计算需求，除了以下4个数值还可以自己输出
   # 常规产物日收益：row_profits
@@ -579,14 +579,14 @@ def main() -> None:
   print("=== 星露谷物语动物收益计算器 ===")
   # 0-鸡、1-虚空鸡、2-金鸡、3-恐龙、4-鸭、5-兔子、6-牛、7-山羊、8-绵羊、9-猪、10-鸵鸟
   # for animal_id in range(11):
-  animal_id: int = 0
+  animal_id: int = 6
   # setup_animal_config()
   print("\n配置动物信息（有技能）...")
   config_with_skills = setup_animal_config(
     animal_id=animal_id,
     skill_ids=[1, 2, 3, 4],
     profit_rate=1.0,
-    use_golden_cookie=True,
+    use_golden_cookie=False,
   )
 
   print(f"配置完成：{config_with_skills['type']}")
@@ -643,7 +643,6 @@ def main() -> None:
     animal_id=animal_id,
   )
   monitor.stop()
-  monitor.print_stats()
 
 
 if __name__ == "__main__":

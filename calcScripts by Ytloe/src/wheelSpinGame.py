@@ -124,7 +124,7 @@ def main() -> None:
     # 选绿调整列
     if adjusted_green:
       green_result = f"{color_green}({angle_green * 180 / math.pi:.2f}°)"
-      if color_green != color_raw:
+      if color_green == "绿色" and color_raw != "绿色":
         green_result = "*" + green_result
       else:
         green_result = " " + green_result
@@ -135,7 +135,7 @@ def main() -> None:
     # 选橙调整列
     if adjusted_orange:
       orange_result = f"{color_orange}({angle_orange * 180 / math.pi:.2f}°)"
-      if color_orange != color_raw:
+      if color_orange == "橙色" and color_raw != "橙色":
         orange_result = "*" + orange_result
       else:
         orange_result = " " + orange_result

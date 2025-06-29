@@ -1,532 +1,402 @@
-import csv
-import datetime
 import re
+from collections import defaultdict
 from pathlib import Path
-from typing import Any
+from typing import Dict, List
 
-# 导入通用工具库
-from utils import FileUtils, Logger, PerfMonitor, StringUtils
+from utils import FileUtils, PerfMonitor, StringUtils
+
+
+class Item:
+  """物品类，存储物品的前缀、代码、数量和名称"""
+
+  def __init__(self, prefix: str = "(O)", code: str = "", count: int = 1, name: str = ""):
+    self.prefix = prefix
+    self.code = code
+    self.count = count
+    self.name = name
+
+  def __repr__(self):
+    return f"{self.name}[{self.prefix}{self.code}] × {self.count}"
+
+  def __str__(self):
+    return self.__repr__()
+
+  def to_dict(self):
+    return {"prefix": self.prefix, "code": self.code, "count": self.count, "name": self.name}
+
+  def get_key(self):
+    """获取物品的唯一标识键"""
+    return f"{self.name}[{self.prefix}{self.code}]"
+
+
+class Recipe:
+  """配方类，存储配方名称、原料列表和产物"""
+
+  def __init__(self, recipe_name: str, materials: List[Item], product: Item, is_expanded: bool = False):
+    self.recipe_name = recipe_name
+    self.materials = materials
+    self.product = product
+    self.is_expanded = is_expanded
+
+  def __repr__(self):
+    # 配方名称（添加展开标记）
+    name_suffix = "（已展开）" if self.is_expanded else ""
+    result = f"{self.recipe_name}{name_suffix}：\n"
+
+    # 原料列表
+    for material in self.materials:
+      result += f" - {material}\n"
+
+    # 产物
+    result += f" > {self.product}"
+
+    return result
+
+  def __str__(self):
+    return self.__repr__()
+
+  def to_dict(self):
+    """转换为字典格式用于JSON导出"""
+    name_suffix = "（已展开）" if self.is_expanded else ""
+    materials_dict = {}
+    for material in self.materials:
+      materials_dict[material.get_key()] = material.count
+
+    return {
+      f"{self.recipe_name}{name_suffix}": {"原料": materials_dict, self.product.get_key(): self.product.count}
+    }
 
 
 class RecipeParser:
   def __init__(self):
-    """初始化并预加载所有需要的JSON文件"""
-    # 创建日志目录
-    log_dir = Path(__file__).parent / "logs"
-    log_dir.mkdir(parents=True, exist_ok=True)
+    self.cooking_recipes = {}
+    self.crafting_recipes = {}
+    self.objects_data = {}
+    self.objects_zh_cn = {}
+    self.bigcraftables_data = {}
+    self.bigcraftables_zh_cn = {}
+    self.all_recipes = {}
+    self.cooking_recipe_objects = {}  # 存储解析后的烹饪配方对象
+    self.crafting_recipe_objects = {}  # 存储解析后的制作配方对象
+    self.ignore_recipes = ["Transmute (Fe)", "Transmute (Au)"]  # 需要忽略拆解的配方列表
+    self.expanded_recipes = set()  # 记录已展开的配方
 
-    # 创建日志记录器
-    self.logger = Logger("RecipeParser", save_to_file=True, filepath=log_dir / "recipe_parser.log")
-
-    # 创建性能监控器
-    self.perf_monitor = PerfMonitor("整体运行")
-    self.perf_monitor.start()
-
-    # 设置输出目录结构
-    self.output_base_dir = Path(__file__).parent.parent / "output"
-    self.crafting_dir = self.output_base_dir / "crafting"
-    self.cooking_dir = self.output_base_dir / "cooking"
-    self.total_dir = self.output_base_dir / "total"
-
-    # 创建输出目录
-    for dir_path in [self.crafting_dir, self.cooking_dir, self.total_dir]:
-      dir_path.mkdir(parents=True, exist_ok=True)
-
-    # 初始化类别映射表
-    self.manual_item_mapping = {
+    # 类别映射
+    self.negative_code_mapping = {
       "-4": "鱼类(任意)",
       "-5": "蛋类(任意)",
       "-6": "奶类(任意)",
       "-7": "油类(任意)",
       "-777": "季节种子(任意)",
-      # 可以根据需要添加更多映射
     }
-    self.logger.info("已加载手动物品映射表")
 
-    self.logger.info("正在加载数据文件...")
+  def read_json_files(self):
+    """读取JSON文件"""
+    json_path = Path(__file__).parent.parent / "json"
+    self.crafting_recipes = FileUtils.read_json(json_path / "CraftingRecipes.json")
+    self.cooking_recipes = FileUtils.read_json(json_path / "CookingRecipes.json")
+    self.objects_data = FileUtils.read_json(json_path / "Objects.json")
+    self.objects_zh_cn = FileUtils.read_json(json_path / "Objects.zh-CN.json")
+    self.bigcraftables_data = FileUtils.read_json(json_path / "BigCraftables.json")
+    self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "BigCraftables.zh-CN.json")
 
-    # 预加载所有JSON文件到内存
-    self.crafting_recipes_data : dict[str, str] = self._load_json_safe("CraftingRecipes.json")
-    self.cooking_recipes_data : dict[str, str] = self._load_json_safe("CookingRecipes.json")
-    self.objects_data : dict[str, dict[str, Any]] = self._load_json_safe("Objects.json")
-    self.objects_localization : dict[str, str] = self._load_json_safe("Objects.zh-CN.json")
-    self.bigcraftables_data : dict[str, dict[str, Any]] = self._load_json_safe("BigCraftables.json")
-    self.bigcraftables_localization : dict[str, str]  = self._load_json_safe("BigCraftables.zh-CN.json")
+  def parse_item(self, item_str: str, is_product: bool = False, is_bc: bool = False) -> Item:
+    """解析物品代码为物品类"""
 
-    self.logger.info("数据加载完成")
+    # 分离代码和数量
+    parts = item_str.strip().split()
+    if len(parts) == 2:
+      code_part, count = parts[0], int(parts[1])
+    else:
+      code_part, count = parts[0], 1
 
-  def _load_json_safe(self, filename) -> dict[str, Any]:
-    """安全加载JSON文件"""
-    try:
-      json_path = Path(__file__).parent.parent / "json" / filename
-      data = FileUtils.read_json(json_path)
-      self.logger.info(f"成功加载文件: {filename}")
-      return data
-    except FileNotFoundError:
-      self.logger.warning(f"找不到文件: {filename}")
-      return {}
-    except Exception as ex:
-      self.logger.error(f"加载 {filename} 时出错: {ex}")
-      return {}
+    # 解析前缀和代码
+    if is_product:
+      # 产物代码处理
+      if is_bc:
+        prefix = "(BC)"
+      else:
+        prefix = "(O)"
+      code = code_part
+    else:
+      # 原料代码处理
+      if code_part.startswith("-"):
+        # 负数情况
+        prefix = ""
+        code = code_part
+      elif code_part.startswith("(") and ")" in code_part:
+        # 带括号前缀的情况
+        match = re.match(r"\(([^)]+)\)(.+)", code_part)
+        if match:
+          prefix = f"({match.group(1)})"
+          code = match.group(2)
+        else:
+          prefix = "(O)"
+          code = code_part
+      else:
+        # 纯数字或英文
+        prefix = "(O)"
+        code = code_part
 
-  def read_recipes(self) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
-    """读取配方文件，解析物品代码和数量，分别返回制造和烹饪配方"""
-    crafting_recipes = {}
-    cooking_recipes = {}
+    item = Item(prefix=prefix, code=code, count=count, name="")
+    # 获取物品名称
+    item.name = self.get_item_name(item)
 
-    # 解析制造配方
-    for recipe_name, recipe_string in self.crafting_recipes_data.items():
-      parts = recipe_string.split("/")
-      if len(parts) >= 4:
-        materials = []
-        material_parts = parts[0].split()
+    return item
 
-        for i in range(0, len(material_parts), 2):
-          if i + 1 < len(material_parts):
-            item_code = material_parts[i]
-            quantity = int(material_parts[i + 1])
-            materials.append({"code": item_code, "quantity": quantity})
+  def _parse_recipe(self, recipe_name: str, recipe_str: str, is_crafting: bool = False) -> Recipe:
+    """解析单个配方"""
+    # 分割配方字符串
+    parts = recipe_str.split("/")
 
-        product_parts = parts[2].split()
-        product_code = product_parts[0]
-        product_quantity = int(product_parts[1]) if len(product_parts) > 1 else 1
-        is_bigcraftable = parts[3].lower() == "true"
+    # 解析原料部分
+    materials_str = parts[0]
+    materials = []
 
-        crafting_recipes[recipe_name] = {
-          "materials": materials,
-          "product": {"code": product_code, "quantity": product_quantity, "is_bigcraftable": is_bigcraftable},
-          "type": "crafting",
-        }
+    # 解析每个原料
+    material_items = materials_str.split()
+    i = 0
+    while i < len(material_items):
+      # 检查是否是带括号的前缀
+      if material_items[i].startswith("(") and ")" in material_items[i]:
+        # 带前缀的情况
+        if i + 1 < len(material_items) and material_items[i + 1].isdigit():
+          item_str = f"{material_items[i]} {material_items[i + 1]}"
+          i += 2
+        else:
+          item_str = material_items[i]
+          i += 1
+      else:
+        # 检查下一个是否是数量
+        if i + 1 < len(material_items) and material_items[i + 1].isdigit():
+          item_str = f"{material_items[i]} {material_items[i + 1]}"
+          i += 2
+        else:
+          item_str = material_items[i]
+          i += 1
+
+      materials.append(self.parse_item(item_str, is_product=False))
+
+    # 解析产物部分
+    product_str = parts[2]
+
+    # 判断是否为BC
+    is_bc = False
+    if is_crafting and len(parts) > 3:
+      is_bc = parts[3].lower() == "true"
+
+    # 解析产物
+    product = self.parse_item(product_str, is_product=True, is_bc=is_bc)
+
+    return Recipe(recipe_name, materials, product)
+
+  def parse_all_recipes(self):
+    """解析所有配方"""
+    # 读取JSON文件
+    self.read_json_files()
 
     # 解析烹饪配方
-    for recipe_name, recipe_string in self.cooking_recipes_data.items():
-      parts = recipe_string.split("/")
-      if len(parts) >= 3:
-        materials = []
-        material_parts = parts[0].split()
+    for recipe_name, recipe_str in self.cooking_recipes.items():
+      recipe = self._parse_recipe(recipe_name, recipe_str, is_crafting=False)
+      self.all_recipes[recipe_name] = recipe
+      self.cooking_recipe_objects[recipe_name] = recipe
 
-        for i in range(0, len(material_parts), 2):
-          if i + 1 < len(material_parts):
-            item_code = material_parts[i]
-            quantity = int(material_parts[i + 1])
-            materials.append({"code": item_code, "quantity": quantity})
+    # 解析制作配方
+    for recipe_name, recipe_str in self.crafting_recipes.items():
+      recipe = self._parse_recipe(recipe_name, recipe_str, is_crafting=True)
+      self.all_recipes[recipe_name] = recipe
+      self.crafting_recipe_objects[recipe_name] = recipe
 
-        product_parts = parts[2].split()
-        product_code = product_parts[0]
-        product_quantity = int(product_parts[1]) if len(product_parts) > 1 else 1
+    # 展开嵌套配方
+    self.expand_recipes()
 
-        cooking_recipes[recipe_name] = {
-          "materials": materials,
-          "product": {"code": product_code, "quantity": product_quantity, "is_bigcraftable": False},
-          "type": "cooking",
-        }
+    return self.all_recipes
 
-    self.logger.info(f"成功解析 {len(crafting_recipes)} 个制造配方和 {len(cooking_recipes)} 个烹饪配方")
-    return crafting_recipes, cooking_recipes
+  def expand_recipes(self):
+    """展开嵌套配方"""
+    # 创建产物到配方的映射
+    product_to_recipe = {}
+    for recipe_name, recipe in self.all_recipes.items():
+      if recipe_name not in self.ignore_recipes:
+        key = f"{recipe.product.prefix}{recipe.product.code}"
+        product_to_recipe[key] = recipe
 
-  def get_item_info(self, item_code, is_bigcraftable=None):
-    """统一的物品信息获取方法"""
-    # 先检查手动映射表
-    if item_code in self.manual_item_mapping:
-      # 对于手动映射的物品，返回None作为localization_key，因为它们不需要从本地化文件查找
-      return None, item_code, item_code
+    # 展开所有配方
+    expanded = True
+    while expanded:
+      expanded = False
+      for recipe_name, recipe in self.all_recipes.items():
+        # 使用字典来合并相同的材料
+        material_dict = {}
+        has_expansion = False
 
-    # 处理负数物品代码（检查是否在手动映射中）
-    if item_code.startswith("-"):
-      return None, item_code, item_code
+        for material in recipe.materials:
+          # 构建材料的键
+          material_key = f"{material.prefix}{material.code}"
 
-    clean_code = item_code
-    has_prefix = False
-    if item_code.startswith("(") and ")" in item_code:
-      prefix_end = item_code.index(")") + 1
-      clean_code = item_code[prefix_end:]
-      has_prefix = True
+          # 检查是否可以展开
+          if material_key in product_to_recipe:
+            source_recipe = product_to_recipe[material_key]
+            # 展开材料
+            for sub_material in source_recipe.materials:
+              # 构建子材料的唯一键
+              sub_key = f"{sub_material.prefix}{sub_material.code}"
+              # 计算新的数量
+              new_count = sub_material.count * material.count
 
-    if is_bigcraftable is not None:
-      search_bigcraftable = is_bigcraftable
-    elif has_prefix and item_code.startswith("(BC)"):
-      search_bigcraftable = True
+              # 如果已存在相同材料，累加数量
+              if sub_key in material_dict:
+                material_dict[sub_key].count += new_count
+              else:
+                # 创建新的材料项
+                new_item = Item(
+                  prefix=sub_material.prefix,
+                  code=sub_material.code,
+                  count=new_count,
+                  name=sub_material.name,
+                )
+                material_dict[sub_key] = new_item
+
+            expanded = True
+            has_expansion = True
+          else:
+            # 不能展开的材料，也要检查是否已存在
+            if material_key in material_dict:
+              material_dict[material_key].count += material.count
+            else:
+              material_dict[material_key] = material
+
+        if has_expansion:
+          # 将字典转换回列表
+          recipe.materials = list(material_dict.values())
+          recipe.is_expanded = True
+          self.expanded_recipes.add(recipe_name)
+
+  def get_item_name(self, item: Item) -> str:
+    """获取物品的中文名称"""
+    # 处理负数
+    if item.prefix == "" and item.code in self.negative_code_mapping:
+      return self.negative_code_mapping[item.code]
+
+    # 根据prefix选择数据源
+    if item.prefix == "(O)":
+      data_source = self.objects_data
+      localization_source = self.objects_zh_cn
+    elif item.prefix == "(BC)":
+      data_source = self.bigcraftables_data
+      localization_source = self.bigcraftables_zh_cn
     else:
-      search_bigcraftable = False
+      return ""
 
-    if search_bigcraftable:
-      if clean_code in self.bigcraftables_data:
-        display_name = self.bigcraftables_data[clean_code].get("DisplayName", "")
-        match = re.search(r":(\w+_Name)]", display_name)
+    # 查找物品数据
+    if item.code in data_source:
+      item_data = data_source[item.code]
+      display_name = item_data.get("DisplayName", "")
+
+      # 解析DisplayName中的本地化键
+      if display_name.startswith("[LocalizedText"):
+        # 提取本地化键，格式如 "[LocalizedText Strings\Objects:Moss_Name]"
+
+        match = re.search(r":([^]]+)_Name]", display_name)
         if match:
-          return match.group(1), clean_code, f"(BC){clean_code}"
-    else:
-      if clean_code in self.objects_data:
-        display_name = self.objects_data[clean_code].get("DisplayName", "")
-        match = re.search(r":(\w+_Name)]", display_name)
-        if match:
-          return match.group(1), clean_code, f"(O){clean_code}"
-
-    return None, clean_code, item_code
-
-  def get_item_name(self, item_code, is_bigcraftable=None):
-    """统一的物品名称获取方法"""
-    # 首先检查手动映射表
-    clean_code = item_code
-    if item_code.startswith("(") and ")" in item_code:
-      prefix_end = item_code.index(")") + 1
-      clean_code = item_code[prefix_end:]
-
-    if clean_code in self.manual_item_mapping:
-      mapped_name = self.manual_item_mapping[clean_code]
-      # self.logger.info(f"使用手动映射: {item_code} -> {mapped_name}")
-      return mapped_name, item_code
-
-    # 如果不在手动映射表中，继续原有的解析逻辑
-    localization_key, clean_code, normalized_code = self.get_item_info(item_code, is_bigcraftable)
-
-    if localization_key:
-      if normalized_code.startswith("(BC)"):
-        localization_data = self.bigcraftables_localization
-      else:
-        localization_data = self.objects_localization
-
-      if localization_key in localization_data:
-        return localization_data[localization_key], normalized_code
-
-    # 如果都找不到，再次检查是否为负数代码（可能在手动映射中）
-    if item_code.startswith("-") and item_code in self.manual_item_mapping:
-      return self.manual_item_mapping[item_code], item_code
-
-    return f"未知物品({item_code})", item_code
-
-  def get_all_recipes_with_names(self) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
-    """获取所有配方并转换物品代码为中文名称"""
-    crafting_recipes, cooking_recipes = self.read_recipes()
-
-    # 处理制造配方
-    for recipe_name, recipe_info in crafting_recipes.items():
-      for material in recipe_info["materials"]:
-        material["name"], material["normalized_code"] = self.get_item_name(material["code"])
-      product = recipe_info["product"]
-      product["name"], product["normalized_code"] = self.get_item_name(
-        product["code"], product.get("is_bigcraftable", False)
-      )
-
-    # 处理烹饪配方
-    for recipe_name, recipe_info in cooking_recipes.items():
-      for material in recipe_info["materials"]:
-        material["name"], material["normalized_code"] = self.get_item_name(material["code"])
-      product = recipe_info["product"]
-      product["name"], product["normalized_code"] = self.get_item_name(
-        product["code"], product.get("is_bigcraftable", False)
-      )
-
-    return crafting_recipes, cooking_recipes
-
-  @staticmethod
-  def calc_material_usage_detailed(recipes) -> dict[str, Any]:
-    """统计指定配方集合中每种材料的总使用量，返回详细信息"""
-    # 使用材料名称作为键，值为包含代码和数量的字典
-    material_usage = {}
-
-    for recipe_name, recipe_info in recipes.items():
-      for material in recipe_info["materials"]:
-        material_name = material["name"]
-        material_code = material["normalized_code"]
-        quantity = material["quantity"]
-
-        if material_name not in material_usage:
-          material_usage[material_name] = {"code": material_code, "quantity": 0}
-        material_usage[material_name]["quantity"] += quantity
-
-    # 按数量排序
-    sorted_usage = dict(sorted(material_usage.items(), key=lambda x: x[1]["quantity"], reverse=True))
-    return sorted_usage
-
-  def save_recipes_txt(self, recipes, output_dir, recipe_type):
-    """保存配方信息到TXT文件"""
-    output_file = output_dir / "recipes.txt"
-
-    with output_file.open("w", encoding="utf-8") as f:
-      f.write(f"=== {recipe_type}配方信息 ===\n")
-      f.write(f"生成时间: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-      f.write(f"配方总数: {len(recipes)}\n\n")
-
-      for recipe_name, recipe_info in recipes.items():
-        product = recipe_info["product"]
-        f.write(f"{recipe_name}: {product['name']} [{product['normalized_code']}] × {product['quantity']}\n")
-        for material in recipe_info["materials"]:
-          f.write(f"  - {material['name']} [{material['normalized_code']}] × {material['quantity']}\n")
-        f.write("\n")
-
-    self.logger.info(f"{recipe_type}配方TXT已保存到: {output_file}")
-
-  def save_recipes_json(self, recipes, output_dir, recipe_type):
-    """保存配方信息到JSON文件"""
-    output_file = output_dir / "recipes.json"
-
-    export_data = {
-      "生成时间": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-      "配方类型": recipe_type,
-      "配方总数": len(recipes),
-      "配方详情": {},
-    }
-
-    for recipe_name, recipe_info in recipes.items():
-      export_data["配方详情"][recipe_name] = {
-        "产品": {
-          "名称": recipe_info["product"]["name"],
-          "代码": recipe_info["product"]["normalized_code"],
-          "数量": recipe_info["product"]["quantity"],
-        },
-        "材料": [
-          {"名称": mat["name"], "代码": mat["normalized_code"], "数量": mat["quantity"]}
-          for mat in recipe_info["materials"]
-        ],
-      }
-
-    FileUtils.write_json(export_data, output_file)
-    self.logger.info(f"{recipe_type}配方JSON已保存到: {output_file}")
-
-  def save_statistics_txt(self, crafting_usage, cooking_usage, total_usage, output_dir) -> None:
-    """保存统计信息到TXT文件"""
-    output_file = output_dir / "statistics.txt"
-
-    with output_file.open("w", encoding="utf-8") as f:
-      f.write("=== 材料使用统计 ===\n")
-      f.write(f"生成时间: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-
-      # 制造配方统计
-      f.write("== 制造配方材料统计 ==\n")
-      self._write_usage_table_with_code(f, crafting_usage)
-
-      # 烹饪配方统计
-      f.write("\n== 烹饪配方材料统计 ==\n")
-      self._write_usage_table_with_code(f, cooking_usage)
-
-      # 总统计
-      f.write("\n== 总材料使用统计 ==\n")
-      self._write_usage_table_with_code(f, total_usage)
-
-    self.logger.info(f"统计TXT已保存到: {output_file}")
-
-  @staticmethod
-  def _write_usage_table_with_code(file_handle, usage_dict) -> None:
-    """写入材料使用统计表格"""
-    # 计算材料名称[代码]的最大显示宽度
-    max_width = 0
-    for material_name, info in usage_dict.items():
-      display_text = f"{material_name} [{info['code']}]"
-      width = StringUtils.get_display_width(display_text)
-      max_width = max(max_width, width)
-
-    # 设置列宽，留一些余量
-    name_column_width = max_width + 2
-
-    # 写入表头
-    header = StringUtils.pad_to_width("材料名称 [物品代码]", name_column_width)
-    file_handle.write(f"{header}| {'总使用量':>8}\n")
-    file_handle.write("-" * (name_column_width + 12) + "\n")
-
-    # 写入数据
-    for material_name, info in usage_dict.items():
-      display_text = f"{material_name}[{info['code']}]"
-      padded_text = StringUtils.pad_to_width(display_text, name_column_width)
-      file_handle.write(f"{padded_text}| {info['quantity']:>8}\n")
-
-  def save_statistics_json(self, crafting_usage, cooking_usage, total_usage, output_dir):
-    """保存统计信息到JSON文件"""
-    output_file = output_dir / "statistics.json"
-
-    # 从详细数据中提取只包含数量的字典
-    crafting_simple = {name: info["quantity"] for name, info in crafting_usage.items()}
-    cooking_simple = {name: info["quantity"] for name, info in cooking_usage.items()}
-    total_simple = {name: info["quantity"] for name, info in total_usage.items()}
-
-    export_data = {
-      "生成时间": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-      "制造配方材料统计": {"材料种类": len(crafting_simple), "材料使用情况": crafting_simple},
-      "烹饪配方材料统计": {"材料种类": len(cooking_simple), "材料使用情况": cooking_simple},
-      "总材料统计": {"材料种类": len(total_simple), "材料使用情况": total_simple},
-    }
-
-    FileUtils.write_json(export_data, output_file)
-    self.logger.info(f"统计JSON已保存到: {output_file}")
-
-  def save_statistics_csv(self, crafting_usage, cooking_usage, total_usage, output_dir):
-    """保存统计信息到CSV文件"""
-    output_file = output_dir / "statistics.csv"
-
-    with output_file.open("w", encoding="utf-8-sig", newline="") as f:
-      writer = csv.writer(f)
-      writer.writerow(["类别", "材料名称", "物品代码", "使用量"])
-
-      # 写入制造配方统计
-      for material_name, info in crafting_usage.items():
-        writer.writerow(["制造配方", material_name, f"{info['code']}", info["quantity"]])
-
-      # 写入烹饪配方统计
-      for material_name, info in cooking_usage.items():
-        writer.writerow(["烹饪配方", material_name, f"{info['code']}", info["quantity"]])
-
-      # 写入总统计
-      for material_name, info in total_usage.items():
-        writer.writerow(["总计", material_name, f"{info['code']}", info["quantity"]])
-
-    self.logger.info(f"统计CSV已保存到: {output_file}")
-
-  def process_and_save_all(self):
-    """处理所有数据并保存到各种格式"""
-    # 获取配方数据
-    crafting_recipes, cooking_recipes = self.get_all_recipes_with_names()
-
-    # 计算材料使用统计（使用新的详细方法）
-    crafting_usage = self.calc_material_usage_detailed(crafting_recipes)
-    cooking_usage = self.calc_material_usage_detailed(cooking_recipes)
-
-    # 计算总统计
-    total_usage = {}
-
-    # 合并制造配方的材料
-    for material_name, info in crafting_usage.items():
-      total_usage[material_name] = {"code": info["code"], "quantity": info["quantity"]}
-
-    # 合并烹饪配方的材料
-    for material_name, info in cooking_usage.items():
-      if material_name in total_usage:
-        total_usage[material_name]["quantity"] += info["quantity"]
-      else:
-        total_usage[material_name] = {"code": info["code"], "quantity": info["quantity"]}
-
-    # 按数量排序
-    total_usage = dict(sorted(total_usage.items(), key=lambda x: x[1]["quantity"], reverse=True))
-
-    # 保存制造配方数据
-    self.logger.info("正在保存制造配方数据...")
-    self.save_recipes_txt(crafting_recipes, self.crafting_dir, "制造")
-    self.save_recipes_json(crafting_recipes, self.crafting_dir, "制造")
-
-    # 保存烹饪配方数据
-    self.logger.info("正在保存烹饪配方数据...")
-    self.save_recipes_txt(cooking_recipes, self.cooking_dir, "烹饪")
-    self.save_recipes_json(cooking_recipes, self.cooking_dir, "烹饪")
-
-    # 保存统计数据
-    self.logger.info("正在保存统计数据...")
-    self.save_statistics_txt(crafting_usage, cooking_usage, total_usage, self.total_dir)
-    self.save_statistics_json(crafting_usage, cooking_usage, total_usage, self.total_dir)
-    self.save_statistics_csv(crafting_usage, cooking_usage, total_usage, self.total_dir)
-
-    self.logger.info("所有数据保存完成！")
-
-  def show_performance_stats(self):
-    """显示性能统计信息"""
-    self.perf_monitor.stop()
-    print(f"\n{self.perf_monitor.format_stats()}")
-
-    stats = self.perf_monitor.get_stats()
-    self.logger.info(
-      f"程序运行完成 - 总时间: {stats['elapsed_ms']:.2f}ms, 内存增量: {stats['memory_delta_mb']:.2f}MB"
-    )
-
-  def read_craft_recipes(self) -> dict[str, dict[str, str]]:
-    """读取配方文件，解析物品代码和数量，返回制造配方"""
-    crafting_recipes = {}
-
-    # 解析制造配方
-    for recipe_name, recipe_string in self.crafting_recipes_data.items():
-      parts = recipe_string.split("/")
-      if len(parts) >= 4:
-        materials = ""
-        material_parts = parts[0].split()
-
-        # 先解析制造原料及其数量
-        for i in range(0, len(material_parts), 2):
-          if i + 1 < len(material_parts):
-            code = material_parts[i]
-            item_name = self.get_specific_attribute(code, "Name")
-            quantity = int(material_parts[i + 1])
-            wiki_format = f"{{{{Name|{item_name}|{quantity}}}}}"
-            materials += wiki_format
-
-        # 然后获取制造得到的物品数量
-        product_parts = parts[2].split()
-        product_code = product_parts[0]
-        product_quantity = int(product_parts[1]) if len(product_parts) > 1 else 1
-
-        crafting_recipes[recipe_name] = {
-          "code": product_code,
-          "materials": materials,
-          "quantity": product_quantity
-        }
-
-    self.logger.info(f"成功解析 {len(crafting_recipes)} 个制造配方")
-    return crafting_recipes
-
-  def get_specific_attribute(self, code: str, attr: str) -> str | None:
-    """使用物品 ID 名获取更多信息"""
-    all_object_data = self.objects_data
-    if code in all_object_data.keys():
-      value = all_object_data[code].get(attr)
-      return value
-
-    return None
-
-  def eng_2_chn(self, eng: str) -> str | None:
-    """将英文名转化为中文名"""
-    eng = eng.replace(" ", "") + "_Name"
-    eng = eng.lower()
-    for object_name, object_data in self.objects_localization.items():
-      if eng == object_name.lower():
-        return object_data
-
-    return None
-
-  def generate_infobox(self) -> None:
-    """生成 Infobox craft 并打印"""
-    recipes = self.read_craft_recipes()
-
-    for recipe_name, recipe_info in recipes.items():
-      eng = recipe_name
-      name = self.eng_2_chn(recipe_name)
-      produces = ""
-      if int(recipe_info["quantity"]) > 1:
-        produces = recipe_info["quantity"]
-
-      infobox = (f"""{name}：\n
-<onlyinclude>{{{{{{{{{{1|Infobox craft}}}}}}
-|name            = {name}
-|eng             = {eng}
-|description     = {{{{Description|{eng}}}}}
-|source          = [[打造]]
-|sellprice       = {self.get_specific_attribute(recipe_info["code"], "Price")}
-|recipe          = 这里要自己填
-|ingredients     = {recipe_info["materials"]}
-|produces        = {produces}
-}}}}</onlyinclude>
-'''{name}'''是一种[[打造|打造物品]]，\n""")
-      infobox = infobox.replace("|sellprice       = None\n", "")
-      print(infobox)
+          localization_key = match.group(1) + "_Name"
+          # 从本地化文件中获取名称
+          if localization_key in localization_source:
+            return localization_source[localization_key]
+
+    return "未知物品"
+
+  def calc_material_count(self, recipes: Dict[str, Recipe]) -> Dict[str, int]:
+    """计算原料统计"""
+    material_stats = defaultdict(int)
+
+    for recipe in recipes.values():
+      for material in recipe.materials:
+        material_key = material.get_key()
+        material_stats[material_key] += material.count
+
+    # 按数量降序排序
+    sorted_stats = dict(sorted(material_stats.items(), key=lambda x: x[1], reverse=True))
+    return sorted_stats
+
+  def save_recipes_to_files(self, recipes: Dict[str, Recipe], output_dir: Path, file_prefix: str):
+    """保存配方到文件"""
+    # 确保输出目录存在
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # 计算统计数据
+    material_stats = self.calc_material_count(recipes)
+
+    # 保存TXT文件
+    txt_path = output_dir / f"{file_prefix}.txt"
+    with open(txt_path, "w", encoding="utf-8") as f:
+      # 写入配方
+      for recipe in recipes.values():
+        f.write(str(recipe))
+        f.write("\n\n")
+
+      # 计算统计表宽度
+      max_width = 0
+      for material, count in material_stats.items():
+        width = StringUtils.get_display_width(material)
+        max_width = max(max_width, width)
+
+      # 写入统计
+      f.write(f"{file_prefix}材料统计")
+      f.write("\n" + "=" * (max_width + 16) + "\n")
+      header = StringUtils.pad_to_width("原料[代码]", max_width)
+      f.write(f"{header} | {'数量（降序）':>8}\n")
+      f.write("-" * (max_width + 16) + "\n")
+      for material, count in material_stats.items():
+        material = StringUtils.pad_to_width(material, max_width)
+        f.write(f"{material} | {count:>12}\n")
+
+    # 保存JSON文件
+    json_data = {}
+    for recipe in recipes.values():
+      json_data.update(recipe.to_dict())
+
+    json_path = output_dir / f"{file_prefix}.json"
+    FileUtils.write_json(json_data, json_path)
+
+    print(f"已保存 {len(recipes)} 个配方到 {output_dir}")
+    print(f"共需要 {len(material_stats)} 种原料")
+
+  def save_all_results(self):
+    """保存所有结果"""
+    output_base = Path(__file__).parent.parent / "output"
+
+    # 保存烹饪配方
+    cooking_dir = output_base / "CookingRecipes"
+    self.save_recipes_to_files(self.cooking_recipe_objects, cooking_dir, "CookingRecipes")
+
+    # 保存制作配方
+    crafting_dir = output_base / "CraftingRecipes"
+    self.save_recipes_to_files(self.crafting_recipe_objects, crafting_dir, "CraftingRecipes")
+
+    # 保存全部配方
+    total_dir = output_base / "total"
+    self.save_recipes_to_files(self.all_recipes, total_dir, "AllRecipes")
 
 
 # 使用示例
 if __name__ == "__main__":
-  try:
-    # 创建解析器实例
-    parser = RecipeParser()
+  monitor = PerfMonitor()
+  monitor.start()
+  # 创建解析器
+  parser = RecipeParser()
 
-    # # 生成 wiki infobox 列表
-    # parser.generate_infobox()
+  # 解析所有配方
+  """
+  完整流程：
+  read_json_files()读取6个需要的json文件
+  parse_all_recipes()→parse_recipe()解析所有配方代码为Item格式
+  expand_recipes()展开所有可拆分的原料并打上“已拆分”标记
+  get_item_name()进入Objects和BigCraftables中根据完整代码获取对应物品的中文键名
+  calc_material_count()计算所有配方的原料数量
+  """
+  recipes = parser.parse_all_recipes()
 
-    # 处理并保存所有数据
-    parser.process_and_save_all()
-
-    # 显示性能统计
-    parser.show_performance_stats()
-
-    print(f"\n所有文件已保存到: {parser.output_base_dir}")
-    print(f"- 制造配方: {parser.crafting_dir}")
-    print(f"- 烹饪配方: {parser.cooking_dir}")
-    print(f"- 总统计: {parser.total_dir}")
-
-  except Exception as e:
-    print(f"发生错误: {e}")
-    import traceback
-
-    traceback.print_exc()
+  # 保存所有结果
+  parser.save_all_results()
+  monitor.stop()
