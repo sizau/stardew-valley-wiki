@@ -83,16 +83,16 @@ class Recipe:
 
 class RecipeParser:
   def __init__(self):
-    self.cooking_recipes = {}
-    self.crafting_recipes = {}
-    self.objects_data = {}
-    self.objects_zh_cn = {}
-    self.bigcraftables_data = {}
-    self.bigcraftables_zh_cn = {}
-    self.all_recipes = {}
-    self.cooking_recipe_objects = {}  # 存储解析后的烹饪配方对象
-    self.crafting_recipe_objects = {}  # 存储解析后的制作配方对象
-    self.ignore_recipes = ["Transmute (Fe)", "Transmute (Au)"]  # 需要忽略拆解的配方列表
+    self.cooking_recipes: dict[str, str] = {}
+    self.crafting_recipes: dict[str, str] = {}
+    self.objects_data: dict[str, dict] = {}
+    self.objects_zh_cn: dict[str, str] = {}
+    self.bigcraftables_data: dict[str, dict] = {}
+    self.bigcraftables_zh_cn: dict[str, str] = {}
+    self.all_recipes: dict[str, Recipe] = {}
+    self.cooking_recipe_objects: dict[str, Recipe] = {}  # 存储解析后的烹饪配方对象
+    self.crafting_recipe_objects: dict[str, Recipe] = {}  # 存储解析后的制作配方对象
+    self.ignore_recipes: list[str] = ["Transmute (Fe)", "Transmute (Au)"]  # 需要忽略拆解的配方列表
     self.expanded_recipes = set()  # 记录已展开的配方
 
     # 类别映射

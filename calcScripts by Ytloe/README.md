@@ -67,8 +67,7 @@
 
 - utils.py 是一些通用的函数，可以运行 if main 查看测试结果
 
-建议雀枝把计算鱼的 Output 挪到自己的文件夹里或本地备份，这部分数据我不好处理  
-如果后续有需要调用 readRecipes.py 的，直接新建一个文件
+- test.py 作为测试模块使用
 
 ```python
 import readRecipes
