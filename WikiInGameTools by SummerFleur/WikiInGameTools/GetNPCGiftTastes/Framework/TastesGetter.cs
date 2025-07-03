@@ -144,6 +144,7 @@ internal static class TastesGetter
                 "126" => "诡异玩偶（绿）",
                 "127" => "诡异玩偶（黄）",
                 "SpecificBait" => "针对性鱼饵",
+                "Smoked" => "熏鱼",
                 "DriedFruit" => "果干",
                 "DriedMushrooms" => "蘑菇干",
                 _ => item.DisplayName
