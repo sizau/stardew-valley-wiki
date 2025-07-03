@@ -1,35 +1,43 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 using WikiIngameTools.Framework;
 
 namespace WikiIngameTools.GetNPCGiftTastes.Framework;
 
+[Serializable]
 internal struct GiftTastes
 {
     /// <summary>
     /// 最爱该物品的 NPC，或 NPC 最爱的物品列表
     /// </summary>
-    private List<string> LoveThis { get; } = new ();
+    [JsonProperty("Love")]
+    public List<string> LoveThis { get; set; } = new ();
 
     /// <summary>
     /// 喜欢该物品的 NPC，或 NPC 喜欢的物品列表
     /// </summary>
-    private List<string> LikeThis { get; } = new ();
+    [JsonProperty("Like")]
+    public List<string> LikeThis { get; set; } = new ();
 
     /// <summary>
     /// 对该物品态度中立的 NPC，或 NPC 态度中立的物品列表
     /// </summary>
-    private List<string> NeutralThis { get; } = new ();
+    [JsonProperty("Neutral")]
+    public List<string> NeutralThis { get; set; } = new ();
 
     /// <summary>
     /// 不喜欢该物品的 NPC，或 NPC 不喜欢的物品列表
     /// </summary>
-    private List<string> DislikeThis { get; } = new ();
+    [JsonProperty("Dislike")]
+    public List<string> DislikeThis { get; set; } = new ();
 
     /// <summary>
     /// 讨厌该物品的 NPC，或 NPC 讨厌的物品列表
     /// </summary>
-    private List<string> HateThis { get; } = new ();
+    [JsonProperty("Hate")]
+    public List<string> HateThis { get; set; } = new ();
 
     /// <summary>
     /// 解析状态
@@ -41,6 +49,7 @@ internal struct GiftTastes
     ///   <item><term>Blacklisted</term><description>非常规物品</description></item>
     /// </list>
     /// </value>
+    [JsonIgnore]
     public Status Status { get; set; }
 
     public GiftTastes(Status status)

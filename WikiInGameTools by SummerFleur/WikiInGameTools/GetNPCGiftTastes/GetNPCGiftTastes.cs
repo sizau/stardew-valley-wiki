@@ -91,18 +91,38 @@ internal class GetNPCGiftTastes : IModule
         ModEntry.Log("具体信息如下：\n" + result);
     }
 
+    /// <summary>
+    /// 获取所有 NPC 对所有物品的态度，并导出为 json。
+    /// </summary>
+    private void GetAll(string command, string[] args)
+    {
+        if (!IsActive)
+        {
+            ModEntry.Log("模块未被启用！", LogLevel.Error);
+            return;
+        }
+
+        TastesGetter.GetAllGiftTastes();
+        ModEntry.Log("已将全部结果导出至：output/AllGiftTastes.json");
+    }
+
     public GetNPCGiftTastes()
     {
         ModEntry.ModHelper.ConsoleCommands.Add("NPC_Taste_To",
             "输出所有 NPC 对指定物品的态度，支持使用物品 ID，英文名或中文名。\n" +
-            "使用示例：NPCTasteTo 防风草\n" +
+            "使用示例：NPC_Taste_To 防风草\n" +
             "若物品名称错误，或给予了一个不正确的物品，会给出警告。",
             NPCTasteTo);
         
         ModEntry.ModHelper.ConsoleCommands.Add("Tastes_Of_NPC",
             "输出指定 NPC 对所有物品的态度，支持使用 NPC 的英文名或中文名。\n" +
-            "使用示例：TastesOfNPC 阿比盖尔\n" +
+            "使用示例：Tastes_Of_NPC 阿比盖尔\n" +
             "若 NPC 名称错误，会给出警告。",
             TastesOfNPC);
+
+        ModEntry.ModHelper.ConsoleCommands.Add("All_Gift_Tastes",
+            "获取所有 NPC 对所有物品的态度，并导出为 json。\n" +
+            "使用示例：All_Gift_Tastes\n",
+            GetAll);
     }
 }

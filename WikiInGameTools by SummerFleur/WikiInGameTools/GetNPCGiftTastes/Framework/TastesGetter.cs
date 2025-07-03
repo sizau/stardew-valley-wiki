@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using StardewModdingAPI;
 using StardewValley;
+using WikiInGameTools;
 using static WikiIngameTools.GetNPCGiftTastes.Framework.ItemData;
 using static WikiIngameTools.GetNPCGiftTastes.Framework.NPCData;
 
@@ -88,7 +92,7 @@ internal static class TastesGetter
         if (!Enum.TryParse<LocalizedContentManager.LanguageCode>(langCode.ToLower(), out var languageCode))
             languageCode = LocalizedContentManager.LanguageCode.en;
 
-        // 从 npcName 获取物品实例
+        // 从 npcName 获取 NPC 实例
         var npc = AllSocializableVillagers
             .FirstOrDefault(n =>
                 string.Equals(n.Name, npcName, StringComparison.OrdinalIgnoreCase) ||
@@ -112,5 +116,60 @@ internal static class TastesGetter
         // 写入并返回偏好
         npcTaste.Organize();
         return npcTaste;
+    }
+
+    /// <summary>
+    /// 获取获取所有 NPC 对游戏内所有物品的态度。
+    /// </summary>
+    /// <returns>全部的 NPC 对全部物品的态度</returns>
+    public static void GetAllGiftTastes()
+    {
+
+        // 新建数组存储全部的礼物偏好
+        var allGiftTastes = new Dictionary<string, GiftTastes>();
+
+        // 遍历全部物品与npc，获取偏好
+        foreach (var item in AllItems)
+        {
+            var npcTaste = new GiftTastes(Status.Normal);
+            foreach (var npc in AllSocializableVillagers)
+            {
+                var taste = npc.getGiftTasteForThisItem(item);
+                npcTaste.Add(npc.displayName, Taste2String[taste]);
+            }
+            npcTaste.Organize();
+
+            var displayName = item.ItemId switch
+            {
+                "126" => "诡异玩偶（绿）",
+                "127" => "诡异玩偶（黄）",
+                "SpecificBait" => "针对性鱼饵",
+                "DriedFruit" => "果干",
+                "DriedMushrooms" => "蘑菇干",
+                _ => item.DisplayName
+            };
+
+            if (!allGiftTastes.TryAdd(displayName, npcTaste))
+                ModEntry.Log($"键冲突：Key={displayName}，ID={item.ItemId}。", LogLevel.Warn);
+        }
+
+        // 返回全部礼物偏好
+        ConvertToJson(allGiftTastes);
+    }
+
+    private static void ConvertToJson(Dictionary<string, GiftTastes> tastes)
+    {
+        var savePath = Path.Combine("output", "AllGiftTastes.json");
+        var absolutePath = Path.Combine(ModEntry.ModHelper.DirectoryPath, savePath);
+
+        try
+        {
+            ModEntry.ModHelper.Data.WriteJsonFile(savePath, tastes);
+        }
+        catch (Exception ex)
+        {
+            ModEntry.Log($"无法导出数据至 {absolutePath}");
+            ModEntry.Log(ex.ToString());
+        }
     }
 }
