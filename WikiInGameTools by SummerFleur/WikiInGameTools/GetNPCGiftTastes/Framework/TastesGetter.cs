@@ -139,14 +139,20 @@ internal static class TastesGetter
             }
             npcTaste.Organize();
 
+            // 处理部分特殊物品以适应 wiki 编写
             var displayName = item.ItemId switch
             {
                 "126" => "诡异玩偶（绿）",
                 "127" => "诡异玩偶（黄）",
+                "167" => "Joja可乐",
+                "168" => "垃圾（物品）",
+                "171" => "破损的CD",
+                "685" => "鱼饵（物品）",
                 "SpecificBait" => "针对性鱼饵",
                 "Smoked" => "熏鱼",
                 "DriedFruit" => "果干",
                 "DriedMushrooms" => "蘑菇干",
+                "FrogEgg" => "青蛙蛋",
                 _ => item.DisplayName
             };
 

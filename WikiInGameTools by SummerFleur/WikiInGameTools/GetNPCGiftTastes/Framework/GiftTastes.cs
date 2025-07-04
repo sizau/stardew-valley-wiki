@@ -12,31 +12,31 @@ internal struct GiftTastes
     /// <summary>
     /// 最爱该物品的 NPC，或 NPC 最爱的物品列表
     /// </summary>
-    [JsonProperty("Love")]
+    [JsonProperty("最爱")]
     public List<string> LoveThis { get; set; } = new ();
 
     /// <summary>
     /// 喜欢该物品的 NPC，或 NPC 喜欢的物品列表
     /// </summary>
-    [JsonProperty("Like")]
+    [JsonProperty("喜欢")]
     public List<string> LikeThis { get; set; } = new ();
 
     /// <summary>
     /// 对该物品态度中立的 NPC，或 NPC 态度中立的物品列表
     /// </summary>
-    [JsonProperty("Neutral")]
+    [JsonProperty("一般")]
     public List<string> NeutralThis { get; set; } = new ();
 
     /// <summary>
     /// 不喜欢该物品的 NPC，或 NPC 不喜欢的物品列表
     /// </summary>
-    [JsonProperty("Dislike")]
+    [JsonProperty("不喜欢")]
     public List<string> DislikeThis { get; set; } = new ();
 
     /// <summary>
     /// 讨厌该物品的 NPC，或 NPC 讨厌的物品列表
     /// </summary>
-    [JsonProperty("Hate")]
+    [JsonProperty("讨厌")]
     public List<string> HateThis { get; set; } = new ();
 
     /// <summary>
