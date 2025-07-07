@@ -1,0 +1,1236 @@
+{
+  "FlashShifter.StardewValleyExpandedCP_Adventurer_Gear": {
+    "Name": "Adventurer Gear",
+    "DisplayName": "{{i18n:big-craftables.adventurer-gear.name}}",
+    "Description": "{{i18n:big-craftables.adventurer-gear.description}}",
+    "Price": 2500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Adventurer Gear",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Amethyst_Node": {
+    "Name": "Amethyst Node",
+    "DisplayName": "{{i18n:big-craftables.amethyst-node.name}}",
+    "Description": "{{i18n:big-craftables.amethyst-node.description}}",
+    "Price": 2000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Amethyst Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Aquamarine_Node": {
+    "Name": "Aquamarine Node",
+    "DisplayName": "{{i18n:big-craftables.aquamarine-node.name}}",
+    "Description": "{{i18n:big-craftables.aquamarine-node.description}}",
+    "Price": 1750,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Aquamarine Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Backpack": {
+    "Name": "Backpack",
+    "DisplayName": "{{i18n:big-craftables.backpack.name}}",
+    "Description": "{{i18n:big-craftables.backpack.description}}",
+    "Price": 1000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Backpack",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Beautiful_Flower": {
+    "Name": "Beautiful Flower",
+    "DisplayName": "{{i18n:big-craftables.beautiful-flower.name}}",
+    "Description": "{{i18n:big-craftables.beautiful-flower.description}}",
+    "Price": 500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Beautiful Flower",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Big_Bush_L": {
+    "Name": "Big Bush L",
+    "DisplayName": "{{i18n:big-craftables.big-bush-l.name}}",
+    "Description": "{{i18n:big-craftables.big-bush-l.description}}",
+    "Price": 4000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Big Bush L",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Big_Bush_R": {
+    "Name": "Big Bush R",
+    "DisplayName": "{{i18n:big-craftables.big-bush-r.name}}",
+    "Description": "{{i18n:big-craftables.big-bush-r.description}}",
+    "Price": 4000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Big Bush R",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Big_Crop_(stage_1)": {
+    "Name": "Big Crop (stage 1)",
+    "DisplayName": "{{i18n:big-craftables.big-crop-stage-1.name}}",
+    "Description": "{{i18n:big-craftables.big-crop-stage-1.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Big Crop (stage 1)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Big_Crop_(stage_2)": {
+    "Name": "Big Crop (stage 2)",
+    "DisplayName": "{{i18n:big-craftables.big-crop-stage-2.name}}",
+    "Description": "{{i18n:big-craftables.big-crop-stage-2.description}}",
+    "Price": 480,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Big Crop (stage 2)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Big_Crop_(stage_3)": {
+    "Name": "Big Crop (stage 3)",
+    "DisplayName": "{{i18n:big-craftables.big-crop-stage-3.name}}",
+    "Description": "{{i18n:big-craftables.big-crop-stage-3.description}}",
+    "Price": 560,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Big Crop (stage 3)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Big_Foliage": {
+    "Name": "Big Foliage",
+    "DisplayName": "{{i18n:big-craftables.big-foliage.name}}",
+    "Description": "{{i18n:big-craftables.big-foliage.description}}",
+    "Price": 600,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Big Foliage",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Bone_Node_1": {
+    "Name": "Bone Node 1",
+    "DisplayName": "{{i18n:big-craftables.bone-node-1.name}}",
+    "Description": "{{i18n:big-craftables.bone-node-1.description}}",
+    "Price": 2000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Bone Node 1",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Bone_Node_2": {
+    "Name": "Bone Node 2",
+    "DisplayName": "{{i18n:big-craftables.bone-node-2.name}}",
+    "Description": "{{i18n:big-craftables.bone-node-2.description}}",
+    "Price": 2000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Bone Node 2",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Bushy_Crop_(stage_1)": {
+    "Name": "Bushy Crop (stage 1)",
+    "DisplayName": "{{i18n:big-craftables.bushy-crop-stage-1.name}}",
+    "Description": "{{i18n:big-craftables.bushy-crop-stage-1.description}}",
+    "Price": 450,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Bushy Crop (stage 1)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Bushy_Crop_(stage_2)": {
+    "Name": "Bushy Crop (stage 2)",
+    "DisplayName": "{{i18n:big-craftables.bushy-crop-stage-2.name}}",
+    "Description": "{{i18n:big-craftables.bushy-crop-stage-2.description}}",
+    "Price": 600,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Bushy Crop (stage 2)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Bushy_Crop_(stage_3)": {
+    "Name": "Bushy Crop (stage 3)",
+    "DisplayName": "{{i18n:big-craftables.bushy-crop-stage-3.name}}",
+    "Description": "{{i18n:big-craftables.bushy-crop-stage-3.description}}",
+    "Price": 700,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Bushy Crop (stage 3)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Cinder_Shard_Node_1": {
+    "Name": "Cinder Shard Node 1",
+    "DisplayName": "{{i18n:big-craftables.cinder-shard-node-1.name}}",
+    "Description": "{{i18n:big-craftables.cinder-shard-node-1.description}}",
+    "Price": 5000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Cinder Shard Node 1",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Cinder_Shard_Node_2": {
+    "Name": "Cinder Shard Node 2",
+    "DisplayName": "{{i18n:big-craftables.cinder-shard-node-2.name}}",
+    "Description": "{{i18n:big-craftables.cinder-shard-node-2.description}}",
+    "Price": 5000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Cinder Shard Node 2",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Clay_Node": {
+    "Name": "Clay Node",
+    "DisplayName": "{{i18n:big-craftables.clay-node.name}}",
+    "Description": "{{i18n:big-craftables.clay-node.description}}",
+    "Price": 1500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Clay Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Coal_Box": {
+    "Name": "Coal Box",
+    "DisplayName": "{{i18n:big-craftables.coal-box.name}}",
+    "Description": "{{i18n:big-craftables.coal-box.description}}",
+    "Price": 2000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Coal Box",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Copper_Node": {
+    "Name": "Copper Node",
+    "DisplayName": "{{i18n:big-craftables.copper-node.name}}",
+    "Description": "{{i18n:big-craftables.copper-node.description}}",
+    "Price": 1000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Copper Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Corn_Crop_(stage_1)": {
+    "Name": "Corn Crop (stage 1)",
+    "DisplayName": "{{i18n:big-craftables.corn-crop-stage-1.name}}",
+    "Description": "{{i18n:big-craftables.corn-crop-stage-1.description}}",
+    "Price": 180,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Corn Crop (stage 1)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Corn_Crop_(stage_2)": {
+    "Name": "Corn Crop (stage 2)",
+    "DisplayName": "{{i18n:big-craftables.corn-crop-stage-2.name}}",
+    "Description": "{{i18n:big-craftables.corn-crop-stage-2.description}}",
+    "Price": 220,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Corn Crop (stage 2)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Corn_Crop_(stage_3)": {
+    "Name": "Corn Crop (stage 3)",
+    "DisplayName": "{{i18n:big-craftables.corn-crop-stage-3.name}}",
+    "Description": "{{i18n:big-craftables.corn-crop-stage-3.description}}",
+    "Price": 275,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Corn Crop (stage 3)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Curly_Foliage": {
+    "Name": "Curly Foliage",
+    "DisplayName": "{{i18n:big-craftables.curly-foliage.name}}",
+    "Description": "{{i18n:big-craftables.curly-foliage.description}}",
+    "Price": 900,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Curly Foliage",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Danger_Sign": {
+    "Name": "Danger Sign",
+    "DisplayName": "{{i18n:big-craftables.danger-sign.name}}",
+    "Description": "{{i18n:big-craftables.danger-sign.description}}",
+    "Price": 800,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Danger Sign",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Diamond_Node": {
+    "Name": "Diamond Node",
+    "DisplayName": "{{i18n:big-craftables.diamond-node.name}}",
+    "Description": "{{i18n:big-craftables.diamond-node.description}}",
+    "Price": 4000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Diamond Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Dwarf_Chest": {
+    "Name": "Dwarf Chest",
+    "DisplayName": "{{i18n:big-craftables.dwarf-chest.name}}",
+    "Description": "{{i18n:big-craftables.dwarf-cheste.description}}",
+    "Price": 6000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Dwarf Chest",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Dwarf_Cushion": {
+    "Name": "Dwarf Cushion",
+    "DisplayName": "{{i18n:big-craftables.dwarf-cushion.name}}",
+    "Description": "{{i18n:big-craftables.dwarf-cushion.description}}",
+    "Price": 1500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Dwarf Cushion",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Dwarf_Table": {
+    "Name": "Dwarf Table",
+    "DisplayName": "{{i18n:big-craftables.dwarf-table.name}}",
+    "Description": "{{i18n:big-craftables.dwarf-table.description}}",
+    "Price": 4000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Dwarf Table",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Emerald_Node": {
+    "Name": "Emerald Node",
+    "DisplayName": "{{i18n:big-craftables.emerald-node.name}}",
+    "Description": "{{i18n:big-craftables.emerald-node.description}}",
+    "Price": 3500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Emerald Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Empty_Pot": {
+    "Name": "Empty Pot",
+    "DisplayName": "{{i18n:big-craftables.empty-pot.name}}",
+    "Description": "{{i18n:big-craftables.empty-pot.description}}",
+    "Price": 200,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Empty Pot",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Fancy_Iron_Lamp-post": {
+    "Name": "Fancy Iron Lamp-post",
+    "DisplayName": "{{i18n:big-craftables.fancy-iron-lamp-post.name}}",
+    "Description": "{{i18n:big-craftables.fancy-iron-lamp-post.description}}",
+    "Price": 5000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Fancy Iron Lamp-post",
+    "SpriteIndex": 0,
+    "IsLamp": true
+  },
+  "FlashShifter.StardewValleyExpandedCP_Fancy_Wood_Lamp-post": {
+    "Name": "Fancy Wood Lamp-post",
+    "DisplayName": "{{i18n:big-craftables.fancy-wood-lamp-post.name}}",
+    "Description": "{{i18n:big-craftables.fancy-wood-lamp-post.description}}",
+    "Price": 4000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Fancy Wood Lamp-post",
+    "SpriteIndex": 0,
+    "IsLamp": true
+  },
+  "FlashShifter.StardewValleyExpandedCP_Flower_Bushel_1": {
+    "Name": "Flower Bushel 1",
+    "DisplayName": "{{i18n:big-craftables.flower-bushel-1.name}}",
+    "Description": "{{i18n:big-craftables.flower-bushel-1.description}}",
+    "Price": 300,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Flower Bushel 1",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Flower_Bushel_2": {
+    "Name": "Flower Bushel 2",
+    "DisplayName": "{{i18n:big-craftables.flower-bushel-2.name}}",
+    "Description": "{{i18n:big-craftables.flower-bushel-2.description}}",
+    "Price": 300,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Flower Bushel 2",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Flower_Bushel_3": {
+    "Name": "Flower Bushel 3",
+    "DisplayName": "{{i18n:big-craftables.flower-bushel-3.name}}",
+    "Description": "{{i18n:big-craftables.flower-bushel-3.description}}",
+    "Price": 300,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Flower Bushel 3",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Flower_Bushel_4": {
+    "Name": "Flower Bushel 4",
+    "DisplayName": "{{i18n:big-craftables.flower-bushel-4.name}}",
+    "Description": "{{i18n:big-craftables.flower-bushel-4.description}}",
+    "Price": 300,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Flower Bushel 4",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Flower_Bushel_5": {
+    "Name": "Flower Bushel 5",
+    "DisplayName": "{{i18n:big-craftables.flower-bushel-5.name}}",
+    "Description": "{{i18n:big-craftables.flower-bushel-5.description}}",
+    "Price": 300,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Flower Bushel 5",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Flower_Bushel_6": {
+    "Name": "Flower Bushel 6",
+    "DisplayName": "{{i18n:big-craftables.flower-bushel-6.name}}",
+    "Description": "{{i18n:big-craftables.flower-bushel-6.description}}",
+    "Price": 300,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Flower Bushel 6",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Foliage": {
+    "Name": "Foliage",
+    "DisplayName": "{{i18n:big-craftables.foliage.name}}",
+    "Description": "{{i18n:big-craftables.foliage.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Foliage",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Frozen_Geode_Node": {
+    "Name": "Frozen Geode Node",
+    "DisplayName": "{{i18n:big-craftables.frozen-geode-node.name}}",
+    "Description": "{{i18n:big-craftables.frozen-geode-node.description}}",
+    "Price": 2500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Frozen Geode Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Frozen_Stone_1": {
+    "Name": "Frozen Stone 1",
+    "DisplayName": "{{i18n:big-craftables.frozen-stone-1.name}}",
+    "Description": "{{i18n:big-craftables.frozen-stone-1.description}}",
+    "Price": 500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Frozen Stone 1",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Frozen_Stone_2": {
+    "Name": "Frozen Stone 2",
+    "DisplayName": "{{i18n:big-craftables.frozen-stone-2.name}}",
+    "Description": "{{i18n:big-craftables.frozen-stone-2.description}}",
+    "Price": 500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Frozen Stone 2",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Frozen_Stone_3": {
+    "Name": "Frozen Stone 3",
+    "DisplayName": "{{i18n:big-craftables.frozen-stone-3.name}}",
+    "Description": "{{i18n:big-craftables.frozen-stone-3.description}}",
+    "Price": 500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Frozen Stone 3",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Frozen_Stone_4": {
+    "Name": "Frozen Stone 4",
+    "DisplayName": "{{i18n:big-craftables.frozen-stone-4.name}}",
+    "Description": "{{i18n:big-craftables.frozen-stone-4.description}}",
+    "Price": 500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Frozen Stone 4",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Gem_Node": {
+    "Name": "Gem Node",
+    "DisplayName": "{{i18n:big-craftables.gem-node.name}}",
+    "Description": "{{i18n:big-craftables.gem-node.description}}",
+    "Price": 2750,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Gem Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Geode_Node": {
+    "Name": "Geode Node",
+    "DisplayName": "{{i18n:big-craftables.geode-node.name}}",
+    "Description": "{{i18n:big-craftables.geode-node.description}}",
+    "Price": 1500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Geode Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Gold_Node": {
+    "Name": "Gold Node",
+    "DisplayName": "{{i18n:big-craftables.gold-node.name}}",
+    "Description": "{{i18n:big-craftables.gold-node.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Gold Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Golden_Piggy_Bank": {
+    "Name": "Golden Piggy Bank",
+    "DisplayName": "{{i18n:big-craftables.golden-piggy-bank.name}}",
+    "Description": "{{i18n:big-craftables.golden-piggy-bank.description}}",
+    "Price": 10000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Golden Piggy Bank",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Golden_Skull_Lamp-post": {
+    "Name": "Golden Skull Lamp-post",
+    "DisplayName": "{{i18n:big-craftables.golden-skull-lamp-post.name}}",
+    "Description": "{{i18n:big-craftables.golden-skull-lamp-post.description}}",
+    "Price": 7500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Golden Skull Lamp-post",
+    "SpriteIndex": 0,
+    "IsLamp": true
+  },
+  "FlashShifter.StardewValleyExpandedCP_Ice_Crystal_1": {
+    "Name": "Ice Crystal 1",
+    "DisplayName": "{{i18n:big-craftables.ice-crystal-1.name}}",
+    "Description": "{{i18n:big-craftables.ice-crystal-1.description}}",
+    "Price": 1000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Ice Crystal 1",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Ice_Crystal_2": {
+    "Name": "Ice Crystal 2",
+    "DisplayName": "{{i18n:big-craftables.ice-crystal-2.name}}",
+    "Description": "{{i18n:big-craftables.ice-crystal-2.description}}",
+    "Price": 1000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Ice Crystal 2",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Ice_Crystal_3": {
+    "Name": "Ice Crystal 3",
+    "DisplayName": "{{i18n:big-craftables.ice-crystal-3.name}}",
+    "Description": "{{i18n:big-craftables.ice-crystal-3.description}}",
+    "Price": 1000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Ice Crystal 3",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Iridium_Node": {
+    "Name": "Iridium Node",
+    "DisplayName": "{{i18n:big-craftables.iridium-node.name}}",
+    "Description": "{{i18n:big-craftables.iridium-node.description}}",
+    "Price": 4000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Iridium Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Iridium_Skull_Lamp-post": {
+    "Name": "Iridium Skull Lamp-post",
+    "DisplayName": "{{i18n:big-craftables.iridium-skull-lamp-post.name}}",
+    "Description": "{{i18n:big-craftables.iridium-skull-lamp-post.description}}",
+    "Price": 17500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Iridium Skull Lamp-post",
+    "SpriteIndex": 0,
+    "IsLamp": true
+  },
+  "FlashShifter.StardewValleyExpandedCP_Iron_Node": {
+    "Name": "Iron Node",
+    "DisplayName": "{{i18n:big-craftables.iron-node.name}}",
+    "Description": "{{i18n:big-craftables.iron-node.description}}",
+    "Price": 2000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Iron Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Jade_Node": {
+    "Name": "Jade Node",
+    "DisplayName": "{{i18n:big-craftables.jade-node.name}}",
+    "Description": "{{i18n:big-craftables.jade-node.description}}",
+    "Price": 2500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Jade Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Jagged_Boulder_L": {
+    "Name": "Jagged Boulder L",
+    "DisplayName": "{{i18n:big-craftables.jagged-boulder-l.name}}",
+    "Description": "{{i18n:big-craftables.jagged-boulder-l.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Jagged Boulder L",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Jagged_Boulder_R": {
+    "Name": "Jagged Boulder R",
+    "DisplayName": "{{i18n:big-craftables.jagged-boulder-r.name}}",
+    "Description": "{{i18n:big-craftables.jagged-boulder-r.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Jagged Boulder R",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Large_Wood_Barrel_L": {
+    "Name": "Large Wood Barrel L",
+    "DisplayName": "{{i18n:big-craftables.large-wood-barrel-l.name}}",
+    "Description": "{{i18n:big-craftables.large-wood-barrel-l.description}}",
+    "Price": 1000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Large Wood Barrel L",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Large_Wood_Barrel_R": {
+    "Name": "Large Wood Barrel R",
+    "DisplayName": "{{i18n:big-craftables.large-wood-barrel-r.name}}",
+    "Description": "{{i18n:big-craftables.large-wood-barrel-r.description}}",
+    "Price": 1000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Large Wood Barrel R",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Leafy_Crop_(stage_1)": {
+    "Name": "Leafy Crop (stage 1)",
+    "DisplayName": "{{i18n:big-craftables.leafy-crop-stage-1.name}}",
+    "Description": "{{i18n:big-craftables.leafy-crop-stage-1.description}}",
+    "Price": 325,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Leafy Crop (stage 1)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Leafy_Crop_(stage_2)": {
+    "Name": "Leafy Crop (stage 2)",
+    "DisplayName": "{{i18n:big-craftables.leafy-crop-stage-2.name}}",
+    "Description": "{{i18n:big-craftables.leafy-crop-stage-2.description}}",
+    "Price": 390,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Leafy Crop (stage 2)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Leafy_Crop_(stage_3)": {
+    "Name": "Leafy Crop (stage 3)",
+    "DisplayName": "{{i18n:big-craftables.leafy-crop-stage-3.name}}",
+    "Description": "{{i18n:big-craftables.leafy-crop-stage-3.description}}",
+    "Price": 520,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Leafy Crop (stage 3)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Little_Machine": {
+    "Name": "Little Machine",
+    "DisplayName": "{{i18n:big-craftables.little-machine.name}}",
+    "Description": "{{i18n:big-craftables.little-machine.description}}",
+    "Price": 1500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Little Machine",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Little_Shrub": {
+    "Name": "Little Shrub",
+    "DisplayName": "{{i18n:big-craftables.little-shrub.name}}",
+    "Description": "{{i18n:big-craftables.little-shrub.description}}",
+    "Price": 1000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Little Shrub",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Log_Pile": {
+    "Name": "Log Pile",
+    "DisplayName": "{{i18n:big-craftables.log-pile.name}}",
+    "Description": "{{i18n:big-craftables.log-pile.description}}",
+    "Price": 250,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Log Pile",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Magma_Geode_Node": {
+    "Name": "Magma Geode Node",
+    "DisplayName": "{{i18n:big-craftables.magma-geode-node.name}}",
+    "Description": "{{i18n:big-craftables.magma-geode-node.description}}",
+    "Price": 3500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Magma Geode Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Magma_Stone_1": {
+    "Name": "Magma Stone 1",
+    "DisplayName": "{{i18n:big-craftables.magma-stone-1.name}}",
+    "Description": "{{i18n:big-craftables.magma-stone-1.description}}",
+    "Price": 800,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Magma Stone 1",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Magma_Stone_2": {
+    "Name": "Magma Stone 2",
+    "DisplayName": "{{i18n:big-craftables.magma-stone-2.name}}",
+    "Description": "{{i18n:big-craftables.magma-stone-2.description}}",
+    "Price": 800,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Magma Stone 2",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Meteorite_L": {
+    "Name": "Meteorite L",
+    "DisplayName": "{{i18n:big-craftables.meteorite-l.name}}",
+    "Description": "{{i18n:big-craftables.meteorite-l.description}}",
+    "Price": 10000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Meteorite L",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Meteorite_R": {
+    "Name": "Meteorite R",
+    "DisplayName": "{{i18n:big-craftables.meteorite-r.name}}",
+    "Description": "{{i18n:big-craftables.meteorite-r.description}}",
+    "Price": 10000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Meteorite R",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Moving_Box": {
+    "Name": "Moving Box",
+    "DisplayName": "{{i18n:big-craftables.moving-box.name}}",
+    "Description": "{{i18n:big-craftables.moving-box.description}}",
+    "Price": 200,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Moving Box",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Mystic_Node": {
+    "Name": "Mystic Node",
+    "DisplayName": "{{i18n:big-craftables.mystic-node.name}}",
+    "Description": "{{i18n:big-craftables.mystic-node.description}}",
+    "Price": 5000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Mystic Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Omni_Geode_Node": {
+    "Name": "Omni Geode Node",
+    "DisplayName": "{{i18n:big-craftables.omni-geode-node.name}}",
+    "Description": "{{i18n:big-craftables.omni-geode-node.description}}",
+    "Price": 4500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Omni Geode Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Ordinary_Mushroom": {
+    "Name": "Ordinary Mushroom",
+    "DisplayName": "{{i18n:big-craftables.ordinary-mushroom.name}}",
+    "Description": "{{i18n:big-craftables.ordinary-mushroom.description}}",
+    "Price": 600,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Ordinary Mushroom",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Potted_Plant": {
+    "Name": "Potted Plant",
+    "DisplayName": "{{i18n:big-craftables.potted-plant.name}}",
+    "Description": "{{i18n:big-craftables.potted-plant.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Potted Plant",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Pretty_Flower": {
+    "Name": "Pretty Flower",
+    "DisplayName": "{{i18n:big-craftables.pretty-flower.name}}",
+    "Description": "{{i18n:big-craftables.pretty-flower.description}}",
+    "Price": 500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Pretty Flower",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Radioactive_Node": {
+    "Name": "Radioactive Node",
+    "DisplayName": "{{i18n:big-craftables.radioactive-node.name}}",
+    "Description": "{{i18n:big-craftables.radioactive-node.description}}",
+    "Price": 5000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Radioactive Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Ruby_Node": {
+    "Name": "Ruby Node",
+    "DisplayName": "{{i18n:big-craftables.ruby-node.name}}",
+    "Description": "{{i18n:big-craftables.ruby-node.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Ruby Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Shrub": {
+    "Name": "Shrub",
+    "DisplayName": "{{i18n:big-craftables.shrub.name}}",
+    "Description": "{{i18n:big-craftables.shrub.description}}",
+    "Price": 2000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Shrub",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Sign_of_Yoba": {
+    "Name": "Sign of Yoba",
+    "DisplayName": "{{i18n:big-craftables.sign-of-yoba.name}}",
+    "Description": "{{i18n:big-craftables.sign-of-yoba.description}}",
+    "Price": 7500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Sign of Yoba",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Small_Barrel": {
+    "Name": "Small Barrel",
+    "DisplayName": "{{i18n:big-craftables.small-barrel.name}}",
+    "Description": "{{i18n:big-craftables.small-barrel.description}}",
+    "Price": 650,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Small Barrel",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Small_Foliage": {
+    "Name": "Small Foliage",
+    "DisplayName": "{{i18n:big-craftables.small-foliage.name}}",
+    "Description": "{{i18n:big-craftables.small-foliage.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Small Foliage",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Small_Opened_Barrel": {
+    "Name": "Small Opened Barrel",
+    "DisplayName": "{{i18n:big-craftables.small-opened-barrel.name}}",
+    "Description": "{{i18n:big-craftables.small-opened-barrel.description}}",
+    "Price": 650,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Small Opened Barrel",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Smooth_Boulder_L": {
+    "Name": "Smooth Boulder L",
+    "DisplayName": "{{i18n:big-craftables.smooth-boulder-l.name}}",
+    "Description": "{{i18n:big-craftables.smooth-boulder-l.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Smooth Boulder L",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Smooth_Boulder_R": {
+    "Name": "Smooth Boulder R",
+    "DisplayName": "{{i18n:big-craftables.smooth-boulder-r.name}}",
+    "Description": "{{i18n:big-craftables.smooth-boulder-r.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Smooth Boulder R",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Special_Crop_(stage_1)": {
+    "Name": "Special Crop (stage 1)",
+    "DisplayName": "{{i18n:big-craftables.special-crop-stage-1.name}}",
+    "Description": "{{i18n:big-craftables.special-crop-stage-1.description}}",
+    "Price": 425,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Special Crop (stage 1)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Special_Crop_(stage_2)": {
+    "Name": "Special Crop (stage 2)",
+    "DisplayName": "{{i18n:big-craftables.special-crop-stage-2.name}}",
+    "Description": "{{i18n:big-craftables.special-crop-stage-2.description}}",
+    "Price": 510,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Special Crop (stage 2)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Special_Crop_(stage_3)": {
+    "Name": "Special Crop (stage 3)",
+    "DisplayName": "{{i18n:big-craftables.special-crop-stage-3.name}}",
+    "Description": "{{i18n:big-craftables.special-crop-stage-3.description}}",
+    "Price": 625,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Special Crop (stage 3)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Statue_Of_Treasure": {
+    "Name": "Statue Of Treasure",
+    "DisplayName": "{{i18n:big-craftables.statue-of-treasure.name}}",
+    "Description": "{{i18n:big-craftables.statue-of-treasure.description}}",
+    "Price": 10000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Statue Of Treasure",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Stone_1": {
+    "Name": "Stone 1",
+    "DisplayName": "{{i18n:big-craftables.stone-1.name}}",
+    "Description": "{{i18n:big-craftables.stone-1.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Stone 1",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Stone_2": {
+    "Name": "Stone 2",
+    "DisplayName": "{{i18n:big-craftables.stone-2.name}}",
+    "Description": "{{i18n:big-craftables.stone-2.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Stone 2",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Stone_3": {
+    "Name": "Stone 3",
+    "DisplayName": "{{i18n:big-craftables.stone-3.name}}",
+    "Description": "{{i18n:big-craftables.stone-3.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Stone 3",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Stone_4": {
+    "Name": "Stone 4",
+    "DisplayName": "{{i18n:big-craftables.stone-4.name}}",
+    "Description": "{{i18n:big-craftables.stone-4.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Stone 4",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Stone_5": {
+    "Name": "Stone 5",
+    "DisplayName": "{{i18n:big-craftables.stone-5.name}}",
+    "Description": "{{i18n:big-craftables.stone-5.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Stone 5",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Stone_6": {
+    "Name": "Stone 6",
+    "DisplayName": "{{i18n:big-craftables.stone-6.name}}",
+    "Description": "{{i18n:big-craftables.stone-6.description}}",
+    "Price": 400,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Stone 6",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Tall_Mushroom": {
+    "Name": "Tall Mushroom",
+    "DisplayName": "{{i18n:big-craftables.tall-mushroom.name}}",
+    "Description": "{{i18n:big-craftables.tall-mushroom.description}}",
+    "Price": 800,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Tall Mushroom",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Tied_Log_Pile": {
+    "Name": "Tied Log Pile",
+    "DisplayName": "{{i18n:big-craftables.tied-log-pile.name}}",
+    "Description": "{{i18n:big-craftables.tied-log-pile.description}}",
+    "Price": 300,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Tied Log Pile",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Tiny_Crop_(stage_1)": {
+    "Name": "Tiny Crop (stage 1)",
+    "DisplayName": "{{i18n:big-craftables.tiny-crop-stage-1.name}}",
+    "Description": "{{i18n:big-craftables.tiny-crop-stage-1.description}}",
+    "Price": 200,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Tiny Crop (stage 1)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Tiny_Crop_(stage_2)": {
+    "Name": "Tiny Crop (stage 2)",
+    "DisplayName": "{{i18n:big-craftables.tiny-crop-stage-2.name}}",
+    "Description": "{{i18n:big-craftables.tiny-crop-stage-2.description}}",
+    "Price": 240,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Tiny Crop (stage 2)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Tiny_Crop_(stage_3)": {
+    "Name": "Tiny Crop (stage 3)",
+    "DisplayName": "{{i18n:big-craftables.tiny-crop-stage-3.name}}",
+    "Description": "{{i18n:big-craftables.tiny-crop-stage-3.description}}",
+    "Price": 200,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Tiny Crop (stage 3)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Topaz_Node": {
+    "Name": "Topaz Node",
+    "DisplayName": "{{i18n:big-craftables.topaz-node.name}}",
+    "Description": "{{i18n:big-craftables.topaz-node.description}}",
+    "Price": 1500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Topaz Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Tree_Stump": {
+    "Name": "Tree Stump",
+    "DisplayName": "{{i18n:big-craftables.tree-stump.name}}",
+    "Description": "{{i18n:big-craftables.tree-stump.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Tree Stump",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Trellis_Crop_(stage_1)": {
+    "Name": "Trellis Crop (stage 1)",
+    "DisplayName": "{{i18n:big-craftables.trellis-crop-stage-1.name}}",
+    "Description": "{{i18n:big-craftables.trellis-crop-stage-1.description}}",
+    "Price": 850,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Trellis Crop (stage 1)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Trellis_Crop_(stage_2)": {
+    "Name": "Trellis Crop (stage 2)",
+    "DisplayName": "{{i18n:big-craftables.trellis-crop-stage-2.name}}",
+    "Description": "{{i18n:big-craftables.trellis-crop-stage-2.description}}",
+    "Price": 925,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Trellis Crop (stage 2)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Trellis_Crop_(stage_3)": {
+    "Name": "Trellis Crop (stage 3)",
+    "DisplayName": "{{i18n:big-craftables.trellis-crop-stage-3.name}}",
+    "Description": "{{i18n:big-craftables.trellis-crop-stage-3.description}}",
+    "Price": 1050,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Trellis Crop (stage 3)",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Trimmed_Berry_Bush_L": {
+    "Name": "Trimmed Berry Bush L",
+    "DisplayName": "{{i18n:big-craftables.trimmed-berry-bush-l.name}}",
+    "Description": "{{i18n:big-craftables.trimmed-berry-bush-l.description}}",
+    "Price": 3500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Trimmed Berry Bush L",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Trimmed_Berry_Bush_R": {
+    "Name": "Trimmed Berry Bush R",
+    "DisplayName": "{{i18n:big-craftables.trimmed-berry-bush-r.name}}",
+    "Description": "{{i18n:big-craftables.trimmed-berry-bush-r.description}}",
+    "Price": 3500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Trimmed Berry Bush R",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Trimmed_Bush_L": {
+    "Name": "Trimmed Bush L",
+    "DisplayName": "{{i18n:big-craftables.trimmed-berry-bush-l.name}}",
+    "Description": "{{i18n:big-craftables.trimmed-berry-bush-l.description}}",
+    "Price": 2500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Trimmed Bush L",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Trimmed_Bush_R": {
+    "Name": "Trimmed Bush R",
+    "DisplayName": "{{i18n:big-craftables.trimmed-berry-bush-r.name}}",
+    "Description": "{{i18n:big-craftables.trimmed-berry-bush-r.description}}",
+    "Price": 2500,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Trimmed Bush R",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Volcanic_Copper_Node": {
+    "Name": "Volcanic Copper Node",
+    "DisplayName": "{{i18n:big-craftables.volcanic-copper-node.name}}",
+    "Description": "{{i18n:big-craftables.volcanic-copper-node.description}}",
+    "Price": 2000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Volcanic Copper Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Volcanic_Iron_Node": {
+    "Name": "Volcanic Iron Node",
+    "DisplayName": "{{i18n:big-craftables.volcanic-iron-node.name}}",
+    "Description": "{{i18n:big-craftables.volcanic-iron-node.description}}",
+    "Price": 4000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Volcanic Iron Node",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Volcanic_Stone_1": {
+    "Name": "Volcanic Stone 1",
+    "DisplayName": "{{i18n:big-craftables.volcanic-stone-1.name}}",
+    "Description": "{{i18n:big-craftables.volcanic-stone-1.description}}",
+    "Price": 900,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Volcanic Stone 1",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Volcanic_Stone_2": {
+    "Name": "Volcanic Stone 2",
+    "DisplayName": "{{i18n:big-craftables.volcanic-stone-2.name}}",
+    "Description": "{{i18n:big-craftables.volcanic-stone-2.description}}",
+    "Price": 900,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Volcanic Stone 2",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Volcanic_Stone_3": {
+    "Name": "Volcanic Stone 3",
+    "DisplayName": "{{i18n:big-craftables.volcanic-stone-3.name}}",
+    "Description": "{{i18n:big-craftables.volcanic-stone-3.description}}",
+    "Price": 900,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Volcanic Stone 3",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Wild_Berry_Bush_L": {
+    "Name": "Wild Berry Bush L",
+    "DisplayName": "{{i18n:big-craftables.wild-berry-bush-l.name}}",
+    "Description": "{{i18n:big-craftables.wild-berry-bush-r.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Wild Berry Bush L",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Wild_Berry_Bush_R": {
+    "Name": "Wild Berry Bush R",
+    "DisplayName": "{{i18n:big-craftables.wild-berry-bush-r.name}}",
+    "Description": "{{i18n:big-craftables.wild-berry-bush-r.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Wild Berry Bush R",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Wild_Bush_L": {
+    "Name": "Wild Bush L",
+    "DisplayName": "{{i18n:big-craftables.wild-bush-l.name}}",
+    "Description": "{{i18n:big-craftables.wild-bush-l.description}}",
+    "Price": 3000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Wild Bush L",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Wild_Bush_R": {
+    "Name": "Wild Bush R",
+    "DisplayName": "{{i18n:big-craftables.wild-bush-r.name}}",
+    "Description": "{{i18n:big-craftables.wild-bush-r.description}}",
+    "Price": 2000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Wild Bush R",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Wood_Barrel": {
+    "Name": "Wood Barrel",
+    "DisplayName": "{{i18n:big-craftables.wood-barrel.name}}",
+    "Description": "{{i18n:big-craftables.wood-barrel.description}}",
+    "Price": 1000,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Wood Barrel",
+    "SpriteIndex": 0
+  },
+  "FlashShifter.StardewValleyExpandedCP_Wood_Crate": {
+    "Name": "Wood Crate",
+    "DisplayName": "{{i18n:big-craftables.wood-crate.name}}",
+    "Description": "{{i18n:big-craftables.wood-crate.description}}",
+    "Price": 750,
+    "CanBePlacedOutDoors": true,
+    "CanBePlacedIndoors": true,
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Wood Crate",
+    "SpriteIndex": 0
+  }
+}

@@ -1,0 +1,13 @@
+[project]
+name = "wiki-editing-scripts"
+version = "1.0.0"
+description = "编写 Wiki 时能用到的自动化工具"
+authors = [
+    {name = "SummerFleur",email = "summerfleur@qq.com"}
+]
+license = {text = "GPL-3.0 license"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pillow (==11.2.1)"
+]

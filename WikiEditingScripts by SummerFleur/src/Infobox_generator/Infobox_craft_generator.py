@@ -1,4 +1,4 @@
-from Infobox_helper import *
+from Recipes_helper import *
 
 
 def generate_infobox(p: readRecipes.RecipeParser) -> None:
