@@ -4,7 +4,13 @@ version = "0.1.0"
 description = "计算工具"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["matplotlib>=3.10.3", "psutil>=7.0.0"]
+dependencies = [
+    "lxml>=6.0.0",
+    "matplotlib>=3.10.3",
+    "pandas>=2.3.1",
+    "psutil>=7.0.0",
+    "requests>=2.32.4",
+]
 
 [tool.ruff]
 "indent-width" = 2

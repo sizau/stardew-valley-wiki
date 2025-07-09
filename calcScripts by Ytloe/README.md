@@ -65,7 +65,11 @@
   - Data\PaintData
   - Data\Quests
 
-- utils.py 是一些通用的函数，可以运行 if main 查看测试结果
+- calcFishingQualityProb.py 用于列出钓鱼品质在不同情况下的概率（以分数计算，保留两位小数 wikitable 输出）
+
+- getAudioNameToCSV.py 用于将 bwiki 上的音频名称列表写入 csv 文件，与 rename_audio_filename.bat 脚本一起使用可获取所有标准音频文件
+
+- utils.py 是一些通用的函数，可以运行 if main 查看测试结果，已将 format_stats()方法并入 stop()方法中
 
 - test.py 作为测试模块使用
 
@@ -74,8 +78,8 @@ import readRecipes
 parser = readRecipes.RecipeParser()
 recipes = parser.parse_all_recipes() #获取所有配方信息
 for recipe_name,recipe in recipes.items():
-  recipe.materials = [{prefix,code,count,name},...] #材料列表
-  recipe.product = {prefix,code,count,name} #产物
+  recipe.materials : [{prefix,code,count,name},...] #材料列表
+  recipe.product : {prefix,code,count,name} #产物
 #后续可以照抄get_item_name()前半部分到item_data就能获取所有的数据了
 ```
 
