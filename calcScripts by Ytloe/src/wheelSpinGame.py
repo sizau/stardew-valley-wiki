@@ -155,7 +155,6 @@ def main() -> None:
   print(f"选橙：+{orange_adjust - orange_raw}/{20 * 30}")
 
   monitor.stop()
-  monitor.print_stats()
 
 
 if __name__ == "__main__":
