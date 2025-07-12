@@ -93,6 +93,25 @@ class PictureProcessor:
                 return
             self._save(roi, pic)
 
+    def divide_by_width(self, region_width: int) -> None:
+        """
+        按指定宽度从左至右依次裁剪图片为多个区域
+        :param region_width: 每个区域的宽度（像素）
+        """
+        for pic in self.pictures:
+            image: Image = Image.open(f"pics/{pic}")
+            img_width, img_height = image.size
+            count = 1
+            for left in range(0, img_width, region_width):
+                right = min(left + region_width, img_width)
+                box = (left, 0, right, img_height)
+                region = image.crop(box)
+                # 输出到 output 文件夹，文件名加序号
+                name, ext = os.path.splitext(pic)
+                region_filename = f"{name} {count}{ext}"
+                self._save(region, region_filename)
+                count += 1
+
     def add_mask(self, region_lists: list[str], color, tile_width: int = 16, cover=False) -> None:
         """
         获取 pic 文件夹内的第一张图片，在其之上绘制图片遮罩
@@ -140,14 +159,19 @@ class PictureProcessor:
 
     def clear(self) -> None:
         """
-        清除 pic 文件夹
+        清除空的导出文件夹和 pic 文件夹
         """
+        # 如果 clear_input 为 True，删除 pics 文件夹下的所有图片
         if self.clear_input:
             for pic in self.pictures:
                 os.remove(f"pics/{pic}")
+        # 删除当前实例创建的空的导出文件夹
+        if os.path.isdir(self.output_dir) and not os.listdir(self.output_dir):
+            os.rmdir(self.output_dir)
 
 
 if __name__ == "__main__":
+    # 默认运行完成后不清除原始文件，如需调整，改为 True
     processor = PictureProcessor(clearInputDir=False)
     try:
         # 按需调用
