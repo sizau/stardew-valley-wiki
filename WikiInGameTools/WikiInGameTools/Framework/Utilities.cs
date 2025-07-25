@@ -1,11 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using StardewValley;
+using WikiInGameTools;
 
 namespace WikiIngameTools.Framework;
 
 internal static class Utilities
 {
+    /// <summary>
+    /// 从模组目录的 Data 文件夹下获取数据。
+    /// </summary>
+    /// <param name="fileName">需要获取的数据文件名</param>
+    /// <returns>数据文件的绝对路径</returns>
+    public static string GetDataFilePath(string fileName) 
+        => Path.Combine(ModEntry.ModHelper.DirectoryPath, "Data", fileName);
+
     /// <summary>
     /// 获取当前鼠标指针下的地块坐标。
     /// </summary>

@@ -24,7 +24,7 @@ public class DebugModule : IModule
 
         // 2. 应用变量监控功能
         var monitor = new VariableMonitor(_harmony);
-        monitor.ApplyFromConfig((DebugModuleConfig)Config);
+        monitor.ApplyFromConfig();
     }
 
     public void Deactivate()

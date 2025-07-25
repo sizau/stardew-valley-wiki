@@ -6,6 +6,7 @@ using System.Reflection.Emit;
 using HarmonyLib;
 using StardewModdingAPI;
 using WikiInGameTools;
+using WikiIngameTools.Framework;
 
 namespace WikiIngameTools.DebugModule.Framework;
 
@@ -28,9 +29,18 @@ internal class VariableMonitor
     /// <summary>
     /// 读取配置并应用所有已启用的监控补丁。
     /// </summary>
-    public void ApplyFromConfig(DebugModuleConfig config)
+    public void ApplyFromConfig()
     {
-        foreach (var target in config.VariableMonitor)
+        // 获取由用户在 Data/MonitorTarget.json 中定义的、需要监控的变量目标列表。
+        var variableMonitors = ModEntry.ModHelper.Data
+            .ReadJsonFile<List<MonitorTarget>>(Utilities.GetDataFilePath("MonitorTarget.json"));
+        if (variableMonitors is null || variableMonitors.Count == 0)
+        {
+            ModEntry.Log("未能发现任何数据！", LogLevel.Warn);
+            return;
+        }
+        // 应用监控补丁
+        foreach (var target in variableMonitors)
         {
             if (!target.Enabled) continue;
 

@@ -1,6 +1,9 @@
-﻿namespace WikiIngameTools.DebugModule.Framework;
+﻿using System;
+
+namespace WikiIngameTools.DebugModule.Framework;
 
 /// <summary>代表在config.json中定义的单个变量监控目标。</summary>
+[Serializable]
 public class MonitorTarget
 {
     // ... 其他属性不变 ...
