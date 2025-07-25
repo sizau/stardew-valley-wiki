@@ -5,6 +5,7 @@
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <Authors>SummerFleur</Authors>
         <RootNamespace>WikiIngameTools</RootNamespace>
+        <EnableHarmony>true</EnableHarmony>
     </PropertyGroup>
     <PropertyGroup>
         <OutputType>Library</OutputType>

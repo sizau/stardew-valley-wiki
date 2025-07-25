@@ -1,4 +1,5 @@
 ﻿using System;
+using WikiIngameTools.DebugModule;
 
 namespace WikiIngameTools.Framework;
 
@@ -7,4 +8,5 @@ internal class ModConfig
 {
     public CalcFishesProb.CalcFishesProbModConfig CalcFishesProbModConfig { get; set; } = new();
     public GetNPCGiftTastes.GetNPCGiftTastesModConfig GetNPCGiftTastesModConfig { get; set; } = new();
+    public DebugModuleConfig DebugModuleConfig { get; set; } = new();
 }

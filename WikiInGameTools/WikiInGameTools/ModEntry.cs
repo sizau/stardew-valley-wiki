@@ -1,7 +1,9 @@
 ﻿using JetBrains.Annotations;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using StardewValley;
 using WikiIngameTools.CalcFishesProb;
+using WikiIngameTools.DebugModule;
 using WikiIngameTools.Framework;
 using WikiInGameTools.Framework.ConfigurationService;
 using WikiIngameTools.GetNPCGiftTastes;
@@ -33,6 +35,7 @@ internal class ModEntry : Mod
     #region Modules
     private static CalcFishesProb CalcFishesProb { get; set; }
     private static GetNPCGiftTastes GetNPCGiftTastes { get; set; }
+    private static DebugModule DebugModule { get; set; }
     #endregion
     
     /// <summary>
@@ -68,8 +71,14 @@ internal class ModEntry : Mod
         if (Config.CalcFishesProbModConfig.Enable)
             CalcFishesProb.Activate();
 
+        // 语句 GetNPCGiftTastes = new GetNPCGiftTastes();
+        // 需要在 OnGameLaunched 中执行
         if (Config.GetNPCGiftTastesModConfig.Enable)
             GetNPCGiftTastes.Activate();
+
+        DebugModule = new DebugModule();
+        if (Config.DebugModuleConfig.Enable)
+            DebugModule.Activate();
     }
 
     /// <summary>
@@ -81,6 +90,9 @@ internal class ModEntry : Mod
         CalcFishesProb = null;
 
         GetNPCGiftTastes.Deactivate();
+
+        DebugModule.Deactivate();
+        DebugModule = null;
     }
 
     /// <summary>
@@ -119,8 +131,12 @@ internal class ModEntry : Mod
     {
         ModHelper.WriteConfig(Config);
         Config = ModHelper.ReadConfig<ModConfig>();
-        CalcFishesProb.Reload();
         GetNPCGiftTastes.Reload();
+
+        if (!Game1.hasLoadedGame) return;
+
+        CalcFishesProb.Reload();
+        DebugModule.Reload();
     }
     #endregion
 }

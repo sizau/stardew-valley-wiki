@@ -32,5 +32,11 @@ internal static class GenericModConfigMenuIntegration
             () => ModEntry.Config.GetNPCGiftTastesModConfig.Enable,
             delegate(bool value) { ModEntry.Config.GetNPCGiftTastesModConfig.Enable = value; },
             () => "启用");
+
+        api.AddSectionTitle(ModEntry.Manifest, () => "Debug 模块");
+        api.AddBoolOption(ModEntry.Manifest,
+            () => ModEntry.Config.DebugModuleConfig.Enable,
+            delegate(bool value) { ModEntry.Config.DebugModuleConfig.Enable = value; },
+            () => "启用");
     }
 }
