@@ -1,6 +1,6 @@
-﻿using WikiInGameTools.Framework.ConfigurationService;
+﻿using WikiInGameTools._Framework.ConfigurationService;
 
-namespace WikiIngameTools.CalcFishesProb;
+namespace WikiInGameTools.CalcFishesProb;
 
 internal class CalcFishesProbModConfig : IConfig
 {

@@ -1,7 +1,7 @@
 ﻿using StardewValley;
 using StardewValley.GameData.Locations;
 
-namespace WikiIngameTools.CalcFishesProb.Framework;
+namespace WikiInGameTools.CalcFishesProb.Framework;
 
 internal static class FishUtilities
 {

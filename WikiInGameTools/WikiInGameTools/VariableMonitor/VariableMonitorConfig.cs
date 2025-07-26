@@ -1,6 +1,6 @@
-﻿using WikiInGameTools.Framework.ConfigurationService;
+﻿using WikiInGameTools._Framework.ConfigurationService;
 
-namespace WikiIngameTools.VariableMonitor;
+namespace WikiInGameTools.VariableMonitor;
 
 public class VariableMonitorConfig : IConfig
 {

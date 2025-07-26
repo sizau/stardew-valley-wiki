@@ -1,7 +1,7 @@
 ﻿using System;
-using WikiIngameTools.DebugModule;
+using WikiInGameTools.DebugModule;
 
-namespace WikiIngameTools.Framework;
+namespace WikiInGameTools._Framework;
 
 [Serializable]
 internal class ModConfig

@@ -1,7 +1,7 @@
 using System;
 using StardewModdingAPI;
 
-namespace WikiInGameTools.Framework.ConfigurationService;
+namespace WikiInGameTools._Framework.ConfigurationService;
 
 internal static class GenericModConfigMenuIntegration
 {

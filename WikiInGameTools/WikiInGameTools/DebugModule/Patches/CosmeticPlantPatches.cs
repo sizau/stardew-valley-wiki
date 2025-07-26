@@ -5,9 +5,8 @@ using StardewValley;
 using StardewValley.Extensions;
 using StardewValley.TerrainFeatures;
 using StardewValley.Tools;
-using WikiInGameTools;
 
-namespace WikiIngameTools.DebugModule.Patches;
+namespace WikiInGameTools.DebugModule.Patches;
 
 /// <summary>包含针对 StardewValley.TerrainFeatures.CosmeticPlant 类的Harmony补丁。</summary>
 internal class CosmeticPlantPatches

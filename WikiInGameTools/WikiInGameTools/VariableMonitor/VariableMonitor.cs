@@ -5,11 +5,10 @@ using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using StardewModdingAPI;
-using WikiInGameTools;
-using WikiIngameTools.Framework;
-using WikiInGameTools.Framework.ConfigurationService;
+using WikiInGameTools._Framework;
+using WikiInGameTools._Framework.ConfigurationService;
 
-namespace WikiIngameTools.VariableMonitor;
+namespace WikiInGameTools.VariableMonitor;
 
 /// <summary>
 /// 负责根据配置动态应用变量监控补丁的类。

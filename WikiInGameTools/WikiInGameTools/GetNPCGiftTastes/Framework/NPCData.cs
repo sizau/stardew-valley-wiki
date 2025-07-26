@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using StardewValley;
 
-namespace WikiIngameTools.GetNPCGiftTastes.Framework;
+namespace WikiInGameTools.GetNPCGiftTastes.Framework;
 
 /// <summary>
 /// 用于获取所有可社交的 NPC 列表的静态类。

@@ -2,12 +2,8 @@
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
-using WikiIngameTools.CalcFishesProb;
-using WikiIngameTools.DebugModule;
-using WikiIngameTools.Framework;
-using WikiInGameTools.Framework.ConfigurationService;
-using WikiIngameTools.GetNPCGiftTastes;
-using WikiIngameTools.VariableMonitor;
+using WikiInGameTools._Framework;
+using WikiInGameTools._Framework.ConfigurationService;
 
 namespace WikiInGameTools;
 
@@ -34,10 +30,10 @@ internal class ModEntry : Mod
      ** Modules
      ****/
     #region Modules
-    private static CalcFishesProb CalcFishesProb { get; set; }
-    private static DebugModule DebugModule { get; set; }
-    private static GetNPCGiftTastes GetNPCGiftTastes { get; set; }
-    private static VariableMonitor VariableMonitor { get; set; }
+    private static CalcFishesProb.CalcFishesProb CalcFishesProb { get; set; }
+    private static DebugModule.DebugModule DebugModule { get; set; }
+    private static GetNPCGiftTastes.GetNPCGiftTastes GetNPCGiftTastes { get; set; }
+    private static VariableMonitor.VariableMonitor VariableMonitor { get; set; }
     #endregion
     
     /// <summary>
@@ -69,15 +65,15 @@ internal class ModEntry : Mod
     /// </summary>
     private static void OnGameLoaded(object sender, SaveLoadedEventArgs e)
     {
-        CalcFishesProb = new CalcFishesProb();
+        CalcFishesProb = new CalcFishesProb.CalcFishesProb();
         if (Config.CalcFishesProbModConfig.Enable)
             CalcFishesProb.Activate();
 
-        DebugModule = new DebugModule();
+        DebugModule = new DebugModule.DebugModule();
         if (Config.DebugModuleConfig.Enable)
             DebugModule.Activate();
 
-        VariableMonitor = new VariableMonitor();
+        VariableMonitor = new VariableMonitor.VariableMonitor();
         if (Config.VariableMonitorConfig.Enable)
             VariableMonitor.Activate();
 
@@ -114,7 +110,7 @@ internal class ModEntry : Mod
             ReloadConfig
         );
 
-        GetNPCGiftTastes = new GetNPCGiftTastes();
+        GetNPCGiftTastes = new GetNPCGiftTastes.GetNPCGiftTastes();
     }
 
     /// <summary>

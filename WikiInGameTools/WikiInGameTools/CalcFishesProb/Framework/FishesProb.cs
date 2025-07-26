@@ -6,10 +6,9 @@ using Microsoft.Xna.Framework;
 using StardewValley;
 using StardewValley.Extensions;
 using StardewValley.GameData.Locations;
-using WikiInGameTools;
-using WikiIngameTools.Framework;
+using WikiInGameTools._Framework;
 
-namespace WikiIngameTools.CalcFishesProb.Framework;
+namespace WikiInGameTools.CalcFishesProb.Framework;
 
 internal static class FishesProb
 {

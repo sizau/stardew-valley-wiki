@@ -1,12 +1,11 @@
 ﻿using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley.TerrainFeatures;
-using WikiInGameTools;
-using WikiIngameTools.DebugModule.Patches;
-using WikiIngameTools.Framework;
-using WikiInGameTools.Framework.ConfigurationService;
+using WikiInGameTools._Framework;
+using WikiInGameTools._Framework.ConfigurationService;
+using WikiInGameTools.DebugModule.Patches;
 
-namespace WikiIngameTools.DebugModule;
+namespace WikiInGameTools.DebugModule;
 
 public class DebugModule : IModule
 {

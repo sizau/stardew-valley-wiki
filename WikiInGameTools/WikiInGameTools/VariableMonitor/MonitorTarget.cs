@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WikiIngameTools.VariableMonitor;
+namespace WikiInGameTools.VariableMonitor;
 
 /// <summary>代表在config.json中定义的单个变量监控目标。</summary>
 [Serializable]

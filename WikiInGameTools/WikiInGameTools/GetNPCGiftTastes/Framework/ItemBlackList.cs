@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using StardewValley;
 
-namespace WikiIngameTools.GetNPCGiftTastes.Framework;
+namespace WikiInGameTools.GetNPCGiftTastes.Framework;
 
 internal static class ItemBlackList
 {

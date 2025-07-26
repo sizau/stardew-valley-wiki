@@ -1,11 +1,10 @@
 ﻿using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
-using WikiInGameTools;
-using WikiIngameTools.CalcFishesProb.Framework;
-using WikiIngameTools.Framework;
-using WikiInGameTools.Framework.ConfigurationService;
+using WikiInGameTools._Framework;
+using WikiInGameTools._Framework.ConfigurationService;
+using WikiInGameTools.CalcFishesProb.Framework;
 
-namespace WikiIngameTools.CalcFishesProb;
+namespace WikiInGameTools.CalcFishesProb;
 
 internal class CalcFishesProb : IModule
 {

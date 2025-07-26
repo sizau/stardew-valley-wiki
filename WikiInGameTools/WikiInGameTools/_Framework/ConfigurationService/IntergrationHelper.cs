@@ -1,6 +1,6 @@
 ﻿using StardewModdingAPI;
 
-namespace WikiInGameTools.Framework.ConfigurationService;
+namespace WikiInGameTools._Framework.ConfigurationService;
 
 /// <summary>Simplifies validated access to mod APIs.</summary>
 internal static class IntegrationHelper

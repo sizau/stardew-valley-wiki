@@ -3,7 +3,7 @@ using System.Linq;
 using StardewValley;
 using StardewValley.Objects.Trinkets;
 
-namespace WikiIngameTools.GetNPCGiftTastes.Framework;
+namespace WikiInGameTools.GetNPCGiftTastes.Framework;
 
 /// <summary>
 /// 用于获取所有可以作为礼物送出的物品列表的静态类。

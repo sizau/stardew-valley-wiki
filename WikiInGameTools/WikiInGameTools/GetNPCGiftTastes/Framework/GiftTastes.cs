@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
-using WikiIngameTools.Framework;
+using WikiInGameTools._Framework;
 
-namespace WikiIngameTools.GetNPCGiftTastes.Framework;
+namespace WikiInGameTools.GetNPCGiftTastes.Framework;
 
 [Serializable]
 internal struct GiftTastes

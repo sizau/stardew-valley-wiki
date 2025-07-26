@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using StardewValley;
 
-namespace WikiIngameTools.Framework;
+namespace WikiInGameTools._Framework;
 
 internal static class Utilities
 {

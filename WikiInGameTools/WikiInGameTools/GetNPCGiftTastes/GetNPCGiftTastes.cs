@@ -1,10 +1,9 @@
 ﻿using StardewModdingAPI;
-using WikiInGameTools;
-using WikiIngameTools.Framework;
-using WikiInGameTools.Framework.ConfigurationService;
-using WikiIngameTools.GetNPCGiftTastes.Framework;
+using WikiInGameTools._Framework;
+using WikiInGameTools._Framework.ConfigurationService;
+using WikiInGameTools.GetNPCGiftTastes.Framework;
 
-namespace WikiIngameTools.GetNPCGiftTastes;
+namespace WikiInGameTools.GetNPCGiftTastes;
 
 internal class GetNPCGiftTastes : IModule
 {

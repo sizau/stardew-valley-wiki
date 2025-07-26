@@ -1,6 +1,6 @@
-﻿using WikiInGameTools.Framework.ConfigurationService;
+﻿using WikiInGameTools._Framework.ConfigurationService;
 
-namespace WikiIngameTools.Framework;
+namespace WikiInGameTools._Framework;
 
 internal interface IModule
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WikiIngameTools.CalcFishesProb.Framework;
+namespace WikiInGameTools.CalcFishesProb.Framework;
 
 [Serializable]
 internal class Fish

@@ -1,6 +1,6 @@
-﻿using WikiInGameTools.Framework.ConfigurationService;
+﻿using WikiInGameTools._Framework.ConfigurationService;
 
-namespace WikiIngameTools.DebugModule;
+namespace WikiInGameTools.DebugModule;
 
 public class DebugModuleConfig : IConfig
 {

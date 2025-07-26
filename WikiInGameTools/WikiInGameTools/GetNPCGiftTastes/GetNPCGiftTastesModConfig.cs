@@ -1,6 +1,6 @@
-﻿using WikiInGameTools.Framework.ConfigurationService;
+﻿using WikiInGameTools._Framework.ConfigurationService;
 
-namespace WikiIngameTools.GetNPCGiftTastes;
+namespace WikiInGameTools.GetNPCGiftTastes;
 
 internal class GetNPCGiftTastesModConfig : IConfig
 {

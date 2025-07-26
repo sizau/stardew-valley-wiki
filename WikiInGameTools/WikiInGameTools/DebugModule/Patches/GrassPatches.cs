@@ -3,9 +3,8 @@ using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.TerrainFeatures;
-using WikiInGameTools;
 
-namespace WikiIngameTools.DebugModule.Patches;
+namespace WikiInGameTools.DebugModule.Patches;
 
 /// <summary>包含针对 StardewValley.TerrainFeatures.Grass 类的Harmony补丁。</summary>
 internal class GrassPatches

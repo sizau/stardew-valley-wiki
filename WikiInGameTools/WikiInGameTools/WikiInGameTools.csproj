@@ -4,13 +4,13 @@
         <DeployModFolderName>$(MSBuildProjectName)</DeployModFolderName>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <Authors>SummerFleur</Authors>
-        <RootNamespace>WikiIngameTools</RootNamespace>
+        <RootNamespace>WikiInGameTools</RootNamespace>
         <EnableHarmony>true</EnableHarmony>
     </PropertyGroup>
     <PropertyGroup>
         <OutputType>Library</OutputType>
-        <AssemblyTitle>WikiIngameTools</AssemblyTitle>
-        <Product>WikiIngameTools</Product>
+        <AssemblyTitle>WikiInGameTools</AssemblyTitle>
+        <Product>WikiInGameTools</Product>
         <Copyright>Copyright © SummerFleur 2025</Copyright>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <FileVersion>1.0.0.0</FileVersion>
@@ -21,7 +21,7 @@
         <PathMap>$(SolutionDir)=.</PathMap>
     </PropertyGroup>
     <PropertyGroup>
-        <ModFolderName>WikiIngameTools</ModFolderName>
+        <ModFolderName>WikiInGameTools</ModFolderName>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />

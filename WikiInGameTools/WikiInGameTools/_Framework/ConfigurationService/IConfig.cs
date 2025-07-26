@@ -1,4 +1,4 @@
-﻿namespace WikiInGameTools.Framework.ConfigurationService;
+﻿namespace WikiInGameTools._Framework.ConfigurationService;
 
 public interface IConfig
 {

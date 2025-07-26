@@ -1,6 +1,6 @@
 ﻿using StardewValley;
 
-namespace WikiIngameTools.CalcFishesProb.Framework;
+namespace WikiInGameTools.CalcFishesProb.Framework;
 
 internal struct FishConditions
 {

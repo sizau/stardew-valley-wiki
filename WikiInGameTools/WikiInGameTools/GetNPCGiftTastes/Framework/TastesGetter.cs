@@ -4,11 +4,10 @@ using System.IO;
 using System.Linq;
 using StardewModdingAPI;
 using StardewValley;
-using WikiInGameTools;
-using static WikiIngameTools.GetNPCGiftTastes.Framework.ItemData;
-using static WikiIngameTools.GetNPCGiftTastes.Framework.NPCData;
+using static WikiInGameTools.GetNPCGiftTastes.Framework.ItemData;
+using static WikiInGameTools.GetNPCGiftTastes.Framework.NPCData;
 
-namespace WikiIngameTools.GetNPCGiftTastes.Framework;
+namespace WikiInGameTools.GetNPCGiftTastes.Framework;
 
 /// <summary>
 /// 用于获取礼物偏好的静态类。
