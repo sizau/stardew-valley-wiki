@@ -1,17 +1,17 @@
-# DebugModule 变量监控器 `config.json` 使用指南
+# DebugModule 变量监控器 `MonitorTarget.json` 使用指南
 
-本功能允许您通过编辑 `config.json` 文件，在游戏运行时动态监控特定方法中的变量值，并将结果输出到 SMAPI 控制台。这对于 Mod 开发、调试或深入了解游戏机制非常有用。
+本功能允许您通过编辑 `MonitorTarget.json` 文件，在游戏运行时动态监控特定方法中的变量值，并将结果输出到 SMAPI 控制台。这对于 Mod 开发、调试或深入了解游戏机制非常有用。
 
 ## 文件结构
 
-`config.json` 文件包含一个名为 `VariableMonitor` 的数组。数组中的每一个对象都代表一个独立的监控任务。
+`MonitorTarget.json` 文件包含一个数组。数组中的每一个对象都代表一个独立的监控任务。
 
 当您首次运行本 Mod 时，会在 Mod 文件夹下自动生成一个空的配置文件，如下所示。您需要手动在 `[]` 中添加您想要监控的目标对象。
 
-```json
-{
-  "VariableMonitor": []
-}
+```js
+[
+    // 您需要添加的内容
+]
 ```
 
 ## 监控对象参数详解
@@ -73,31 +73,29 @@
 
 ## 完整示例
 
-以下是一个配置了三个监控任务的完整 `config.json` 文件示例：
+以下是一个配置了三个监控任务的完整 `MonitorTarget.json` 文件示例：
 
 ```json
-{
-  "VariableMonitor": [
-    {
-      "Enabled": true,
-      "FullMethodName": "StardewValley.Tools.FishingRod:DoFunction",
-      "Strategy": "InstanceField",
-      "VariablePath": "clearWaterDistance"
-    },
-    {
-      "Enabled": true,
-      "FullMethodName": "StardewValley.Tools.FishingRod:distanceToLand",
-      "Strategy": "LocalVariable",
-      "VariablePath": "r.Width"
-    },
-    {
-      "Enabled": true,
-      "FullMethodName": "StardewValley.GameLocation:getFish",
-      "Strategy": "ReturnValue",
-      "VariablePath": "scale.X"
-    }
-  ]
-}
+[
+  {
+    "Enabled": true,
+    "FullMethodName": "StardewValley.Tools.FishingRod:DoFunction",
+    "Strategy": "InstanceField",
+    "VariablePath": "clearWaterDistance"
+  },
+  {
+    "Enabled": true,
+    "FullMethodName": "StardewValley.Tools.FishingRod:distanceToLand",
+    "Strategy": "LocalVariable",
+    "VariablePath": "r.Width"
+  },
+  {
+    "Enabled": true,
+    "FullMethodName": "StardewValley.GameLocation:getFish",
+    "Strategy": "ReturnValue",
+    "VariablePath": "scale.X"
+  }
+]
 ```
 
 ### 示例解释:

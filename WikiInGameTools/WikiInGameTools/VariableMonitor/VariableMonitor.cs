@@ -7,29 +7,41 @@ using HarmonyLib;
 using StardewModdingAPI;
 using WikiInGameTools;
 using WikiIngameTools.Framework;
+using WikiInGameTools.Framework.ConfigurationService;
 
-namespace WikiIngameTools.DebugModule.Framework;
+namespace WikiIngameTools.VariableMonitor;
 
 /// <summary>
 /// 负责根据配置动态应用变量监控补丁的类。
 /// 所有日志输出均通过SMAPI日志系统。
 /// </summary>
-internal class VariableMonitor
+internal class VariableMonitor : IModule
 {
     // 静态字段，用于在补丁方法中访问上下文
     private static Dictionary<string, MonitorTarget> _configsByMethodKey = new();
     private static MonitorTarget _currentTranspilerTarget;
-    private readonly Harmony _harmony;
+    private readonly Harmony _harmony = new (ModEntry.Manifest.UniqueID + ".VariableMonitor");
+    public bool IsActive { get; private set; }
+    public IConfig Config => ModEntry.Config.VariableMonitorConfig;
 
-    public VariableMonitor(Harmony harmony)
+    public void Activate()
     {
-        _harmony = harmony;
+        IsActive = true;
+        // 应用变量监控功能
+        ApplyFromConfig();
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
+        _harmony.UnpatchAll(_harmony.Id);
+        ModEntry.Log("已取消监控所有变量。", LogLevel.Info);
     }
 
     /// <summary>
     /// 读取配置并应用所有已启用的监控补丁。
     /// </summary>
-    public void ApplyFromConfig()
+    private void ApplyFromConfig()
     {
         // 获取由用户在 Data/MonitorTarget.json 中定义的、需要监控的变量目标列表。
         var variableMonitors = ModEntry.ModHelper.Data

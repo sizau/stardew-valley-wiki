@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WikiIngameTools.DebugModule.Framework;
+namespace WikiIngameTools.VariableMonitor;
 
 /// <summary>代表在config.json中定义的单个变量监控目标。</summary>
 [Serializable]
@@ -13,10 +13,15 @@ public class MonitorTarget
 
     /// <summary>
     /// 要监控的变量名或路径。
-    /// 对于InstanceField: "fieldName" 或 "field.nestedField"
-    /// 对于ReturnValue: "" (监控返回值本身) 或 "field.nestedField" (监控返回值的属性)
-    /// 对于LocalVariable: "variableName.FieldName"，例如 "r.Width"。
     /// </summary>
+    /// <remarks>
+    /// 填写方法：
+    /// <list type="table">
+    ///   <item>InstanceField — "fieldName" 或 "field.nestedField"</item>
+    ///   <item>ReturnValue — "" (监控返回值本身) 或 "field.nestedField" (监控返回值的属性)</item>
+    ///   <item>LocalVariable — "variableName.FieldName"，例如 "r.Width"</item>
+    /// </list>
+    /// </remarks>
     public string VariablePath { get; set; }
 }
 

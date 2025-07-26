@@ -27,16 +27,22 @@ internal static class GenericModConfigMenuIntegration
             delegate(int value) { ModEntry.Config.CalcFishesProbModConfig.WaterDepth = value; },
             () => "水深", null, 0, 5);
 
+        api.AddSectionTitle(ModEntry.Manifest, () => "Debug 模块");
+        api.AddBoolOption(ModEntry.Manifest,
+            () => ModEntry.Config.DebugModuleConfig.Enable,
+            delegate(bool value) { ModEntry.Config.DebugModuleConfig.Enable = value; },
+            () => "启用");
+
         api.AddSectionTitle(ModEntry.Manifest, () => "获取 NPC 礼物偏好模块");
         api.AddBoolOption(ModEntry.Manifest,
             () => ModEntry.Config.GetNPCGiftTastesModConfig.Enable,
             delegate(bool value) { ModEntry.Config.GetNPCGiftTastesModConfig.Enable = value; },
             () => "启用");
 
-        api.AddSectionTitle(ModEntry.Manifest, () => "Debug 模块");
+        api.AddSectionTitle(ModEntry.Manifest, () => "变量监控器模块");
         api.AddBoolOption(ModEntry.Manifest,
-            () => ModEntry.Config.DebugModuleConfig.Enable,
-            delegate(bool value) { ModEntry.Config.DebugModuleConfig.Enable = value; },
+            () => ModEntry.Config.VariableMonitorConfig.Enable,
+            delegate(bool value) { ModEntry.Config.VariableMonitorConfig.Enable = value; },
             () => "启用");
     }
 }

@@ -2,7 +2,6 @@
 using StardewModdingAPI;
 using StardewValley.TerrainFeatures;
 using WikiInGameTools;
-using WikiIngameTools.DebugModule.Framework;
 using WikiIngameTools.DebugModule.Patches;
 using WikiIngameTools.Framework;
 using WikiInGameTools.Framework.ConfigurationService;
@@ -11,26 +10,22 @@ namespace WikiIngameTools.DebugModule;
 
 public class DebugModule : IModule
 {
+    private readonly Harmony _harmony = new (ModEntry.Manifest.UniqueID + ".DebugModule");
     public bool IsActive { get; private set; }
     public IConfig Config => ModEntry.Config.DebugModuleConfig;
-    private readonly Harmony _harmony = new (ModEntry.Manifest.UniqueID + ".DebugModule");
 
     public void Activate()
     {
         IsActive = true;
-
-        // 1. 应用所有硬编码的C#补丁 (古代种子)
+        // 应用所有硬编码的C#补丁 (古代种子)
         ApplyCSharpPatches(_harmony);
-
-        // 2. 应用变量监控功能
-        var monitor = new VariableMonitor(_harmony);
-        monitor.ApplyFromConfig();
     }
 
     public void Deactivate()
     {
         IsActive = false;
         _harmony.UnpatchAll(_harmony.Id);
+        ModEntry.Log("已取消注入全部补丁", LogLevel.Info);
     }
 
     /// <summary>应用所有硬编码的C#补丁。</summary>
