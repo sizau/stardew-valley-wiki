@@ -79,7 +79,7 @@ def generate_csv_files():
 
     temp_df.columns = [str(c).lower() for c in temp_df.columns]
 
-    required_cols = ["name", "wavebank", "hexadecimal"]
+    required_cols = ["名称", "声音库", "十六进制"]
     if all(col in temp_df.columns for col in required_cols):
       # 如果表格符合要求，记录其索引并合并数据
       valid_table_indices.append(str(i + 1))
@@ -87,7 +87,7 @@ def generate_csv_files():
 
   # 需求 1 (日志): 输出总结信息
   if not valid_table_indices:
-    print("\n[错误] 在所有表格中均未找到包含 'name', 'wavebank', 'hexadecimal' 的有效表格。")
+    print("\n[错误] 在所有表格中均未找到包含 '名称', '声音库', '十六进制' 的有效表格。")
     return
   print(f"\n[信息] 在 {len(tables)} 个表格中，第 {', '.join(valid_table_indices)} 个表格符合格式要求。")
 
