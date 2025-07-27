@@ -20,7 +20,7 @@ def generate_infobox(p: readRecipes.RecipeParser) -> None:
 |description     = {{{{Description|{eng}}}}}
 |source          = [[打造]]
 |sellprice       = {sellprice}
-|recipe          = 这里要自己填
+|recipe          = ---------- 配方来源，这里要自己填 ----------
 |ingredients     = {ingredients}
 |produces        = {produces}
 }}}}</onlyinclude>

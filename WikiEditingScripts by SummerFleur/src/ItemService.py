@@ -40,7 +40,10 @@ class GameData:
         """读取 SVE JSON 文件，获取 Object 和 BigCraftable 信息"""
         json_path = Path(__file__).parent.parent / "json_sve"
         self.objects_data = FileUtils.read_json(json_path / "Objects.json")
+        self.objects_zh_cn = self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "zh.json")
         self.bigcraftables_data = FileUtils.read_json(json_path / "BigCraftables.json")
+        self.bigcraftables_zh_cn = self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "zh.json")
+        self.crops_data = FileUtils.read_json(json_path / "Crops.json")
         self.namespace = "SVE"
 
 
@@ -81,6 +84,12 @@ class Item:
 
     @staticmethod
     def get_name(code: str, data: GameData) -> str:
+        """
+        获取物品的内部名称（英文）
+        :param code: 物品的 QualifiedItemId
+        :param data: GameData 实例
+        :return: 物品的内部名称
+        """
         data_source = data.objects_data
         if code in data_source:
             item_data = data_source[code]
@@ -92,6 +101,12 @@ class Item:
 
     @staticmethod
     def get_display_name(code: str, data: GameData) -> str:
+        """
+        获取物品的本地化名称，仅限于原版物品
+        :param code: 物品的 QualifiedItemId
+        :param data: GameData 实例
+        :return: 物品的本地化名称
+        """
         data_source = data.objects_data
         if code in data_source:
             item_data = data_source[code]
@@ -100,10 +115,34 @@ class Item:
             # 解析DisplayName中的本地化键
             if display_name.startswith("[LocalizedText"):
                 # 提取本地化键，格式如 "[LocalizedText Strings\Objects:Moss_Name]"
-
                 match = re.search(r":([^]]+)_Name]", display_name)
                 if match:
                     localization_key = match.group(1) + "_Name"
+                    # 从本地化文件中获取名称
+                    if localization_key in data.objects_zh_cn:
+                        return data.objects_zh_cn[localization_key]
+
+        return "未知物品"
+
+    @staticmethod
+    def get_display_name_sve(code: str, data: GameData) -> str:
+        """
+        获取物品的本地化名称，适用于 SVE 物品
+        :param code: 物品的 QualifiedItemId
+        :param data: GameData 实例
+        :return: 物品的本地化名称
+        """
+        data_source = data.objects_data
+        if code in data_source:
+            item_data = data_source[code]
+            display_name = item_data.get("DisplayName", "")
+
+            # 解析DisplayName中的本地化键
+            if display_name.startswith("{{i18n:"):
+                # 提取本地化键，格式如 "[LocalizedText Strings\Objects:Moss_Name]"
+                match = re.search(r"\{\{i18n:([^}]+)}}", display_name)
+                if match:
+                    localization_key = match.group(1)
                     # 从本地化文件中获取名称
                     if localization_key in data.objects_zh_cn:
                         return data.objects_zh_cn[localization_key]
@@ -115,6 +154,7 @@ class Item:
         获取物品的指定属性信息
         :param field: 需要获取的属性
         :exception KeyError: 不存在该属性
+        :return: 获取到的物品属性
         """
         try:
             return self.raw[field]
@@ -167,6 +207,4 @@ class Crop:
 
 
 if __name__ == "__main__":
-    Data = GameData()
-    Data.read_json_files_sve()
-    print(Data.objects_data)
+    ...

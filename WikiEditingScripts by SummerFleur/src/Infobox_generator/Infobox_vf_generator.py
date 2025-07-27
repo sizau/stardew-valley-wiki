@@ -3,7 +3,6 @@ from src.ItemService import *
 
 def generate_infobox(d: GameData, category: str) -> None:
     """生成 Infobox vegetable/fruit 并打印"""
-    d.read_json_files()
     objects = d.objects_data
     crops = d.crops_data
 
@@ -19,7 +18,13 @@ def generate_infobox(d: GameData, category: str) -> None:
                 continue
 
         eng = item.name
-        name = Item.get_display_name(object_id, d)
+        name = ""
+        match d.namespace:
+            case "SVE":
+                name = Item.get_display_name_sve(object_id, d)
+                _category += "/SVE"
+            case "Vanilla":
+                name = Item.get_display_name(object_id, d)
         sellprice = item.sellprice
         edibility = item.edibility
         color = item.color
@@ -69,6 +74,17 @@ def generate_infobox(d: GameData, category: str) -> None:
 
 
 if __name__ == "__main__":
-    data = GameData()
-    data.read_json_files()
+    data = GameData(namespace="SVE")
+    match data.namespace:
+        case "SVE":
+            data.read_json_files_sve()
+        case "Vanilla":
+            data.read_json_files()
+    if data.objects_data == {}:
+        raise ValueError("不合法的命名空间！")
+
+    print("-------------------- 蔬菜 --------------------\n")
     generate_infobox(data, category="vegetable")
+    print("")
+    print("-------------------- 水果 --------------------\n")
+    generate_infobox(data, category="fruit")
