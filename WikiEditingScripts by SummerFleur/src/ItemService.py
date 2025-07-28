@@ -16,6 +16,7 @@ class GameData:
         bigcraftables_data: 解析 Bigcraftables.json 得到的字典
         bigcraftables_zh_cn: 英文名 -> 中文名
         crops_data: 解析 Crops.json 得到的字典
+        fruit_trees_data: 解析 FruitTrees.json 得到的字典
         namespace: 当前位于哪个空间，Vanilla 为原版，或 SVE
     """
 
@@ -25,6 +26,7 @@ class GameData:
         self.bigcraftables_data: dict[str, dict] = {}
         self.bigcraftables_zh_cn: dict[str, str] = {}
         self.crops_data: dict[str, dict] = {}
+        self.fruit_trees_data: dict[str, dict] = {}
         self.namespace = namespace
 
     def read_json_files(self) -> None:
@@ -35,6 +37,7 @@ class GameData:
         self.bigcraftables_data = FileUtils.read_json(json_path / "BigCraftables.json")
         self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "BigCraftables.zh-CN.json")
         self.crops_data = FileUtils.read_json(json_path / "Crops.json")
+        self.fruit_trees_data = FileUtils.read_json(json_path / "FruitTrees.json")
 
     def read_json_files_sve(self) -> None:
         """读取 SVE JSON 文件，获取 Object 和 BigCraftable 信息"""
@@ -44,6 +47,7 @@ class GameData:
         self.bigcraftables_data = FileUtils.read_json(json_path / "BigCraftables.json")
         self.bigcraftables_zh_cn = self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "zh.json")
         self.crops_data = FileUtils.read_json(json_path / "Crops.json")
+        self.fruit_trees_data = FileUtils.read_json(json_path / "FruitTrees.json")
         self.namespace = "SVE"
 
 
@@ -158,16 +162,16 @@ class Item:
         """
         try:
             return self.raw[field]
-        except Exception:
-            raise KeyError("no such field!")
+        except KeyError:
+            return "No such field!"
 
 
 class Crop:
     """
-    物品类，存储物品的前缀、代码、数量和名称
+    作物类，存储作物的各项基本数据
 
     Attributes:
-        raw: 物品的原始数据字典
+        raw: 作物的原始数据字典
         harvest: 作物收获得到的物品
         growth: 作物成熟所需时间
         seasons: 作物生长的季节
@@ -193,6 +197,41 @@ class Crop:
         exp = 16 * math.log(0.018 * sellprice + 1)
         exp = round(exp, 0)
         return int(exp)
+
+    def get_field(self, field: str) -> Any:
+        """
+        获取物品的指定属性信息
+        :param field: 需要获取的属性
+        :exception KeyError: 不存在该属性
+        """
+        try:
+            return self.raw[field]
+        except Exception:
+            raise KeyError("no such field!")
+
+
+class FruitTree:
+    """
+    果树类，存储果树的各项基本数据
+
+    Attributes:
+        raw: 作物的原始数据字典
+        harvest: 果树收获得到的果实
+        seasons: 作物生长的季节
+    """
+
+    def __init__(self, fruit_tree: dict):
+        self.raw: dict = fruit_tree
+        self.harvest: str = fruit_tree.get("Fruit")[0].get("ItemId")
+        self.seasons: str = self._get_season(fruit_tree.get("Seasons"))
+
+    @staticmethod
+    def _get_season(seasons: list[str]) -> str:
+        """将 list[seasons] 转化为 wiki 格式"""
+        string = ""
+        for s in seasons:
+            string = string + "{{Season|" + s + "}} • "
+        return string[:-3]
 
     def get_field(self, field: str) -> Any:
         """
