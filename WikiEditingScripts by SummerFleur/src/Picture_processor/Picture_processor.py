@@ -76,7 +76,7 @@ class PictureProcessor:
             resized_image = image.resize(new_size, Resampling.NEAREST)
             if cover:
                 resized_image.save(f"pics/{pic}")
-                return
+                continue
             self._save(resized_image, pic)
 
     def divide_pic(self, cutRange: tuple[int, int, int, int], cover=False) -> None:
@@ -90,7 +90,7 @@ class PictureProcessor:
             roi = image.crop(cutRange)
             if cover:
                 roi.save(f"pics/{pic}")
-                return
+                continue
             self._save(roi, pic)
 
     def divide_by_width(self, region_width: int) -> None:
@@ -105,6 +105,25 @@ class PictureProcessor:
             for left in range(0, img_width, region_width):
                 right = min(left + region_width, img_width)
                 box = (left, 0, right, img_height)
+                region = image.crop(box)
+                # 输出到 output 文件夹，文件名加序号
+                name, ext = os.path.splitext(pic)
+                region_filename = f"{name} {count}{ext}"
+                self._save(region, region_filename)
+                count += 1
+
+    def divide_by_height(self, region_height: int) -> None:
+        """
+        按指定高度从上至下依次裁剪图片为多个区域
+        :param region_height: 每个区域的高度（像素）
+        """
+        for pic in self.pictures:
+            image: Image = Image.open(f"pics/{pic}")
+            img_width, img_height = image.size
+            count = 1
+            for top in range(0, img_height, region_height):
+                bottom = min(top + region_height, img_height)
+                box = (0, top, img_width, bottom)
                 region = image.crop(box)
                 # 输出到 output 文件夹，文件名加序号
                 name, ext = os.path.splitext(pic)

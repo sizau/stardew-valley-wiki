@@ -51,15 +51,15 @@ def get_season(seasons: str):
     for s in seasons:
         desc = desc + "{{Season|" + s + "}} • "
     return desc[:-3]
-            
-            
+
+
 def fl(value):
     if value != "0":
         return value
     else:
         return ' '
-    
-    
+
+
 def fish_xp(value):
     return int(value/3) + 3
 

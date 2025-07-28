@@ -1,0 +1,125 @@
+{
+  "FlashShifter.StardewValleyExpandedCP_Pear_Sapling": {
+    "DisplayName": "{{i18n:object.pear.name}}",
+    "Seasons": [
+      "Spring"
+    ],
+    "Fruit": [
+      {
+        "Season": null,
+        "Chance": 1.0,
+        "Condition": null,
+        "Id": "FlashShifter.StardewValleyExpandedCP_Pear",
+        "ItemId": "FlashShifter.StardewValleyExpandedCP_Pear",
+        "RandomItemId": null,
+        "MinStack": -1,
+        "MaxStack": -1,
+        "Quality": -1,
+        "ObjectInternalName": null,
+        "ObjectDisplayName": null,
+        "ToolUpgradeLevel": -1,
+        "IsRecipe": false,
+        "StackModifiers": null,
+        "StackModifierMode": "Stack",
+        "QualityModifiers": null,
+        "QualityModifierMode": "Stack"
+      }
+    ],
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\SVEFruitTrees",
+    "TextureSpriteRow": 0,
+    "CustomFields": {}
+  },
+  "FlashShifter.StardewValleyExpandedCP_Nectarine_Sapling": {
+    "DisplayName": "{{i18n:object.nectarine.name}}",
+    "Seasons": [
+      "Summer"
+    ],
+    "Fruit": [
+      {
+        "Season": null,
+        "Chance": 1.0,
+        "Condition": null,
+        "Id": "FlashShifter.StardewValleyExpandedCP_Nectarine",
+        "ItemId": "FlashShifter.StardewValleyExpandedCP_Nectarine",
+        "RandomItemId": null,
+        "MinStack": -1,
+        "MaxStack": -1,
+        "Quality": -1,
+        "ObjectInternalName": null,
+        "ObjectDisplayName": null,
+        "ToolUpgradeLevel": -1,
+        "IsRecipe": false,
+        "StackModifiers": null,
+        "StackModifierMode": "Stack",
+        "QualityModifiers": null,
+        "QualityModifierMode": "Stack"
+      }
+    ],
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\SVEFruitTrees",
+    "TextureSpriteRow": 1,
+    "CustomFields": {}
+  },
+  "FlashShifter.StardewValleyExpandedCP_Persimmon_Sapling": {
+    "DisplayName": "{{i18n:object.persimmon.name}}",
+    "Seasons": [
+      "Fall"
+    ],
+    "Fruit": [
+      {
+        "Season": null,
+        "Chance": 1.0,
+        "Condition": null,
+        "Id": "FlashShifter.StardewValleyExpandedCP_Persimmon",
+        "ItemId": "FlashShifter.StardewValleyExpandedCP_Persimmon",
+        "RandomItemId": null,
+        "MinStack": -1,
+        "MaxStack": -1,
+        "Quality": -1,
+        "ObjectInternalName": null,
+        "ObjectDisplayName": null,
+        "ToolUpgradeLevel": -1,
+        "IsRecipe": false,
+        "StackModifiers": null,
+        "StackModifierMode": "Stack",
+        "QualityModifiers": null,
+        "QualityModifierMode": "Stack"
+      }
+    ],
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\SVEFruitTrees",
+    "TextureSpriteRow": 2,
+    "CustomFields": {}
+  },
+  "FlashShifter.StardewValleyExpandedCP_Tree_Coin": {
+    "DisplayName": "{{i18n:displayname.money-tree}}",
+    "Seasons": [
+      "Spring",
+      "Summer",
+      "Fall",
+      "Winter"
+    ],
+    "Fruit": [
+      {
+        "Season": null,
+        "Chance": 1.0,
+        "Condition": null,
+        "Id": "FlashShifter.StardewValleyExpandedCP_Money_Bag",
+        "ItemId": "FlashShifter.StardewValleyExpandedCP_Money_Bag",
+        "RandomItemId": null,
+        "MinStack": -1,
+        "MaxStack": -1,
+        "Quality": -1,
+        "ObjectInternalName": null,
+        "ObjectDisplayName": null,
+        "ToolUpgradeLevel": -1,
+        "IsRecipe": false,
+        "StackModifiers": null,
+        "StackModifierMode": "Stack",
+        "QualityModifiers": null,
+        "QualityModifierMode": "Stack"
+      }
+    ],
+    "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\SVEFruitTrees",
+    "TextureSpriteRow": 3,
+    "CustomFields": {}
+  }
+}
