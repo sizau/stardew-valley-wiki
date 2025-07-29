@@ -63,6 +63,9 @@ class PictureProcessor:
         self.clear_input = clearInputDir
         os.makedirs(self.output_dir, exist_ok=True)
 
+    def _update(self):
+        self.pictures = os.listdir("pics")
+
     def resize_pic(self, scale: float = 3.0, cover=False) -> None:
         """
         遍历 pic 文件夹内的所有图片，使用硬边缘缩放图片尺寸，使像素图片更适合用于显示，默认缩放比例为 3.0
@@ -93,10 +96,11 @@ class PictureProcessor:
                 continue
             self._save(roi, pic)
 
-    def divide_by_width(self, region_width: int) -> None:
+    def divide_by_width(self, region_width: int, cover=False) -> None:
         """
         按指定宽度从左至右依次裁剪图片为多个区域
         :param region_width: 每个区域的宽度（像素）
+        :param cover: 是否覆盖原图片，若为 True 则会直接在原目录中操作，否则输出至 output文件夹
         """
         for pic in self.pictures:
             image: Image = Image.open(f"pics/{pic}")
@@ -109,13 +113,20 @@ class PictureProcessor:
                 # 输出到 output 文件夹，文件名加序号
                 name, ext = os.path.splitext(pic)
                 region_filename = f"{name} {count}{ext}"
-                self._save(region, region_filename)
+                if cover:
+                    region.save(f"pics/{region_filename}")
+                else:
+                    self._save(region, region_filename)
                 count += 1
+            if cover:
+                os.remove(f"pics/{pic}")
+        self._update()
 
-    def divide_by_height(self, region_height: int) -> None:
+    def divide_by_height(self, region_height: int, cover=False) -> None:
         """
         按指定高度从上至下依次裁剪图片为多个区域
         :param region_height: 每个区域的高度（像素）
+        :param cover: 是否覆盖原图片，若为 True 则会直接在原目录中操作，否则输出至 output文件夹
         """
         for pic in self.pictures:
             image: Image = Image.open(f"pics/{pic}")
@@ -128,8 +139,46 @@ class PictureProcessor:
                 # 输出到 output 文件夹，文件名加序号
                 name, ext = os.path.splitext(pic)
                 region_filename = f"{name} {count}{ext}"
-                self._save(region, region_filename)
+                if cover:
+                    region.save(f"pics/{region_filename}")
+                else:
+                    self._save(region, region_filename)
                 count += 1
+            if cover:
+                os.remove(f"pics/{pic}")
+        self._update()
+
+    def divide_by_region(self, region_height: int, region_width: int, cover=False) -> None:
+        """
+        按指定高度和宽度裁剪图片为多个区域
+        :param region_height: 每个区域的高度（像素）
+        :param region_width: 每个区域的宽度（像素）
+        :param cover: 是否覆盖原图片，若为 True 则会直接在原目录中操作，否则输出至 output文件夹
+        """
+        for pic in self.pictures:
+            image: Image = Image.open(f"pics/{pic}")
+            img_width, img_height = image.size
+            count = 1
+            for top in range(0, img_height, region_height):
+                bottom = min(top + region_height, img_height)
+                box = (0, top, img_width, bottom)
+                cache = image.crop(box)
+                reg_width, reg_height = cache.size
+                for left in range(0, reg_width, region_width):
+                    right = min(left + region_width, reg_width)
+                    box = (left, 0, right, reg_height)
+                    region = cache.crop(box)
+                    # 输出到 output 文件夹，文件名加序号
+                    name, ext = os.path.splitext(pic)
+                    region_filename = f"{name} {count}{ext}"
+                    if cover:
+                        region.save(f"pics/{region_filename}")
+                    else:
+                        self._save(region, region_filename)
+                    count += 1
+            if cover:
+                os.remove(f"pics/{pic}")
+        self._update()
 
     def add_mask(self, region_lists: list[str], color, tile_width: int = 16, cover=False) -> None:
         """
@@ -167,6 +216,42 @@ class PictureProcessor:
             image.save(f"pics/{pic}")
             return
         self._save(image, pic)
+
+    def pngs2gif(self, duration: int = 300, group_length: int = 256) -> None:
+        """
+        遍历 pic 文件夹内的所有图片，生成 gif 动图。
+        """
+        for group_index in range(0, len(self.pictures), group_length):
+            # 获取当前组的图片路径
+            group_pics = min(len(self.pictures), group_index + group_length)
+            group = self.pictures[group_index:group_pics]
+            # 准备当前组的帧列表
+            frames = []
+            name = None
+            for frame in group:
+                if name is None:
+                    name = os.path.splitext(frame)[0]
+                frame = Image.open(f"pics/{frame}")
+                frames.append(frame)
+                # 生成当前组的GIF
+                frames[0].save(f"{self.output_dir}/{name}.gif", save_all=True, append_images=frames[1:],
+                               loop=0, disposal=2, transparency=0, duration=duration)
+
+    def select(self, ends_with: str = None) -> None:
+        """
+        筛选 pics 文件夹内名称后缀为特定值的图片，删除其余图片
+        :param ends_with: 需要筛选的后缀
+        """
+        for pic in self.pictures:
+            name, ext = os.path.splitext(pic)
+            if ends_with is not None and name.endswith(ends_with):
+                sub = - len(ends_with)
+                name = name[:sub]
+                filename = f"{name}{ext}"
+                os.rename(f"pics/{pic}", f"pics/{filename}")
+            else:
+                os.remove(f"pics/{pic}")
+        self._update()
 
     def _save(self, image: Image, filename: str) -> None:
         """

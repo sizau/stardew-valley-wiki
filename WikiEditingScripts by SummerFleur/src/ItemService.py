@@ -1,7 +1,7 @@
 import math
 import re
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from utils import FileUtils
 
@@ -20,7 +20,7 @@ class GameData:
         namespace: 当前位于哪个空间，Vanilla 为原版，或 SVE
     """
 
-    def __init__(self, namespace="Vanilla") -> None:
+    def __init__(self, namespace: Literal["Vanilla", "SVE"] = "Vanilla") -> None:
         self.objects_data: dict[str, dict] = {}
         self.objects_zh_cn: dict[str, str] = {}
         self.bigcraftables_data: dict[str, dict] = {}
@@ -29,26 +29,30 @@ class GameData:
         self.fruit_trees_data: dict[str, dict] = {}
         self.namespace = namespace
 
-    def read_json_files(self) -> None:
-        """读取 JSON 文件，获取 Object 和 BigCraftable 信息"""
-        json_path = Path(__file__).parent.parent / "json"
-        self.objects_data = FileUtils.read_json(json_path / "Objects.json")
-        self.objects_zh_cn = FileUtils.read_json(json_path / "Objects.zh-CN.json")
-        self.bigcraftables_data = FileUtils.read_json(json_path / "BigCraftables.json")
-        self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "BigCraftables.zh-CN.json")
-        self.crops_data = FileUtils.read_json(json_path / "Crops.json")
-        self.fruit_trees_data = FileUtils.read_json(json_path / "FruitTrees.json")
+        # 根据命名空间，获取相关原始数据
+        match namespace:
+            # 读取原版 JSON 文件
+            case "Vanilla":
+                json_path = Path(__file__).parent.parent / "json"
+                self.objects_data = FileUtils.read_json(json_path / "Objects.json")
+                self.objects_zh_cn = FileUtils.read_json(json_path / "Objects.zh-CN.json")
+                self.bigcraftables_data = FileUtils.read_json(json_path / "BigCraftables.json")
+                self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "BigCraftables.zh-CN.json")
+                self.crops_data = FileUtils.read_json(json_path / "Crops.json")
+                self.fruit_trees_data = FileUtils.read_json(json_path / "FruitTrees.json")
+            # 读取 SVE JSON 文件
+            case "SVE":
+                json_path = Path(__file__).parent.parent / "json_sve"
+                self.objects_data = FileUtils.read_json(json_path / "Objects.json")
+                self.objects_zh_cn = self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "zh.json")
+                self.bigcraftables_data = FileUtils.read_json(json_path / "BigCraftables.json")
+                self.bigcraftables_zh_cn = self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "zh.json")
+                self.crops_data = FileUtils.read_json(json_path / "Crops.json")
+                self.fruit_trees_data = FileUtils.read_json(json_path / "FruitTrees.json")
+                self.namespace = "SVE"
 
-    def read_json_files_sve(self) -> None:
-        """读取 SVE JSON 文件，获取 Object 和 BigCraftable 信息"""
-        json_path = Path(__file__).parent.parent / "json_sve"
-        self.objects_data = FileUtils.read_json(json_path / "Objects.json")
-        self.objects_zh_cn = self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "zh.json")
-        self.bigcraftables_data = FileUtils.read_json(json_path / "BigCraftables.json")
-        self.bigcraftables_zh_cn = self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "zh.json")
-        self.crops_data = FileUtils.read_json(json_path / "Crops.json")
-        self.fruit_trees_data = FileUtils.read_json(json_path / "FruitTrees.json")
-        self.namespace = "SVE"
+        if self.objects_data == {}:
+            raise ValueError("不合法的命名空间！")
 
 
 class Item:
@@ -83,7 +87,7 @@ class Item:
 
         for tag in tags:
             if tag.startswith("color_"):
-                return tag[6:]
+                return tag[6:].replace("_", " ")
         return ""
 
     @staticmethod

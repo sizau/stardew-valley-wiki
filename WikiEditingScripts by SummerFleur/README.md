@@ -17,15 +17,14 @@ The scripts in this directory are licensed under the [GPL-3.0 license](LICENSE).
 需要放入的原版 json 文件有：
 - `Data\BigCraftables.json`
 - `Data\Crops.json`
+- `Data\FruitTrees.json`
 - `Data\Objects.json`
 - `Strings\BigCraftables.zh-CN.json`
 - `Strings\Objects.zh-CN.json`
 
 #### json_sve 目录
 
-**目前 SVE 的汉化读取模块还未写好，不能正常运作！！！！**
-
-sve 需要放入的内容则仅包括上面列出来的前三个，以及中文汉化文件。需要注意的是 sve 的数据需要进行手动处理，处理步骤大致为：
+sve 需要放入的内容则仅包括上面列出来的前四个位于 `Data` 目录下的文件，以及中文汉化文件。需要注意的是 sve 的数据需要进行手动处理，处理步骤大致为：
 
 1. 由于 sve 的数据是写给 ContentPatcher 看的，因此要把 Changes 列表内第一个字典中 `Entries` 键所对应的值给取出来，其余部分全部舍弃；
 2. 修改所有不符合 `json` 规范的语法，例如注释和尾随逗号，现代化的 IDE 或 VSC 的插件应该都能很方便的自动处理它们；
@@ -35,7 +34,7 @@ sve 需要放入的内容则仅包括上面列出来的前三个，以及中文�
 
 ## ItemService.py
 
-本模块用于解析游戏内所有 `Object` 的基础数据，并自定义了一个 `Item` 类，提取了一些常用的数据字段和属性，对于农作物，还定义了一个 `Crop` 类用于存储农作物常用数据。
+本模块用于解析游戏内所有 `Object` 的基础数据，并自定义了一个 `Item` 类，提取了一些常用的数据字段和属性，对于农作物，还定义了一个 `Crop` 类和 ` FruitTree` 类用于存储农作物的常用数据。
 
 具体使用方法已在文件注释里详细说明。
 
@@ -44,9 +43,9 @@ sve 需要放入的内容则仅包括上面列出来的前三个，以及中文�
 该目录下的脚本主要用于自动生成 Wiki 内物品详情页面中的 Infobox。其原理非常简单：解析游戏 json 数据，获取 Wiki Infobox 所接受的数据，然后打印出来。
 
 - 对于 `Infobox_craft_generator.py`，生成的是游戏内全部可打造物品的 Infobox；
-- 对于 `Infobox_vf_generator.py`，生成的是游戏内全部蔬菜和水果的 Infobox。
+- 对于 `Infobox_vfff_generator.py`，生成的是游戏内全部蔬菜（vegetables）、水果（fruits）、花（flowers）和采集品（forages）的 Infobox。
 
-具体使用方法已在文件注释里详细说明。
+具体使用方法已在文件注释里详细说明，使用时只需要在 `if __name__ == "__main__":` 下更改相关参数即可。
 
 ## Picture_processor
 

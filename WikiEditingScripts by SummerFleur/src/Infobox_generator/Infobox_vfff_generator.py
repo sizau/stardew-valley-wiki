@@ -1,7 +1,7 @@
 from src.ItemService import *
 
 
-def generate_infobox(d: GameData, category: str) -> None:
+def generate_infobox(d: GameData, category: Literal["vegetable", "fruit", "flower", "forage"]) -> None:
     """生成 Infobox vegetable/fruit 并打印"""
     objects = d.objects_data
 
@@ -72,6 +72,7 @@ def generate_infobox(d: GameData, category: str) -> None:
 
 def _search_crop(d: GameData, category: str, object_id: str, item: Item, name: str) -> tuple[str, str, str, str, str]:
     """
+    检查游戏数据，尝试寻找该物品的种子、生长时间、生长季节
     :return: source, seed, growth, season, tag
     """
     crops = d.crops_data
@@ -138,14 +139,7 @@ def _search_crop(d: GameData, category: str, object_id: str, item: Item, name: s
 
 
 if __name__ == "__main__":
-    data = GameData()
-    match data.namespace:
-        case "SVE":
-            data.read_json_files_sve()
-        case "Vanilla":
-            data.read_json_files()
-    if data.objects_data == {}:
-        raise ValueError("不合法的命名空间！")
+    data = GameData()   # 若需要更改命名空间，请在这里填写，留空则代表使用原版
 
     print("-------------------- 蔬菜 --------------------\n")
     generate_infobox(data, category="vegetable")
