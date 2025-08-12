@@ -1,3 +1,4 @@
+from __future__ import annotations
 import math
 import re
 from pathlib import Path
@@ -27,6 +28,8 @@ class GameData:
         self.bigcraftables_zh_cn: dict[str, str] = {}
         self.crops_data: dict[str, dict] = {}
         self.fruit_trees_data: dict[str, dict] = {}
+        self.shops_data: dict[str, dict] = {}
+        self.item_id: dict[str, str] = {}
         self.namespace = namespace
 
         # 根据命名空间，获取相关原始数据
@@ -40,6 +43,8 @@ class GameData:
                 self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "BigCraftables.zh-CN.json")
                 self.crops_data = FileUtils.read_json(json_path / "Crops.json")
                 self.fruit_trees_data = FileUtils.read_json(json_path / "FruitTrees.json")
+                self.shops_data = FileUtils.read_json(json_path / "Shops.json")
+                self.item_id = FileUtils.read_json(json_path / "ItemID.json")
             # 读取 SVE JSON 文件
             case "SVE":
                 json_path = Path(__file__).parent.parent / "json_sve"
@@ -53,6 +58,109 @@ class GameData:
 
         if self.objects_data == {}:
             raise ValueError("不合法的命名空间！")
+
+    def try_get_item(self, code: str) -> Item | None:
+        """
+        根据物品的 QualifiedItemID 来创建 Item 实例。
+        :param code: 物品的 QualifiedItemID
+        :return: 物品实例
+        :exception KeyError: 未找到对应的物品
+        """
+        try:
+            code = Item.trim(code)
+            item = self.objects_data[code]
+            return Item(item)
+        except (KeyError, TypeError):
+            return None
+
+    def try_get_crop(self, code: str) -> Crop | None:
+        """
+        根据作物种子的 QualifiedItemID 来创建 Crop 实例。
+        :param code: 作物种子的 QualifiedItemID
+        :return: 作物种子实例
+        :exception KeyError: 未找到对应的作物
+        """
+        try:
+            code = Item.trim(code)
+            crop = self.objects_data[code]
+            return Crop(crop)
+        except (KeyError, TypeError):
+            return None
+
+    def try_get_fruit(self, code: str) -> FruitTree | None:
+        """
+        根据果树树苗的 QualifiedItemID 来创建 FruitTree 实例。
+        :param code: 果树树苗的 QualifiedItemID
+        :return: 果树树苗实例
+        :exception KeyError: 未找到对应的果树
+        """
+        try:
+            code = Item.trim(code)
+            fruit = self.objects_data[code]
+            return FruitTree(fruit)
+        except (KeyError, TypeError):
+            return None
+
+    def quick_get_name(self, code: str) -> str | None:
+        """
+        快速获取物品的内部名称（英文）
+        :param code: 物品的 QualifiedItemId
+        :return: 物品的内部名称
+        """
+        data_source = self.item_id
+        return data_source.get(code)
+
+    def get_name(self, code: str) -> str:
+        """
+        获取物品的内部名称（英文）
+        :param code: 物品的 QualifiedItemId
+        :return: 物品的内部名称
+        """
+        data_source = self.objects_data
+        if code in data_source:
+            item_data = data_source[code]
+            name = item_data.get("Name", "")
+
+            return name
+
+        return "未知物品"
+
+    def get_display_name(self, code: str) -> str:
+        """
+        获取物品的本地化名称，仅限于原版物品
+        :param code: 物品的 QualifiedItemId
+        :return: 物品的本地化名称
+        """
+        data_source = self.objects_data
+        if code in data_source:
+            item_data = data_source[code]
+            display_name = item_data.get("DisplayName", "")
+            localization_key = None
+
+            match self.namespace:
+                case "Vanilla":
+                    # 解析DisplayName中的本地化键
+                    if display_name.startswith("[LocalizedText"):
+                        # 提取本地化键，格式如 "[LocalizedText Strings\Objects:Moss_Name]"
+                        match = re.search(r":([^]]+)_Name]", display_name)
+                        if match:
+                            localization_key = match.group(1) + "_Name"
+                case "SVE":
+                    # 解析DisplayName中的本地化键
+                    if display_name.startswith("{{i18n:"):
+                        # 提取本地化键，格式如 "[LocalizedText Strings\Objects:Moss_Name]"
+                        match = re.search(r"\{\{i18n:([^}]+)}}", display_name)
+                        if match:
+                            localization_key = match.group(1)
+
+            if localization_key is None:
+                raise ValueError("unknown namespace!")
+
+            # 从本地化文件中获取名称
+            if localization_key in self.objects_zh_cn:
+                return self.objects_zh_cn[localization_key]
+
+        return "未知物品"
 
 
 class Item:
@@ -91,71 +199,24 @@ class Item:
         return ""
 
     @staticmethod
-    def get_name(code: str, data: GameData) -> str:
+    def trim(code: str) -> str:
         """
-        获取物品的内部名称（英文）
-        :param code: 物品的 QualifiedItemId
-        :param data: GameData 实例
-        :return: 物品的内部名称
+        去除物品代码的 “(O)” 前缀
+        :param code: 需要去除前缀的物品代码
+        :return: 去除前缀后的物品代码
+        :exception TypeError: 物品代码类型不合法
         """
-        data_source = data.objects_data
-        if code in data_source:
-            item_data = data_source[code]
-            name = item_data.get("Name", "")
-
-            return name
-
-        return "未知物品"
+        if type(code) is not str:
+            raise TypeError("code must be str!")
+        if code.startswith("(O)"):
+            return code[3:]
+        return code
 
     @staticmethod
-    def get_display_name(code: str, data: GameData) -> str:
-        """
-        获取物品的本地化名称，仅限于原版物品
-        :param code: 物品的 QualifiedItemId
-        :param data: GameData 实例
-        :return: 物品的本地化名称
-        """
-        data_source = data.objects_data
-        if code in data_source:
-            item_data = data_source[code]
-            display_name = item_data.get("DisplayName", "")
-
-            # 解析DisplayName中的本地化键
-            if display_name.startswith("[LocalizedText"):
-                # 提取本地化键，格式如 "[LocalizedText Strings\Objects:Moss_Name]"
-                match = re.search(r":([^]]+)_Name]", display_name)
-                if match:
-                    localization_key = match.group(1) + "_Name"
-                    # 从本地化文件中获取名称
-                    if localization_key in data.objects_zh_cn:
-                        return data.objects_zh_cn[localization_key]
-
-        return "未知物品"
-
-    @staticmethod
-    def get_display_name_sve(code: str, data: GameData) -> str:
-        """
-        获取物品的本地化名称，适用于 SVE 物品
-        :param code: 物品的 QualifiedItemId
-        :param data: GameData 实例
-        :return: 物品的本地化名称
-        """
-        data_source = data.objects_data
-        if code in data_source:
-            item_data = data_source[code]
-            display_name = item_data.get("DisplayName", "")
-
-            # 解析DisplayName中的本地化键
-            if display_name.startswith("{{i18n:"):
-                # 提取本地化键，格式如 "[LocalizedText Strings\Objects:Moss_Name]"
-                match = re.search(r"\{\{i18n:([^}]+)}}", display_name)
-                if match:
-                    localization_key = match.group(1)
-                    # 从本地化文件中获取名称
-                    if localization_key in data.objects_zh_cn:
-                        return data.objects_zh_cn[localization_key]
-
-        return "未知物品"
+    def qualify(code: str) -> str:
+        if code.startswith("(O)"):
+            return code
+        return "(O)" + code
 
     def get_field(self, field: str) -> Any:
         """
@@ -193,6 +254,8 @@ class Crop:
         string = ""
         for s in seasons:
             string = string + "{{Season|" + s + "}} • "
+        if len(string) == 78:
+            return "All"
         return string[:-3]
 
     @staticmethod
@@ -210,8 +273,8 @@ class Crop:
         """
         try:
             return self.raw[field]
-        except Exception:
-            raise KeyError("no such field!")
+        except KeyError:
+            return "No such field!"
 
 
 class FruitTree:
@@ -245,9 +308,9 @@ class FruitTree:
         """
         try:
             return self.raw[field]
-        except Exception:
-            raise KeyError("no such field!")
+        except KeyError:
+            return "No such field!"
 
 
-if __name__ == "__main__":
-    ...
+if __name__ != "__main__":
+    game_data = GameData()

@@ -1,9 +1,9 @@
 from src.ItemService import *
 
 
-def generate_infobox(d: GameData, category: Literal["vegetable", "fruit", "flower", "forage"]) -> None:
-    """生成 Infobox vegetable/fruit 并打印"""
-    objects = d.objects_data
+def generate_infobox(category: Literal["vegetable", "fruit", "flower", "forage"]) -> None:
+    """生成 Infobox vegetable/fruit/flower/forage 并打印"""
+    objects = game_data.objects_data
 
     for object_id, object_data in objects.items():
         item = Item(object_data)
@@ -17,23 +17,25 @@ def generate_infobox(d: GameData, category: Literal["vegetable", "fruit", "flowe
                 _category = "flower"
             case -81 if category == "forage":
                 _category = "forage"
+            case -23 if category == "forage":
+                _category = "forage"
             case _:
                 continue
 
         eng = item.name
         name = ""
-        match d.namespace:
+        match game_data.namespace:
             case "SVE":
-                name = Item.get_display_name_sve(object_id, d)
+                name = game_data.get_display_name(object_id)
                 _category += "/SVE"
             case "Vanilla":
-                name = Item.get_display_name(object_id, d)
+                name = game_data.get_display_name(object_id)
         sellprice = item.sellprice
         edibility = item.edibility
         color = item.color
         xp = Crop.get_xp(sellprice)
 
-        source, seed, growth, season, tag = _search_crop(d, category, object_id, item, name)
+        source, seed, growth, season, tag = _search_crop(category, object_id, item, name)
 
         infobox = f"""{name}：\n
 <onlyinclude>{{{{{{{{{{1|Infobox {_category}}}}}}}
@@ -44,10 +46,10 @@ def generate_infobox(d: GameData, category: Literal["vegetable", "fruit", "flowe
 |growth      = {growth}
 |season      = {season}"""
 
-        if tag == "":
+        if tag == "" and category in ["vegetable", "fruit", "flower"]:
             infobox = infobox + f"""
 |xp          = {{{{Xp|{xp}|farm}}}}"""
-        elif tag == "Forage":
+        elif tag == "Forage" or category == "forage":
             if len(season) > 1 and season[1] == '季':
                 infobox = infobox + f"""
 |xp          = <nowiki />
@@ -70,20 +72,20 @@ def generate_infobox(d: GameData, category: Literal["vegetable", "fruit", "flowe
         print(infobox)
 
 
-def _search_crop(d: GameData, category: str, object_id: str, item: Item, name: str) -> tuple[str, str, str, str, str]:
+def _search_crop(category: str, object_id: str, item: Item, name: str) -> tuple[str, str, str, str, str]:
     """
     检查游戏数据，尝试寻找该物品的种子、生长时间、生长季节
     :return: source, seed, growth, season, tag
     """
-    crops = d.crops_data
-    trees = d.fruit_trees_data
+    crops = game_data.crops_data
+    trees = game_data.fruit_trees_data
 
     # 先检查作物列表
     if category != "forage":
         for seed_id, crop_data in crops.items():
             crop = Crop(crop_data)
             if crop.harvest == object_id and seed_id not in ["495", "496", "497", "498"]:
-                seed = Item.get_name(seed_id, d)
+                seed = game_data.get_name(seed_id)
                 seed = f"{{{{Name|{seed}}}}}"
                 growth = str(crop.growth) + " 天"
                 season = crop.seasons
@@ -95,7 +97,7 @@ def _search_crop(d: GameData, category: str, object_id: str, item: Item, name: s
         for seed_id, tree_data in trees.items():
             tree = FruitTree(tree_data)
             if tree.harvest == object_id or tree.harvest == "(O)" + object_id:
-                seed = Item.get_name(seed_id, d)
+                seed = game_data.get_name(seed_id)
                 seed = f"{{{{Name|{seed}}}}}"
                 growth = "28 天"
                 season = tree.seasons
@@ -139,16 +141,16 @@ def _search_crop(d: GameData, category: str, object_id: str, item: Item, name: s
 
 
 if __name__ == "__main__":
-    data = GameData()   # 若需要更改命名空间，请在这里填写，留空则代表使用原版
+    game_data = GameData()   # 若需要更改命名空间，请在这里填写，留空则代表使用原版
 
     print("-------------------- 蔬菜 --------------------\n")
-    generate_infobox(data, category="vegetable")
+    generate_infobox(category="vegetable")
     print("")
     print("-------------------- 水果 --------------------\n")
-    generate_infobox(data, category="fruit")
+    generate_infobox(category="fruit")
     print("")
     print("-------------------- 花 --------------------\n")
-    generate_infobox(data, category="flower")
+    generate_infobox(category="flower")
     print("")
     print("-------------------- 采集品 --------------------\n")
-    generate_infobox(data, category="forage")
+    generate_infobox(category="forage")

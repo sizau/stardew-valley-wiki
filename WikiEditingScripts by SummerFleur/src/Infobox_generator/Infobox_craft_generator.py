@@ -1,10 +1,10 @@
 from Recipes_helper import *
 
 
-def generate_infobox(p: readRecipes.RecipeParser) -> None:
+def generate_infobox() -> None:
     """生成 Infobox craft 并打印"""
-    p.parse_all_recipes()
-    recipes = p.crafting_recipe_objects
+    parser.parse_all_recipes()
+    recipes = parser.crafting_recipe_objects
 
     for recipe_name, recipe_info in recipes.items():
         eng = recipe_name
@@ -29,4 +29,4 @@ def generate_infobox(p: readRecipes.RecipeParser) -> None:
 
 
 if __name__ == "__main__":
-    generate_infobox(parser)
+    generate_infobox()
