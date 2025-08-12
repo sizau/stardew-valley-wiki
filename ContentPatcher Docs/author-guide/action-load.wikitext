@@ -1,0 +1,149 @@
+{{模组:Content Patcher/header}}
+
+带有 '''<code>&quot;Action&quot;: &quot;Load&quot;</code>''' 的补丁使用您提供的文件替换整个素材。
+
+== 注意事项 ==
+
+<code>Load</code> 的功能很简单明了，但是每个素材只能被一个补丁替换。因此您的内容包无法兼容其他 <code>Load</code> 了同一素材的内容包（只使用了 <code>Edit*</code> 的内容包不会出现这个问题）。
+
+您应当仅在必要的情况下使用 <code>Load</code>，对于其他情况请优先考虑使用[[模组:Content Patcher 制作指南#操作|其他操作]]。
+
+== 用法 ==
+
+=== 格式 ===
+
+一个 <code>Load</code> 补丁由 <code>Changes</code>（请参阅下文[[#示例|示例]]）下的一个模型组成，包含以下字段。
+
+<dl>
+<dt>
+必填字段：
+</dt>
+<dd>
+{| class="wikitable"
+|-
+! 字段
+! 用途
+|-
+| <code>Action</code>
+| 要进行的更改类型。此操作类型设置为 <code>Load</code>。
+|-
+| <code>Target</code>
+| 要替换的目标[[模组:Content Patcher 制作指南#什么是素材？|游戏素材名称]]（或多个由逗号分隔的素材名），例如<code>Portraits/Abigail</code>。该字段支持[[模组:Content Patcher 制作指南#Tokens 和条件|令牌]]，不区分大小写。
+|-
+| <code>FromFile</code>
+| 内容包文件夹中用于替换目标的文件的相对路径（例如 <code>assets/dinosaur.png</code>），或多个逗号分隔的路径。这可以是 <code>.json</code>（数据）、<code>.png</code>（图片）、<code>.tbin</code>或<code>.tmx</code>（地图）以及 <code>.xnb</code> 文件。该字段支持[[模组:Content Patcher 制作指南#Tokens 和条件|令牌]]，不区分大小写。
+|}
+
+</dd>
+<dt>
+可选字段：
+</dt>
+<dd>
+{| class="wikitable"
+|-
+! 字段
+! 用途
+|-
+| <code>When</code>
+| （可选）仅在给定的[[模组:Content Patcher 制作指南#Tokens 和条件|条件]]匹配时应用这个内容补丁。
+|-
+| <code>LogName</code>
+| （可选）在日志中显示的补丁名称。这有助于查找错误。如果省略，则默认为类似 <code>Load Data/Achievements</code> 的名字。
+|-
+| <code>Update</code>
+| （可选）补丁字段的更新频率。请参阅[[模组:Content Patcher 制作指南#补丁更新频率|补丁更新频率]]。
+|-
+| <code>LocalTokens</code>
+| （可选）一组仅在此补丁中生效的[[模组:Content Patcher 制作指南/令牌#局部令牌|局部令牌]]。
+|}
+
+</dd>
+<dt>
+进阶字段：
+</dt>
+<dd>
+{| class="wikitable"
+|-
+!字段
+!用途
+|-
+|<code>Priority</code>
+|（可选）当多个补丁的 <code>Target</code> 相同时，此字段决定了哪个补丁将被应用。默认值为 <code>Exclusive</code>。
+
+可用的值有：
+
+*<code>Low</code>（低）、<code>Medium</code>（中）或 <code>High</code>（高）：只有最高优先级的补丁会被应用。如果多个补丁的优先级一致，则按加载顺序 + 补丁顺序列表中靠前的补丁生效。
+*<code>Exclusive</code>（独占）：如果某一个补丁使用此优先级，那么其他所有补丁都无效。如果多个补丁使用此优先级，'''所有补丁都不生效'''，并且显示错误信息。
+*在条件允许的情况下请尽量避免使用 <code>Exclusive</code>。因为该优先级会显著降低内容包的兼容性。但因为 Content Patcher 无法知道如果加载另一个补丁后您的内容包是否能够正常运行，所以 <code>Exclusive</code> 是默认值。
+
+如果需要更具体的顺序，可以使用简单的偏移量，如 <code>&quot;High + 2&quot;</code> 或者 <code>&quot;Medium - 10&quot;</code>。默认值为 -1000（<code>Low</code>），0（<code>Medium</code>）和 1000（<code>High</code>）。通常不需要这样做，因为相同优先级的补丁已经按照您在内容包中列出的顺序排序。
+
+此字段'''不支持'''令牌，不区分大小写。
+|-
+|<code>TargetLocale</code>
+|（可选）素材名称中要匹配的地区代码，例如设置 <code>&quot;TargetLocale&quot;: &quot;fr-FR&quot;</code> 将会只编辑法语的素材（例如 <code>Data/Achievements.fr-FR</code>）。可以为空，只有只编辑没有地域区分的基本素材。
+
+如果省略，则将应用于所有素材，不论其是否存在本地化。
+|}
+</dd>
+</dl>
+=== 示例 ===
+
+此补丁将阿比盖尔的肖像替换为您提供的图片（请参阅[[模组:NPC数据|模组：NPC 数据]]）：
+
+<syntaxhighlight lang="js">{
+    "Format": "2.7.0",
+    "Changes": [
+        {
+            "Action": "Load",
+            "Target": "Portraits/Abigail",
+            "FromFile": "assets/abigail.png"
+        },
+    ]
+}</syntaxhighlight>
+同一内容包可以有多个 <code>Load</code> 补丁，但是对于同一个 <code>Target</code>，只有一个补丁会生效：
+
+<syntaxhighlight lang="js">{
+    "Format": "2.7.0",
+    "Changes": [
+        {
+            "Action": "Load",
+            "Target": "Portraits/Abigail",
+            "FromFile": "assets/abigail.png"
+        },
+        {
+            "Action": "Load",
+            "Target": "Portraits/Penny",
+            "FromFile": "assets/penny.png"
+        },
+    ]
+}</syntaxhighlight>
+您可以使用用[[模组:Content Patcher 制作指南#Tokens 和条件|令牌]]，如 <code><nowiki>{{TargetWithoutPath}}</nowiki></code>，来同时 <code>Load</code> 多个文件。
+
+<syntaxhighlight lang="js">{
+    "Format": "2.7.0",
+    "Changes": [
+        {
+            "Action": "Load",
+            "Target": "Portraits/Abigail, Portraits/Penny",
+            "FromFile": "assets/{{TargetWithoutPath}}.png" // assets/Abigail.png, assets/Penny.png
+        },
+    ]
+}</syntaxhighlight>
+您可以用 <code>Priority</code> 实现非必需的 <code>Load</code>（例如，当另一个模组先于您的内容包 <code>Load</code> 了某素材时，您的内容包仍然可以正常运行）。
+
+<syntaxhighlight lang="js">{
+    "Format": "2.7.0",
+    "Changes": [
+        {
+            "Action": "Load",
+            "Target": "Data/Events/AdventureGuild",
+            "FromFile": "assets/empty-event-file.json",
+            "Priority": "Low"
+        }
+    ]
+}</syntaxhighlight>
+
+== 参见 ==
+
+* [[模组:Content Patcher 制作指南|Content Patcher 制作指南]]。

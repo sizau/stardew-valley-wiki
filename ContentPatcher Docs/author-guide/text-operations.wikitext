@@ -1,0 +1,300 @@
+{{模组:Content Patcher/header}}
+
+文本操作允许您在保留部分当前值的情况下更改某文本字段数据，而非覆盖整个值。例如您可以在不删除当前文本的情况下新增末尾值（Append）或新增头部值（Prepend）。
+
+[[模组:Content Patcher 制作指南/修改数据|<code>EditData</code>]] 和 [[模组:Content Patcher 制作指南/修改地图|<code>EditMap</code>]] 类型的补丁均支持使用 <code>TextOperations</code> 字段定义文本操作。
+
+== 示例 ==
+
+在深入具体细节之前，让我们先看一个简单案例。
+
+当您不使用文本操作时，这是添加 NPC 普遍最爱的礼物的方法：
+
+<syntaxhighlight lang="js">{
+   "Action": "EditData",
+   "Target": "Data/NPCGiftTastes",
+   "Entries": {
+      "Universal_Love": "74 446 797 373 279 127 128" // 替换现有值
+   }
+}</syntaxhighlight>
+这个补丁很简单，但是它会覆盖掉原本的数据。这也使得由其他模组或未来游戏更新中对 <code>Universal_Love</code> 的任何更改都会被这个补丁抹除掉。所以我们应当使用 <code>Append</code> 操作，在不改变原有数据值的情况下添加新的普遍最爱的礼物：
+
+<syntaxhighlight lang="js">{
+   "Action": "EditData",
+   "Target": "Data/NPCGiftTastes",
+   "TextOperations": [
+      {
+         "Operation": "Append",
+         "Target": ["Entries", "Universal_Love"],
+         "Value": "127 128",
+         "Delimiter": " " // 如果原字段已经有数据，在原有值之后&新增值之前添加一个空格
+      }
+   ]
+}</syntaxhighlight>
+请参阅下章节以了解更多关于每种操作类型及其预期字段的信息。
+
+== 格式 ==
+
+=== 公共字段 ===
+
+所有文本操作都包含以下基本字段：
+
+{| class="wikitable"
+|-
+!字段
+!用途
+|-
+|<code>Operation</code>
+|需执行的文本操作。请参阅下文了解每种操作的信息。
+|-
+|<code>Target</code>
+|要更改的具体文本字段，以[https://zh.wikipedia.org/wiki/面包屑导航 面包屑路径]格式表示。每一个路径值代表要导航到的一个字段，可使用的字段取决于补丁的类型，请参阅 [[模组:Content Patcher 制作指南/修改数据|<code>EditData</code>]] 和 [[模组:Content Patcher 制作指南/修改地图|<code>EditMap</code>]] 文档中对 <code>TextOperations</code> 字段的描述以获取更多信息。
+
+该字段支持[[模组:Content Patcher 制作指南#Tokens 和条件|令牌]]，不区分大小写。
+|}
+
+=== Append ===
+
+<code>Append</code> 操作将文本新增到原字符串的末尾，并可在原值和新值之间添加分割定界符（<code>Delimiter</code>）。
+
+所需要的字段包括：
+
+{| class="wikitable"
+|-
+!字段
+!用途
+|-
+|&nbsp;
+|以上的[[#公共字段|公共字段]]
+|-
+|<code>Value</code>
+|需新增的文本。和大部分 Content Patcher 的字段一样，开头和末尾的空格字符会被删除，如果您需要在原有值和新增值之间添加空格，请使用 <code>Delimiter</code> 字段。
+
+该字段支持[[模组:Content Patcher 制作指南#Tokens 和条件|令牌]]，不区分大小写。
+|-
+|<code>Delimiter</code>
+|（可选）原有值之后/新增值之前添加的文本。如果没有填写，则默认使用 <code>/</code>（对于绝大部分素材）或 <code>^</code>(对于 <code>Data/Achievements</code>)。
+
+例如，假设字段原有值为 <code>A/B</code>，而您想追加 <code>C</code>，那么对于不同的分隔符，会产生以下不同结果：
+
+{| class="wikitable"
+|-
+! 分割定界符
+! 结果
+|-
+| 空
+| <code>A/B/C</code>
+|-
+| <code>&quot;Delimiter&quot;: &quot;/&quot;</code>
+| <code>A/B/C</code>
+|-
+| <code>&quot;Delimiter&quot;: &quot; &quot;</code>
+| <code>A/B C</code>
+|-
+| <code>&quot;Delimiter&quot;: &quot;&quot;</code>
+| <code>A/BC</code>
+|}
+
+如果字段原有值为空字符串，则分割定界符将不生效：
+
+{| class="wikitable"
+|-
+! 分割定界符
+! 结果
+|-
+| <code>&quot;Delimiter&quot;: &quot;/&quot;</code>
+| <code>C</code>
+|}
+
+|}
+此示例将两个新物品 ID 添加到 NPC 的普遍最爱的礼物列表中：
+
+<syntaxhighlight lang="js">{
+   "Action": "EditData",
+   "Target": "Data/NPCGiftTastes",
+   "TextOperations": [
+      {
+         "Operation": "Append",
+         "Target": ["Entries", "Universal_Love"],
+         "Value": "127 128",
+         "Delimiter": " "
+      }
+   ]
+}</syntaxhighlight>
+
+=== Prepend ===
+
+<code>Prepend</code> 操作将文本新增到原字符串的开头，并可在新值和原值之间添加分割定界符（<code>Delimiter</code>）。
+
+此操作的其他属性和 [[#Append|<code>Append</code> 操作]]完全相同。
+
+=== RemoveDelimited ===
+
+<code>RemoveDelimited</code> 操作根据给定的分隔符将目标文本解析为一组值，然后移除一个或多个与给定搜索文本匹配的值。
+
+所需要的字段包括：
+
+{| class="wikitable"
+|-
+!字段
+!用途
+|-
+|&nbsp;
+|以上的[[#公共字段|公共字段]]
+|-
+|<code>Search</code>
+|需从原文本中移除的值。必须完全匹配分隔后的值才能移除，不会移除每个分隔值内的子字符串。
+
+该字段支持[[模组:Content Patcher 制作指南#Tokens 和条件|令牌]]，且'''区分大小写''' 。
+|-
+|<code>Delimiter</code>
+|分割原文本所用的字符。
+
+例如，假设原文本为<code>A a/B/C</code>，以下为不同分割定界符会产生的结果：
+
+{| class="wikitable"
+|-
+! 割定界符
+! 值1
+! 值2
+! 值3
+|-
+| style="text-align:center;" | <code>&quot;Delimiter&quot;: &quot;/&quot;</code>
+| style="text-align:center;" | <code>A a</code>
+| style="text-align:center;" | <code>B</code>
+| style="text-align:center;" | <code>C</code>
+|-
+| style="text-align:center;" | <code>&quot;Delimiter&quot;: &quot; &quot;</code>
+| style="text-align:center;" | <code>A</code>
+| style="text-align:center;" | <code>a/B/C</code>
+|
+|}
+
+|-
+|<code>ReplaceMode</code>
+|（可选）应移除哪些分隔值。支持的选项是：
+
+{| class="wikitable"
+|-
+! 模式
+! 结果
+|-
+| <code>First</code>
+| 移除第一个等于 <code>Search</code> 的值，其他值不变。
+|-
+| <code>Last</code>
+| 移除最后一个等于 <code>Search</code> 的值，其他值不变。
+|-
+| <code>All</code>
+| 移除所有等于 <code>Search</code> 的值。
+|}
+
+默认为 <code>All</code>。
+
+|}
+例如，此补丁将五彩碎片（物品 ID 为 74）从普遍最爱的礼物中移除：
+
+<syntaxhighlight lang="js">{
+   "Action": "EditData",
+   "Target": "Data/NPCGiftTastes",
+   "TextOperations": [
+      {
+         "Operation": "RemoveDelimited",
+         "Target": ["Entries", "Universal_Love"],
+         "Search": "74",
+         "Delimiter": " "
+      }
+   ]
+}</syntaxhighlight>
+
+=== ReplaceDelimited ===
+
+<code>RemoveDelimited</code>操作把原文本值用分割定界符分成一组值，然后替换等于搜索文本的值。
+
+这只替换分割后的值，不替换部分文本。
+
+所需要的字段包括：
+
+{| class="wikitable"
+|-
+!字段
+!用途
+|-
+|&nbsp;
+|以上的[[#公共字段|公共字段]]
+|-
+|<code>Search</code>
+|需从原文本中替换掉的值。必须完全匹配分隔后的值才能替换，不会替换每个分隔值内的子字符串。
+
+该字段支持[[模组:Content Patcher 制作指南#Tokens 和条件|令牌]]，且'''区分大小写''' 。
+|-
+|<code>Value</code>
+|用于替换该值的文本。
+
+该字段支持[[模组:Content Patcher 制作指南#Tokens 和条件|令牌]]，不区分大小写。和大部分 Content Patcher 的字段一样，开头和末尾的空格字符会被删除。
+|-
+|<code>Delimiter</code>
+|分割原文本所用的字符。
+
+例如，假设原文本为<code>A a/B/C</code>，以下为不同分割定界符会产生的结果：
+
+{| class="wikitable"
+|-
+! 割定界符
+! 值1
+! 值2
+! 值3
+|-
+| style="text-align:center;" | <code>&quot;Delimiter&quot;: &quot;/&quot;</code>
+| style="text-align:center;" | <code>A a</code>
+| style="text-align:center;" | <code>B</code>
+| style="text-align:center;" | <code>C</code>
+|-
+| style="text-align:center;" | <code>&quot;Delimiter&quot;: &quot; &quot;</code>
+| style="text-align:center;" | <code>A</code>
+| style="text-align:center;" | <code>a/B/C</code>
+|
+|}
+
+|-
+|<code>ReplaceMode</code>
+|（可选）应替换哪些分隔值。支持的选项是：
+
+{| class="wikitable"
+|-
+! 模式
+! 结果
+|-
+| <code>First</code>
+| 替换第一个等于 <code>Search</code> 的值，其他值不变。
+|-
+| <code>Last</code>
+| 替换最后一个等于 <code>Search</code> 的值，其他值不变。
+|-
+| <code>All</code>
+| 替换所有等于 <code>Search</code> 的值。
+|}
+
+默认为 <code>All</code>。
+|}
+
+例如，此补丁将普遍最爱的礼物中的兔子的脚（物品 ID 为 446）替换为河豚（物品 ID 为 128）：
+
+<syntaxhighlight lang="js">{
+   "Action": "EditData",
+   "Target": "Data/NPCGiftTastes",
+   "TextOperations": [
+      {
+         "Operation": "ReplaceDelimited",
+         "Target": ["Entries", "Universal_Love"],
+         "Search": "446",
+         "Value": "128",
+         "Delimiter": " "
+      }
+   ]
+}</syntaxhighlight>
+<span id="参见"></span>
+
+== 参见 ==
+
+* [[模组:Content Patcher 制作指南|Content Patcher 制作指南]]。

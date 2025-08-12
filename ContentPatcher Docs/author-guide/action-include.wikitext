@@ -1,0 +1,110 @@
+{{模组:Content Patcher/header}}
+
+带有 '''<code>&quot;Action&quot;: &quot;Include&quot;</code>''' 的补丁可以让您从另外一个 JSON 文件里加载其他补丁。
+
+== 用法 ==
+
+=== 概述 ===
+
+您不必将模组所有补丁都定义在一个 <code>content.json</code>，您可以在其他文件里定义补丁，然后在 <code>content.json</code> 中使用用 <code>Include</code> 来引用其他文件的补丁。这些引用的补丁会像您自己这些补丁复制到 <code>Include</code> 的位置那样工作。例如，它们可以使用与 <code>content.json</code> 中相同的功能（如 [[模组:Content Patcher 制作指南#Tokens 和条件|令牌和条件]]），并且任何本地文件路径仍然相对于 <code>content.json</code>。
+
+被引用的文件必须是包含 <code>&quot;Changes&quot;</code> 字段的 <code>.json</code> 文件
+
+<syntaxhighlight lang="js">{
+    // 不能有Format
+    "Changes": [
+        /* 补丁放这里 */
+    ]
+}</syntaxhighlight>
+=== 格式 ===
+
+一个 <code>Include</code> 补丁由 <code>Changes</code>（请参阅下文[[#示例|示例]]）下的一个模型组成，包含以下字段。
+
+<dl>
+<dt>
+必填字段：
+</dt>
+<dd>
+{| class="wikitable"
+|-
+! 字段
+! 用途
+|-
+| <code>Action</code>
+| 要进行的更改类型。此操作类型设置为 <code>Include</code>。
+|-
+| <code>FromFile</code>
+| 包含补丁的 <code>.json</code> 文件的相对路径，或多个逗号分隔的路径。此路径始终相对于您的 <code>content.json</code>（即使包含文件包含着另一个文件）。
+|}
+
+</td>
+</tr>
+</dd>
+<dt>
+可选字段：
+</dt>
+<dd>
+{| class="wikitable"
+|-
+! 类型
+! 作用
+|-
+| <code>When</code>
+| （可选）仅在给定的[[模组:Content Patcher 制作指南#Tokens 和条件|条件]]匹配时应用这个内容补丁。
+|-
+| <code>LogName</code>
+| （可选）在日志中显示的补丁名称。这有助于查找错误。如果省略，则默认为类似 <code>Include patches/data.json</code> 的名字。
+|-
+| <code>Update</code>
+| （可选）补丁字段的更新频率。请参阅[[模组:Content Patcher 制作指南#补丁更新频率|补丁更新频率]]。
+|-
+| <code>LocalTokens</code>
+| （可选）一组仅在此补丁中生效的[[模组:Content Patcher 制作指南/令牌#局部令牌|局部令牌]]。所有被引用的补丁都会继承这些令牌。
+|}
+
+</dd>
+</dl>
+=== 示例 ===
+
+最简单的情况是使用 <code>Include</code> 把您的补丁分类到子文件里：
+
+<syntaxhighlight lang="js">{
+    "Format": "2.7.0",
+    "Changes": [
+        {
+            "Action": "Include",
+            "FromFile": "assets/John NPC.json, assets/Jane NPC.json"
+        },
+    ]
+}</syntaxhighlight>
+您也可以将其与令牌和条件结合起来，从而动态地加载文件：
+
+<syntaxhighlight lang="js">{
+    "Format": "2.7.0",
+    "Changes": [
+        {
+            "Action": "Include",
+            "FromFile": "assets/John_{{season}}.json",
+            "When": {
+                "EnableJohn": true
+            }
+        }
+    ]
+}</syntaxhighlight>
+== 常见问题 ==
+
+<span id="可以include的文件是否有限制"></span>
+=== 可以Include的文件是否有限制？ ===
+
+没有。您可以从任意数量的文件中 <code>Include</code> 补丁，这些补丁里也可以使用 <code>Include</code> 补丁来加载其他文件，您还可以多次 <code>Include</code> 同一个文件。在每种情况下，它的工作原理都和您将所有补丁粘贴到“content.json”中的该位置一样。
+
+唯一的限制是您不可以有循环的 <code>Include</code>（例如文件 A 引用文件 B，而文件 B 也引用文件 A）。
+
+<span id="可以使用-include-加载非补丁文件吗"></span>
+=== 可以使用 Include 加载非补丁文件吗？ ===
+
+不可以。<code>Include</code> 的文件只能包含一个 <code>Changes</code> 字段。如果您试图添加 <code>ConfigSchema</code>、<code>CustomLocations</code>、<code>DynamicTokens</code> 字段，那么 Content Patcher 会报错。
+
+== 参见 ==
+
+* [[模组:Content Patcher 制作指南|Content Patcher 制作指南]]。
