@@ -69,6 +69,8 @@
 
 - getAudioNameToCSV.py 用于将 bwiki 上的音频名称列表写入 csv 文件，与 rename_audio_filename.bat 脚本一起使用可获取所有标准音频文件
 
+- calcFishingTreasureProb.py 用于计算钓鱼宝箱内在不同情况下至少获取一个物品的精确概率。
+
 - utils.py 是一些通用的函数，可以运行 if main 查看测试结果，已将 format_stats()方法并入 stop()方法中
 
 - test.py 作为测试模块使用

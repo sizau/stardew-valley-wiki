@@ -18,7 +18,3 @@ dependencies = [
 
 [tool.uv.workspace]
 members = ["calcScripts by Ytloe"]
-
-[[tool.uv.index]]
-url = "https://mirrors.aliyun.com/pypi/simple/"
-default = true
