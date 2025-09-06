@@ -123,40 +123,26 @@ internal static class TastesGetter
     /// <returns>全部的 NPC 对全部物品的态度</returns>
     public static void GetAllGiftTastes()
     {
-
         // 新建数组存储全部的礼物偏好
         var allGiftTastes = new Dictionary<string, GiftTastes>();
-
+        
         // 遍历全部物品与npc，获取偏好
         foreach (var item in AllItems)
         {
+            
+            // 只获取 SVE 的物品（后续通过 all_gift_tastes sve 触发）
+            // if (!item.ItemId.Contains("StardewValleyExpandedCP"))
+            // {
+            //     continue;
+            // }
+            
             var npcTaste = new GiftTastes(Status.Normal);
             foreach (var npc in AllSocializableVillagers)
             {
                 var taste = npc.getGiftTasteForThisItem(item);
-                npcTaste.Add(npc.displayName, Taste2String[taste]);
+                npcTaste.Add(npc.getName(), Taste2String[taste]);
             }
             npcTaste.Organize();
-
-            // 处理部分特殊物品以适应 wiki 编写
-            var displayName = item.ItemId switch
-            {
-                "126" => "诡异玩偶（绿）",
-                "127" => "诡异玩偶（黄）",
-                "167" => "Joja可乐",
-                "168" => "垃圾（物品）",
-                "171" => "破损的CD",
-                "685" => "鱼饵（物品）",
-                "SpecificBait" => "针对性鱼饵",
-                "Smoked" => "熏鱼",
-                "DriedFruit" => "果干",
-                "DriedMushrooms" => "蘑菇干",
-                "FrogEgg" => "青蛙蛋",
-                _ => item.DisplayName
-            };
-
-            if (!allGiftTastes.TryAdd(displayName, npcTaste))
-                ModEntry.Log($"键冲突：Key={displayName}，ID={item.ItemId}。", LogLevel.Warn);
         }
 
         // 返回全部礼物偏好
