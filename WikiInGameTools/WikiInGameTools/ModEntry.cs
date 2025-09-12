@@ -32,6 +32,7 @@ internal class ModEntry : Mod
     #region Modules
     private static CalcFishesProb.CalcFishesProb CalcFishesProb { get; set; }
     private static DebugModule.DebugModule DebugModule { get; set; }
+    private static GetItemInfo.GetItemInfo GetItemInfo { get; set; }
     private static GetNPCGiftTastes.GetNPCGiftTastes GetNPCGiftTastes { get; set; }
     private static VariableMonitor.VariableMonitor VariableMonitor { get; set; }
     #endregion
@@ -77,6 +78,11 @@ internal class ModEntry : Mod
         if (Config.VariableMonitorConfig.Enable)
             VariableMonitor.Activate();
 
+        // 语句 GetItemInfo = new GetItemInfo();
+        // 需要在 OnGameLaunched 中执行
+        if (Config.GetItemInfoModConfig.Enable)
+            GetItemInfo.Activate();
+
         // 语句 GetNPCGiftTastes = new GetNPCGiftTastes();
         // 需要在 OnGameLaunched 中执行
         if (Config.GetNPCGiftTastesModConfig.Enable)
@@ -97,6 +103,7 @@ internal class ModEntry : Mod
         VariableMonitor.Deactivate();
         VariableMonitor = null;
 
+        GetItemInfo.Deactivate();
         GetNPCGiftTastes.Deactivate();
     }
 
@@ -110,6 +117,7 @@ internal class ModEntry : Mod
             ReloadConfig
         );
 
+        GetItemInfo = new GetItemInfo.GetItemInfo();
         GetNPCGiftTastes = new GetNPCGiftTastes.GetNPCGiftTastes();
     }
 

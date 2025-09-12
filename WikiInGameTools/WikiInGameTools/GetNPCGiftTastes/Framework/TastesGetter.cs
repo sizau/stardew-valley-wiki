@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using StardewModdingAPI;
 using StardewValley;
 using static WikiInGameTools.GetNPCGiftTastes.Framework.ItemData;
 using static WikiInGameTools.GetNPCGiftTastes.Framework.NPCData;
