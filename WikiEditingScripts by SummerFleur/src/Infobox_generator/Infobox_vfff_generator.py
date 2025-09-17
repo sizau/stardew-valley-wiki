@@ -6,7 +6,7 @@ def generate_infobox(category: Literal["vegetable", "fruit", "flower", "forage"]
     objects = game_data.objects_data
 
     for object_id, object_data in objects.items():
-        item = Item(object_data)
+        item = Object(object_data)
 
         match item.get_field("Category"):
             case -75 if category == "vegetable":
@@ -72,7 +72,7 @@ def generate_infobox(category: Literal["vegetable", "fruit", "flower", "forage"]
         print(infobox)
 
 
-def _search_crop(category: str, object_id: str, item: Item, name: str) -> tuple[str, str, str, str, str]:
+def _search_crop(category: str, object_id: str, item: Object, name: str) -> tuple[str, str, str, str, str]:
     """
     检查游戏数据，尝试寻找该物品的种子、生长时间、生长季节
     :return: source, seed, growth, season, tag

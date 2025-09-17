@@ -11,7 +11,7 @@ def generate_infobox() -> None:
     recipes: list[readRecipes.Recipe] = parser.crafting_recipe_objects.values()
 
     for object_id, object_data in objects.items():
-        item = Item(object_data)
+        item = Object(object_data)
 
         if item.get_field("Category") != -74:
             continue
@@ -28,7 +28,6 @@ def generate_infobox() -> None:
 <onlyinclude>{{{{{{{{{{1|Infobox seed}}}}}}
 |name           = {name}
 |eng            = {eng}
-|image          = {eng}.png
 |crop           = {crop}
 |growth         = {growth}
 |season         = {season}
@@ -41,22 +40,22 @@ def generate_infobox() -> None:
 |iPrice         = {i_price}
 |nmday          = {nmday}
 |raccoon        = {raccoon}
-|otherprice     = 
+|otherprice     = ---------- 这里看情况要不要删除 ----------
 |artisan        = {artisan}
 |source         = {source}
 |recipe         = {recipe}
 |ingredients    = {ingredients}
 |produces       = {produces}
-}}}}</onlyinclude>\n\n"""
+}}}}</onlyinclude>
+'''{name}'''是一种种子，播种并生长 {growth} 成熟后可以获得[[???]]。\n\n"""
 
         infobox = (infobox
-                   .replace("|xp             = 0\n", "")
+                   .replace("|xp             = \n", "")
                    .replace("|oPrice         = \n", "")
                    .replace("|tPrice         = \n", "")
                    .replace("|iPrice         = \n", "")
                    .replace("|nmday          = \n", "")
                    .replace("|raccoon        = \n", "")
-                   .replace("|otherprice     = \n", "")
                    .replace("|artisan        = \n", "")
                    .replace("|source         = \n", "")
                    .replace("|recipe         = \n", "")
@@ -66,7 +65,7 @@ def generate_infobox() -> None:
         print(infobox)
 
 
-def _search_crop(seed_id: str) -> tuple[str, str, str, int]:
+def _search_crop(seed_id: str) -> tuple[str, str, str, str]:
     """
     检查游戏数据，尝试寻找该种子产出的物品、生长时间、生长季节、经验值
     :return: crop, growth, season, xp
@@ -88,19 +87,19 @@ def _search_crop(seed_id: str) -> tuple[str, str, str, int]:
     # 这种情况对应混合种子等特殊的种子
     else:
         print("未找到当前种子对应的作物！")
-        return "", "", "", 0
+        return "", "", "", ""
 
     # 作物的生长时间和经验
     if _tag == "c":
-        harvest = game_data.try_get_item(harvest_id)
+        harvest = game_data.try_get_object(harvest_id)
         growth = str(crop.growth) + " 天"
         sellprice = harvest.sellprice
-        xp = Crop.get_xp(sellprice)
+        xp = f"{{{{Xp|{Crop.get_xp(sellprice)}|farm}}}}"
     # 果树的生长时间和经验（定死）
     elif _tag == "f":
-        harvest = game_data.try_get_item(harvest_id[3:])
+        harvest = game_data.try_get_object(Object.trim(harvest_id))
         growth = "28 天"
-        xp = 0
+        xp = ""
     # 好好反思你怎么触发这个的
     else:
         raise ValueError("unknown tag")
@@ -124,6 +123,9 @@ def _calc_price(seed_id: str, shop_manager: ShopManager) -> tuple[str, str, str,
     if j_goods is not None:
         j_price = f"{{{{Price|{j_goods.price}}}}}"
 
+    if game_data.namespace == "SVE":
+        return g_price, j_price, o_price, t_price, i_price, raccoon, nmday
+
     # 尝试在绿洲商店寻找
     o_goods = shop_manager.oasis.try_get_goods(seed_id)
     if o_goods is not None:
@@ -137,13 +139,13 @@ def _calc_price(seed_id: str, shop_manager: ShopManager) -> tuple[str, str, str,
     # 尝试在姜岛商店寻找
     i_goods = shop_manager.island_trade.try_get_goods(seed_id)
     if i_goods is not None:
-        item_name = game_data.get_name(Item.trim(i_goods.trade_item_id))
+        item_name = game_data.get_name(Object.trim(i_goods.trade_item_id))
         i_price = f"{{{{Name|{item_name}|{i_goods.trade_item_amount}}}}}"
 
     # 尝试在浣熊商店寻找
     r_goods = shop_manager.raccoon_shop.try_get_goods(seed_id)
     if r_goods is not None:
-        item_name = game_data.get_name(Item.trim(r_goods.trade_item_id))
+        item_name = game_data.get_name(Object.trim(r_goods.trade_item_id))
         raccoon = f"{{{{Name|{item_name}|{r_goods.trade_item_amount}}}}}"
 
     # 尝试在夜市商店寻找
@@ -170,7 +172,7 @@ def _get_recipe_data(seed_id: str, recipes: list[readRecipes.Recipe]) -> tuple[s
     for craft_recipe in recipes:
         product: readRecipes.Item = craft_recipe.product
         if product.code == seed_id:
-            source = "[打造]"
+            source = "[[打造]]"
             recipe = "---------- 配方来源，这里要自己填 ----------"
             ingredients = item_list_to_string(craft_recipe.materials)
             produces = craft_recipe.product.count

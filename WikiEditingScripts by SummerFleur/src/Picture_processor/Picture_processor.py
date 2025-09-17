@@ -1,6 +1,7 @@
+from __future__ import annotations
 import datetime
 import os
-from typing import override, Self
+from typing import override
 
 from PIL import Image, ImageDraw
 from PIL.Image import Resampling
@@ -12,26 +13,27 @@ class Vector2:
         self.y: int = y
 
     @override
-    def __eq__(self, other: Self) -> bool:
+    def __eq__(self, other: Vector2) -> bool:
         if not isinstance(other, Vector2):
             raise TypeError("not a Vector2!")
         return self.x == other.x and self.y == other.y
 
-    def __mul__(self, other: int) -> Self:
+    def __mul__(self, other: int) -> Vector2:
         return Vector2(self.x * other, self.y * other)
 
-    def __add__(self, other: int | Self) -> Self:
+    def __add__(self, other: int | Vector2) -> Vector2:
         if isinstance(other, Vector2):
             return Vector2(self.x + other.x, self.y + other.y)
         if isinstance(other, int):
             return Vector2(self.x + other, self.y + other)
         raise TypeError("not a supported type!")
 
+    @override
     def __str__(self) -> str:
         return f"({self.x}, {self.y})"
 
     @staticmethod
-    def align(p1, p2) -> None:
+    def align(p1: Vector2, p2: Vector2) -> None:
         """
         调整两个 Vector2 的坐标，使得 p1 位于 p2 的左上方
         """
@@ -43,7 +45,7 @@ class Vector2:
             p1.y, p2.y = p2.y, p1.y
 
     @staticmethod
-    def parse(string: str, separator: str = ","):
+    def parse(string: str, separator: str = ",") -> Vector2:
         """
         将字符串解析为 Vector2 实例
         :param string: 需要解析的字符串
@@ -279,6 +281,7 @@ if __name__ == "__main__":
     processor = PictureProcessor(clearInputDir=False)
     try:
         # 按需调用
+        processor.resize_pic()
         ...
     except Exception as error:
         print(error)

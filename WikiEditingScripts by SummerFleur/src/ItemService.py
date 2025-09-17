@@ -54,12 +54,13 @@ class GameData:
                 self.bigcraftables_zh_cn = self.bigcraftables_zh_cn = FileUtils.read_json(json_path / "zh.json")
                 self.crops_data = FileUtils.read_json(json_path / "Crops.json")
                 self.fruit_trees_data = FileUtils.read_json(json_path / "FruitTrees.json")
+                self.shops_data = FileUtils.read_json(json_path / "Shops.json")
                 self.namespace = "SVE"
 
         if self.objects_data == {}:
             raise ValueError("不合法的命名空间！")
 
-    def try_get_item(self, code: str) -> Item | None:
+    def try_get_object(self, code: str) -> Object | None:
         """
         根据物品的 QualifiedItemID 来创建 Item 实例。
         :param code: 物品的 QualifiedItemID
@@ -67,9 +68,9 @@ class GameData:
         :exception KeyError: 未找到对应的物品
         """
         try:
-            code = Item.trim(code)
+            code = Object.trim(code)
             item = self.objects_data[code]
-            return Item(item)
+            return Object(item)
         except (KeyError, TypeError):
             return None
 
@@ -81,7 +82,7 @@ class GameData:
         :exception KeyError: 未找到对应的作物
         """
         try:
-            code = Item.trim(code)
+            code = Object.trim(code)
             crop = self.objects_data[code]
             return Crop(crop)
         except (KeyError, TypeError):
@@ -95,7 +96,7 @@ class GameData:
         :exception KeyError: 未找到对应的果树
         """
         try:
-            code = Item.trim(code)
+            code = Object.trim(code)
             fruit = self.objects_data[code]
             return FruitTree(fruit)
         except (KeyError, TypeError):
@@ -118,8 +119,8 @@ class GameData:
         """
         data_source = self.objects_data
         if code in data_source:
-            item_data = data_source[code]
-            name = item_data.get("Name", "")
+            object_data = data_source[code]
+            name = object_data.get("Name", "")
 
             return name
 
@@ -133,8 +134,8 @@ class GameData:
         """
         data_source = self.objects_data
         if code in data_source:
-            item_data = data_source[code]
-            display_name = item_data.get("DisplayName", "")
+            object_data = data_source[code]
+            display_name = object_data.get("DisplayName", "")
             localization_key = None
 
             match self.namespace:
@@ -163,7 +164,7 @@ class GameData:
         return "未知物品"
 
 
-class Item:
+class Object:
     """
     物品类，存储物品的前缀、代码、数量和名称
 
@@ -176,12 +177,12 @@ class Item:
         color: 物品的颜色值
     """
 
-    def __init__(self, item: dict) -> None:
-        self.raw: dict = item
-        self.name: str = item.get("Name")
-        self.category: int = item.get("Category")
-        self.sellprice: int = item.get("Price")
-        self.edibility: int = item.get("Edibility")
+    def __init__(self, obj: dict) -> None:
+        self.raw: dict = obj
+        self.name: str = obj.get("Name")
+        self.category: int = obj.get("Category")
+        self.sellprice: int = obj.get("Price")
+        self.edibility: int = obj.get("Edibility")
         self.color: str = self._get_color()
 
     def _get_color(self) -> str:

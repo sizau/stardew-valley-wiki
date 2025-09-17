@@ -238,7 +238,7 @@
     "IsDrink": false,
     "ExcludeFromFishingCollection": true,
     "ExcludeFromShippingCollection": false,
-    "ExcludeFromRandomSale": true,
+    "ExcludeFromRandomSale": false,
     "ContextTags": [
       "color_red"
     ]
@@ -510,7 +510,8 @@
     "IsDrink": false,
     "ContextTags": [
       "color_red",
-      "fish_nonfish"
+      "fish_nonfish",
+      "seaweed_item"
     ]
   },
   "FlashShifter.StardewValleyExpandedCP_Ferngill_Primrose": {
@@ -526,7 +527,11 @@
     "ExcludeFromFishingCollection": true,
     "ExcludeFromShippingCollection": false,
     "ExcludeFromRandomSale": true,
-    "IsDrink": false
+    "IsDrink": false,
+    "ContextTags": [
+      "color_white",
+      "edible_flower_item"
+    ]
   },
   "FlashShifter.StardewValleyExpandedCP_Flower_Cookie": {
     "Name": "Flower Cookie",
@@ -737,7 +742,11 @@
     "IsDrink": false,
     "ExcludeFromFishingCollection": true,
     "ExcludeFromShippingCollection": false,
-    "ExcludeFromRandomSale": true
+    "ExcludeFromRandomSale": true,
+    "ContextTags": [
+      "color_yellow",
+      "edible_flower_item"
+    ]
   },
   "FlashShifter.StardewValleyExpandedCP_Grampleton_Orange_Chicken": {
     "Name": "Grampleton Orange Chicken",
@@ -1286,7 +1295,7 @@
     "IsDrink": false,
     "ExcludeFromFishingCollection": true,
     "ExcludeFromShippingCollection": false,
-    "ExcludeFromRandomSale": true,
+    "ExcludeFromRandomSale": false,
     "ContextTags": [
       "edible_mushroom"
     ]
@@ -1770,7 +1779,11 @@
     "IsDrink": false,
     "ExcludeFromFishingCollection": true,
     "ExcludeFromShippingCollection": false,
-    "ExcludeFromRandomSale": true
+    "ExcludeFromRandomSale": true,
+    "ContextTags": [
+      "color_purple",
+      "edible_flower_item"
+    ]
   },
   "FlashShifter.StardewValleyExpandedCP_Torpedo_Trout": {
     "Name": "Torpedo Trout",
@@ -2151,7 +2164,8 @@
     "ContextTags": [
       "color_green",
       "fruit_item",
-      "fruit_tree_item"
+      "fruit_tree_item",
+      "pear_item"
     ]
   },
   "FlashShifter.StardewValleyExpandedCP_Pear_Sapling": {
@@ -2186,7 +2200,8 @@
     "ContextTags": [
       "color_red",
       "fruit_item",
-      "fruit_tree_item"
+      "fruit_tree_item",
+      "nectarine_item"
     ]
   },
   "FlashShifter.StardewValleyExpandedCP_Nectarine_Sapling": {
@@ -2221,7 +2236,8 @@
     "ContextTags": [
       "color_orange",
       "fruit_item",
-      "fruit_tree_item"
+      "fruit_tree_item",
+      "persimmon_item"
     ]
   },
   "FlashShifter.StardewValleyExpandedCP_Persimmon_Sapling": {
@@ -2444,7 +2460,7 @@
     "Description": "{{i18n:object.cucumber.description}}",
     "Type": "Basic",
     "Category": -75,
-    "Price": 45,
+    "Price": 35,
     "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Cucumber",
     "SpriteIndex": 0,
     "Edibility": 18,
@@ -2455,7 +2471,8 @@
     "ContextTags": [
       "color_green",
       "dye_medium",
-      "season_spring"
+      "season_spring",
+      "cucumber_item"
     ]
   },
   "FlashShifter.StardewValleyExpandedCP_Cucumber_Seed": {
@@ -2464,7 +2481,7 @@
     "Description": "{{i18n:object.cucumber-seed.description}}",
     "Type": "Seeds",
     "Category": -74,
-    "Price": 35,
+    "Price": 75,
     "Texture": "Mods\\FlashShifter.StardewValleyExpandedCP\\Cucumber Seed",
     "SpriteIndex": 0,
     "Edibility": -300,
@@ -2490,7 +2507,9 @@
     "ContextTags": [
       "color_brown",
       "dye_medium",
-      "season_summer"
+      "season_summer",
+      "squash_item",
+      "butternut_squash_item"
     ]
   },
   "FlashShifter.StardewValleyExpandedCP_Butternut_Squash_Seed": {
@@ -2525,7 +2544,8 @@
     "ContextTags": [
       "color_red",
       "dye_medium",
-      "season_fall"
+      "season_fall",
+      "sweet_potato_item"
     ]
   },
   "FlashShifter.StardewValleyExpandedCP_Sweet_Potato_Seed": {
@@ -3294,7 +3314,8 @@
     "ExcludeFromShippingCollection": false,
     "ExcludeFromRandomSale": false,
     "ContextTags": [
-      "color_white"
+      "color_white",
+      "butter_item"
     ]
   },
   "FlashShifter.StardewValleyExpandedCP_Shark_Tooth": {
