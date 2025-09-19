@@ -24,6 +24,47 @@ def new_redirect(**kwargs) -> None:
     print(result)
 
 
+def flavored_artisan() -> None:
+    artisans: dict[str, list[str]] = FileUtils.read_json(Path(__file__).parent / "artisans.json")
+    for key, value in artisans.items():
+        if key == "Wine":
+            for fruit in value:
+                target_page = wiki.pages[fruit + "果酒"]
+                new_text = f"{{{{:{fruit}|FlavoredArtisan/Wine}}}}"
+                result = target_page.edit(text=new_text, summary="使用模板创建具体信息")
+                print(result)
+        if key == "Jelly":
+            for fruit in value:
+                target_page = wiki.pages[fruit + "果酱"]
+                new_text = f"{{{{:{fruit}|FlavoredArtisan/Jelly}}}}"
+                result = target_page.edit(text=new_text, summary="使用模板创建具体信息")
+                print(result)
+        if key == "Dried Fruit":
+            for fruit in value:
+                target_page = wiki.pages[fruit + "干"]
+                new_text = f"{{{{:{fruit}|FlavoredArtisan/DriedFruit}}}}"
+                result = target_page.edit(text=new_text, summary="使用模板创建具体信息")
+                print(result)
+        if key == "Juice":
+            for vegetable in value:
+                target_page = wiki.pages[vegetable + "果汁"]
+                new_text = f"{{{{:{vegetable}|FlavoredArtisan/Juice}}}}"
+                result = target_page.edit(text=new_text, summary="使用模板创建具体信息")
+                print(result)
+        if key == "Pickles":
+            for vegetable in value:
+                target_page = wiki.pages["腌制" + vegetable]
+                new_text = f"{{{{:{vegetable}|FlavoredArtisan/Pickles}}}}"
+                result = target_page.edit(text=new_text, summary="使用模板创建具体信息")
+                print(result)
+        if key == "Dried Mushrooms":
+            for mushroom in value:
+                target_page = wiki.pages[mushroom + "干"]
+                new_text = f"{{{{:{mushroom}|FlavoredArtisan/DriedMushrooms}}}}"
+                result = target_page.edit(text=new_text, summary="使用模板创建具体信息")
+                print(result)
+
+
 def include_transformer(**kwargs) -> str:
     parts = kwargs['text'].split(f"{{{{Infobox {kwargs['type']}")
 
