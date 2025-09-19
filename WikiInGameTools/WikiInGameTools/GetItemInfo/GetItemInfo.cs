@@ -57,10 +57,14 @@ internal class GetItemInfo : IModule
             .DistinctBy(i => i.Name)
             .ToDictionary(i => i.Name, i => i.DisplayName);
 
+        var dictId2Tags = ItemInfos
+            .ToDictionary(i => i.QualifiedItemID, i => i.Tags.Where(t => !t.StartsWith("id_")));
+
         ModEntry.ModHelper.Data.WriteJsonFile(Path.Combine("output", "dictId2Desc.json"), dictId2Desc);
         ModEntry.ModHelper.Data.WriteJsonFile(Path.Combine("output", "dictEn2Desc.json"), dictEn2Desc);
         ModEntry.ModHelper.Data.WriteJsonFile(Path.Combine("output", "dictZh2Desc.json"), dictZh2Desc);
         ModEntry.ModHelper.Data.WriteJsonFile(Path.Combine("output", "dictEn2Name.json"), dictEn2Name);
+        ModEntry.ModHelper.Data.WriteJsonFile(Path.Combine("output", "dictId2Tags.json"), dictId2Tags);
     }
 
     public GetItemInfo()

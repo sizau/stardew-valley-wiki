@@ -33,6 +33,12 @@ internal static class GenericModConfigMenuIntegration
             delegate(bool value) { ModEntry.Config.DebugModuleConfig.Enable = value; },
             () => "启用");
 
+        api.AddSectionTitle(ModEntry.Manifest, () => "获取物品信息模块");
+        api.AddBoolOption(ModEntry.Manifest,
+            () => ModEntry.Config.GetItemInfoModConfig.Enable,
+            delegate(bool value) { ModEntry.Config.GetItemInfoModConfig.Enable = value; },
+            () => "启用");
+
         api.AddSectionTitle(ModEntry.Manifest, () => "获取 NPC 礼物偏好模块");
         api.AddBoolOption(ModEntry.Manifest,
             () => ModEntry.Config.GetNPCGiftTastesModConfig.Enable,
