@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WikiInGameTools", "WikiInGameTools\WikiInGameTools.csproj", "{0EEA96C2-FEE4-4855-A2B6-F96F95A0521B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoneProbabilityCalculator", "StoneProbabilityCalculator\StoneProbabilityCalculator.csproj", "{C8AF4DCA-C4B9-4B61-B1D7-935673C84DAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0EEA96C2-FEE4-4855-A2B6-F96F95A0521B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EEA96C2-FEE4-4855-A2B6-F96F95A0521B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EEA96C2-FEE4-4855-A2B6-F96F95A0521B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8AF4DCA-C4B9-4B61-B1D7-935673C84DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8AF4DCA-C4B9-4B61-B1D7-935673C84DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8AF4DCA-C4B9-4B61-B1D7-935673C84DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8AF4DCA-C4B9-4B61-B1D7-935673C84DAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
